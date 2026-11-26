@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>極速簡譜</title>
+  <title>極速簡譜 | 打簡譜從來沒有這麼容易</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -171,10 +171,43 @@
     body.studio-light aside #btn-export-json,
     body.studio-light aside #btn-import-json,
     body.studio-light aside #btn-add-part,
-    body.studio-light aside #btn-rerun-tests {
+    body.studio-light aside #btn-rerun-tests,
+    body.studio-light aside #btn-collapse-sidebar {
       background-color: #ffffff !important;
       border-color: #e5dec9 !important;
       color: #44403c !important;
+    }
+    body.studio-light aside #btn-theme-toggle:hover,
+    body.studio-light aside #btn-help:hover,
+    body.studio-light aside #btn-export-json:hover,
+    body.studio-light aside #btn-import-json:hover,
+    body.studio-light aside #btn-add-part:hover,
+    body.studio-light aside #btn-rerun-tests:hover,
+    body.studio-light aside #btn-collapse-sidebar:hover {
+      background-color: #f7f3ea !important;
+    }
+    body.studio-light #btn-expand-sidebar {
+      background-color: rgba(255, 254, 251, 0.94) !important;
+      border-color: #e5dec9 !important;
+      color: #292524 !important;
+    }
+    body.studio-light #btn-expand-sidebar:hover {
+      background-color: #faf7f0 !important;
+    }
+
+    /* Sidebar Collapsible Transitions */
+    #studio-sidebar {
+      transition: width 0.25s cubic-bezier(0.4, 0, 0.2, 1), height 0.25s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.2s ease;
+    }
+    #studio-sidebar.sidebar-collapsed {
+      width: 0 !important;
+      min-width: 0 !important;
+      height: 0 !important;
+      min-height: 0 !important;
+      overflow: hidden !important;
+      border-width: 0 !important;
+      opacity: 0;
+      pointer-events: none;
     }
     body.studio-light aside #btn-theme-toggle:hover,
     body.studio-light aside #btn-help:hover,
@@ -189,7 +222,7 @@
     body.studio-light #preview-viewport {
       background-color: #f4f1ea !important;
     }
-    body.studio-light #preview-viewport > div:first-child {
+    body.studio-light #preview-toolbar {
       background-color: rgba(255, 254, 251, 0.94) !important;
       border-color: #e5dec9 !important;
       color: #292524 !important;
@@ -334,7 +367,7 @@
 <div id="app-shell" class="flex flex-col lg:flex-row h-screen w-full overflow-hidden">
 
   <!-- LEFT STUDIO CONTROL PANEL -->
-  <aside class="no-print w-full lg:w-[440px] xl:w-[480px] bg-zinc-900 border-b lg:border-b-0 lg:border-r border-zinc-800 flex flex-col h-[52vh] lg:h-screen shrink-0 z-20">
+  <aside id="studio-sidebar" class="no-print w-full lg:w-[440px] xl:w-[480px] bg-zinc-900 border-b lg:border-b-0 lg:border-r border-zinc-800 flex flex-col h-[52vh] lg:h-screen shrink-0 z-20">
     
     <!-- Top Brand Header -->
     <div class="px-4 py-3 bg-zinc-950 border-b border-zinc-800 flex items-center justify-between gap-2">
@@ -355,11 +388,15 @@
         </button>
         <button id="btn-help" type="button" class="px-2.5 py-1.5 rounded-lg bg-zinc-800 hover:bg-zinc-700 text-zinc-200 text-xs font-medium transition flex items-center gap-1 border border-zinc-700" title="語法說明與快捷鍵">
           <svg class="w-3.5 h-3.5 text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
-          語法手冊
+          手冊
         </button>
         <button id="btn-print" type="button" class="px-3 py-1.5 rounded-lg bg-amber-500 hover:bg-amber-400 text-zinc-950 text-xs font-bold transition flex items-center gap-1.5 shadow-sm">
           <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"/></svg>
           PDF 輸出
+        </button>
+        <button id="btn-collapse-sidebar" type="button" class="p-1.5 rounded-lg bg-zinc-800 hover:bg-zinc-700 text-zinc-200 text-xs font-medium transition flex items-center justify-center border border-zinc-700" title="收合側邊編輯欄">
+          <svg class="w-4 h-4 hidden lg:block" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 19l-7-7 7-7m8 14l-7-7 7-7"/></svg>
+          <svg class="w-4 h-4 lg:hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7"/></svg>
         </button>
       </div>
     </div>
@@ -558,8 +595,15 @@
   <!-- RIGHT A4 SCORE PREVIEW CANVAS -->
   <main id="preview-viewport" class="flex-1 bg-zinc-950/90 overflow-auto flex flex-col items-center relative">
     
+    <!-- Floating Expand Sidebar Button (Visible when sidebar is collapsed) -->
+    <button id="btn-expand-sidebar" type="button" class="no-print hidden fixed top-3 left-3 z-30 px-3 py-1.5 rounded-full bg-zinc-900/90 backdrop-blur border border-zinc-700/80 shadow-xl text-xs font-semibold text-zinc-200 hover:bg-zinc-800 transition flex items-center gap-1.5" title="展開側邊編輯欄">
+      <svg class="w-3.5 h-3.5 text-amber-500 hidden lg:block" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" d="M13 5l7 7-7 7M5 5l7 7-7 7"/></svg>
+      <svg class="w-3.5 h-3.5 text-amber-500 lg:hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" d="M19 9l-7 7-7-7"/></svg>
+      <span>展開編輯欄</span>
+    </button>
+
     <!-- Floating Zoom & Status Toolbar -->
-    <div class="no-print sticky top-3 z-10 mb-4 px-3.5 py-1.5 rounded-full bg-zinc-900/90 backdrop-blur border border-zinc-700/80 shadow-xl flex items-center gap-3 text-xs text-zinc-300">
+    <div id="preview-toolbar" class="no-print sticky top-3 z-10 mb-4 px-3.5 py-1.5 rounded-full bg-zinc-900/90 backdrop-blur border border-zinc-700/80 shadow-xl flex items-center gap-3 text-xs text-zinc-300">
       <div class="flex items-center gap-1.5">
         <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
         <span id="status-summary" class="font-medium text-zinc-200">已渲染 1 頁 A4</span>
@@ -848,6 +892,7 @@
       beatSpacing: 1.0
     },
     zoom: 0.85,
+    sidebarCollapsed: false,
     activePartIndex: 0,
     selectionRange: null, // { partIndex, start, end } when user highlights text in a part editor
     lockedSubdivision: null, // null | '_' | '=' | 'triplet'
@@ -1745,7 +1790,7 @@
           // Render Triplet brackets "3"
           for (let t = 0; t < tripletPoints.length; t += 2) {
             const pA = tripletPoints[t];
-            const pB = tripletPoints[t + 1] || { x: sysRightX - 6, octave: pA.octave };
+            const pB = tripletPoints[t + 1] || { x: lineSlurEndX, octave: pA.octave };
             const yTop = baseY - fontSize * 1.48;
             const midX = (pA.x + pB.x) * 0.5;
             svgContent += `<polyline points="${pA.x - 4},${yTop + 4} ${pA.x - 4},${yTop} ${midX - 7},${yTop}" fill="none" stroke="#1C1B18" stroke-width="1" />`;
@@ -2255,6 +2300,21 @@
     } catch (e) {}
   }
 
+  function applySidebarCollapsed(collapsed, silent = false) {
+    state.sidebarCollapsed = Boolean(collapsed);
+    const sidebarEl = document.getElementById('studio-sidebar');
+    const expandBtn = document.getElementById('btn-expand-sidebar');
+    if (sidebarEl) {
+      sidebarEl.classList.toggle('sidebar-collapsed', state.sidebarCollapsed);
+    }
+    if (expandBtn) {
+      expandBtn.classList.toggle('hidden', !state.sidebarCollapsed);
+    }
+    if (!silent) {
+      showToast(state.sidebarCollapsed ? '已收合側邊編輯欄（點擊左上角「展開編輯欄」還原）' : '已展開側邊編輯欄');
+    }
+  }
+
   function syncConfigInputs() {
     const beatsEl = document.getElementById('cfg-beats-per-line');
     const beatsVal = document.getElementById('val-beats-per-line');
@@ -2332,6 +2392,15 @@
     })();
     applyStudioTheme(savedTheme);
 
+    const collapseSidebarBtn = document.getElementById('btn-collapse-sidebar');
+    if (collapseSidebarBtn) {
+      collapseSidebarBtn.addEventListener('click', () => applySidebarCollapsed(true));
+    }
+    const expandSidebarBtn = document.getElementById('btn-expand-sidebar');
+    if (expandSidebarBtn) {
+      expandSidebarBtn.addEventListener('click', () => applySidebarCollapsed(false));
+    }
+
     const themeBtn = document.getElementById('btn-theme-toggle');
     if (themeBtn) {
       themeBtn.addEventListener('click', () => {
@@ -2408,11 +2477,14 @@
       state.parts = JSON.parse(JSON.stringify(preset.parts));
       state.activePartIndex = 0;
       state.selectionRange = null;
+      state.lockedSubdivision = null;
+      state.tripletStartOffset = null;
       state.undoStacks = [];
       state.redoStacks = [];
       state.parts.forEach((_, i) => ensurePartHistoryStacks(i));
       syncMetadataInputs();
       renderPartsEditorList();
+      updateSubdivisionLockUI();
       renderScore();
       showToast('已載入範例樂譜');
     });
@@ -2877,11 +2949,14 @@
             }
             state.activePartIndex = 0;
             state.selectionRange = null;
+            state.lockedSubdivision = null;
+            state.tripletStartOffset = null;
             state.undoStacks = [];
             state.redoStacks = [];
             state.parts.forEach((_, i) => ensurePartHistoryStacks(i));
             syncMetadataInputs();
             renderPartsEditorList();
+            updateSubdivisionLockUI();
             renderScore();
             showToast('成功匯入樂譜與排版參數設定');
           }
@@ -3297,6 +3372,47 @@
       assert(parseFloat(m2Coords[1]) > 54, `第二行圓滑線起點 (${m2Coords[1]}) 不應壓在左側小節線上`);
     });
 
+    // Test 17: 8th-Note Cross-Line Slur Symmetry & Preset Switch Lock Reset
+    runCase('T17 8分音符跨行圓滑線對稱平滑延伸 & 切換範本自動重置鎖定狀態', () => {
+      state.config.beatsPerLine = 8;
+      state.parts = [{ id: 't', name: 'P1', notation: "(7_ 1'_ 2'_ 3'_ 4'_ 5'_ 6'_ 7'_ | 1'_ 2'_ 3'_ 4'_ 5'_ 6'_ 7'_ 1'_)" }];
+      renderScore();
+      const slurs = document.querySelectorAll('#pages-container svg path.slur-curve');
+      assert(slurs.length === 2, `8分音符跨行圓滑線應分為前後兩段平滑弧線，實際為 ${slurs.length}`);
+      const d1 = slurs[0].getAttribute('d') || '';
+      const d2 = slurs[1].getAttribute('d') || '';
+      assert(d1.includes('C ') && d2.includes('C '), '前後兩段應使用平滑三次貝茲曲線繪製');
+
+      // Verify switching preset cleanly resets any active subdivision lock
+      state.lockedSubdivision = '_';
+      state.tripletStartOffset = 5;
+      const sel = document.getElementById('preset-select');
+      if (sel) {
+        sel.value = 'blank_trio';
+        sel.dispatchEvent(new Event('change', { bubbles: true }));
+        assert(state.lockedSubdivision === null && state.tripletStartOffset === null, '切換範例範本後應自動解除鎖定狀態');
+      }
+    });
+
+    // Test 18: Sidebar Collapse & Expand Toggle
+    runCase('T18 側邊編輯欄收合與展開切換功能正常', () => {
+      const prevCollapsed = state.sidebarCollapsed;
+      const collapseBtn = document.getElementById('btn-collapse-sidebar');
+      const expandBtn = document.getElementById('btn-expand-sidebar');
+      const sidebarEl = document.getElementById('studio-sidebar');
+      assert(collapseBtn && expandBtn && sidebarEl, '側邊欄與收合/展開按鈕元素應存在');
+
+      collapseBtn.click();
+      assert(state.sidebarCollapsed === true && sidebarEl.classList.contains('sidebar-collapsed'), '點擊收合按鈕後應隱藏側邊欄');
+      assert(!expandBtn.classList.contains('hidden'), '收合後應顯示左上角展開按鈕');
+
+      expandBtn.click();
+      assert(state.sidebarCollapsed === false && !sidebarEl.classList.contains('sidebar-collapsed'), '點擊展開按鈕後應恢復顯示側邊欄');
+      assert(expandBtn.classList.contains('hidden'), '展開後應隱藏左上角展開按鈕');
+
+      applySidebarCollapsed(prevCollapsed, true);
+    });
+
     // Render Test Report in Left Panel & Re-render Active Score
     renderScore();
     const badgeEl = document.getElementById('unit-test-badge');
@@ -3327,6 +3443,7 @@
         </div>
       `).join('');
     }
+    return results;
   }
 
   // Boot application
@@ -3338,15 +3455,16 @@
     updateSubdivisionLockUI();
     initEvents();
     renderScore();
-    runAllUnitTests();
+    const initialResults = runAllUnitTests();
 
     const rerunBtn = document.getElementById('btn-rerun-tests');
     if (rerunBtn) {
       rerunBtn.addEventListener('click', e => {
         e.preventDefault();
         e.stopPropagation();
-        runAllUnitTests();
-        showToast('已完成 15 項核心功能單元測試');
+        const latest = runAllUnitTests();
+        const passed = latest.filter(r => r.passed).length;
+        showToast(`已完成 ${latest.length} 項核心功能單元測試（${passed}/${latest.length} 通過）`);
       });
     }
 
