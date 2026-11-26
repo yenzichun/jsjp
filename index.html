@@ -3,22 +3,22 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>口琴簡譜專業排版引擎 | Harmonica Jianpu Engraving Studio</title>
+  <title>極速簡譜</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Jost:wght@400;500;600;700&family=Noto+Sans+TC:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
     :root {
-      --paper-bg: #FAF6EE;
-      --ink-color: #1C1B18;
+      --paper-bg: #FFFDF9;
+      --ink-color: #292724;
       --font-jianpu: 'Futura', 'Tw Cen MT', 'Jost', 'Century Gothic', 'Noto Sans TC', sans-serif;
     }
 
     body {
       font-family: 'Noto Sans TC', -apple-system, BlinkMacSystemFont, sans-serif;
-      background-color: #18181b;
-      color: #f4f4f5;
+      background-color: #f4f1ea;
+      color: #292524;
       margin: 0;
       padding: 0;
     }
@@ -35,16 +35,16 @@
       height: 297mm;
       background-color: var(--paper-bg);
       background-image:
-        radial-gradient(rgba(168, 146, 110, 0.075) 0.9px, transparent 0),
-        radial-gradient(rgba(138, 118, 86, 0.045) 0.7px, transparent 0),
-        linear-gradient(180deg, rgba(255, 253, 248, 0.32) 0%, rgba(248, 242, 231, 0.24) 55%, rgba(244, 237, 224, 0.30) 100%);
+        radial-gradient(rgba(180, 165, 140, 0.04) 0.8px, transparent 0),
+        radial-gradient(rgba(155, 140, 115, 0.025) 0.6px, transparent 0),
+        linear-gradient(180deg, rgba(255, 255, 255, 0.65) 0%, rgba(253, 250, 244, 0.45) 55%, rgba(250, 246, 238, 0.5) 100%);
       background-size: 16px 16px, 23px 23px, 100% 100%;
       background-position: 0 0, 7px 11px, 0 0;
       color: var(--ink-color);
       box-shadow:
-        0 20px 50px rgba(0, 0, 0, 0.55),
-        inset 0 0 28px rgba(214, 198, 170, 0.14),
-        0 0 0 1px rgba(235, 224, 204, 0.45);
+        0 14px 36px rgba(45, 38, 26, 0.12),
+        inset 0 0 20px rgba(230, 220, 200, 0.12),
+        0 0 0 1px rgba(226, 218, 203, 0.7);
       position: relative;
       overflow: hidden;
       box-sizing: border-box;
@@ -62,9 +62,9 @@
     }
     body.studio-light aside .sym-btn.is-locked {
       background-color: #fef3c7 !important;
-      border-color: #d97706 !important;
+      border-color: #f59e0b !important;
       color: #92400e !important;
-      box-shadow: 0 0 0 1px rgba(217, 119, 6, 0.45);
+      box-shadow: 0 0 0 1px rgba(245, 158, 11, 0.4);
     }
 
     /* Custom Scrollbar for Editor */
@@ -87,157 +87,179 @@
        LEFT STUDIO PANEL LIGHT THEME OVERRIDES (淡色主題樣式)
        ========================================================================== */
     body.studio-light ::selection {
-      background-color: rgba(217, 119, 6, 0.28);
+      background-color: rgba(245, 158, 11, 0.22);
       color: #78350f;
     }
     body.studio-light ::-webkit-scrollbar-track {
-      background: #f3efe6;
+      background: #f9f7f2;
     }
     body.studio-light ::-webkit-scrollbar-thumb {
-      background: #d6cfc2;
+      background: #e2dcd0;
     }
     body.studio-light ::-webkit-scrollbar-thumb:hover {
-      background: #bdb4a4;
+      background: #cfc7b8;
     }
     body.studio-light aside {
-      background-color: #faf7f0 !important;
-      border-color: #e2dacb !important;
+      background-color: #fdfcfa !important;
+      border-color: #ece6da !important;
       color: #292524 !important;
     }
     body.studio-light aside > div:first-child {
-      background-color: #f3ede0 !important;
-      border-color: #e2dacb !important;
+      background-color: #faf7f0 !important;
+      border-color: #ece6da !important;
     }
     body.studio-light aside > div:nth-child(2) {
-      background-color: #f7f3ea !important;
-      border-color: #e2dacb !important;
+      background-color: #fcfaf5 !important;
+      border-color: #ece6da !important;
     }
     body.studio-light aside h1,
     body.studio-light aside h2,
     body.studio-light aside summary {
-      color: #1c1917 !important;
+      color: #292524 !important;
     }
     body.studio-light aside p,
     body.studio-light aside label,
     body.studio-light aside span.text-zinc-400 {
-      color: #57534e !important;
+      color: #6b655e !important;
     }
     body.studio-light aside details,
     body.studio-light aside .bg-zinc-800\/60 {
       background-color: #ffffff !important;
-      border-color: #e5dec9 !important;
-      box-shadow: 0 1px 3px rgba(28, 25, 23, 0.04);
+      border-color: #ede8dd !important;
+      box-shadow: 0 1px 2px rgba(28, 25, 23, 0.03);
     }
     body.studio-light aside summary {
-      background-color: #f5f0e4 !important;
+      background-color: #faf7f0 !important;
     }
     body.studio-light aside input[type="text"],
     body.studio-light aside select,
     body.studio-light aside textarea {
-      background-color: #fdfbf7 !important;
-      border-color: #d6cebe !important;
-      color: #1c1917 !important;
+      background-color: #ffffff !important;
+      border-color: #e2dbd0 !important;
+      color: #292524 !important;
     }
     body.studio-light aside input[type="text"]:focus,
     body.studio-light aside select:focus,
     body.studio-light aside textarea:focus {
-      border-color: #d97706 !important;
+      border-color: #f59e0b !important;
       background-color: #ffffff !important;
     }
     body.studio-light aside .part-card {
       background-color: #ffffff !important;
-      border-color: #e5dec9 !important;
-      box-shadow: 0 1px 3px rgba(28, 25, 23, 0.04);
+      border-color: #ede8dd !important;
+      box-shadow: 0 1px 2px rgba(28, 25, 23, 0.03);
     }
     body.studio-light aside .part-card.border-amber-500\/70 {
-      border-color: #d97706 !important;
+      border-color: #f59e0b !important;
     }
     body.studio-light aside .sym-btn,
     body.studio-light code {
-      background-color: #f3ede0 !important;
+      background-color: #faf6ed !important;
+      border-color: #e8e1d3 !important;
       color: #b45309 !important;
     }
+    body.studio-light aside .sym-btn:hover {
+      background-color: #f3ecdd !important;
+    }
     body.studio-light aside #auto-barline-wrap {
-      background-color: #f5f0e4 !important;
-      border-color: #dcd3c1 !important;
+      background-color: #faf6ed !important;
+      border-color: #e6dfd1 !important;
       color: #44403c !important;
+    }
+    body.studio-light aside #btn-theme-toggle,
+    body.studio-light aside #btn-help,
+    body.studio-light aside #btn-export-json,
+    body.studio-light aside #btn-import-json,
+    body.studio-light aside #btn-add-part,
+    body.studio-light aside #btn-rerun-tests {
+      background-color: #ffffff !important;
+      border-color: #e5dec9 !important;
+      color: #44403c !important;
+    }
+    body.studio-light aside #btn-theme-toggle:hover,
+    body.studio-light aside #btn-help:hover,
+    body.studio-light aside #btn-export-json:hover,
+    body.studio-light aside #btn-import-json:hover,
+    body.studio-light aside #btn-add-part:hover,
+    body.studio-light aside #btn-rerun-tests:hover {
+      background-color: #f7f3ea !important;
     }
 
     /* Right Preview Viewport Light Theme Overrides */
     body.studio-light #preview-viewport {
-      background-color: #eae4d7 !important;
+      background-color: #f4f1ea !important;
     }
     body.studio-light #preview-viewport > div:first-child {
-      background-color: rgba(250, 247, 240, 0.92) !important;
-      border-color: #d6cebe !important;
+      background-color: rgba(255, 254, 251, 0.94) !important;
+      border-color: #e5dec9 !important;
       color: #292524 !important;
-      box-shadow: 0 8px 24px rgba(28, 25, 23, 0.1);
+      box-shadow: 0 6px 20px rgba(28, 25, 23, 0.07);
     }
     body.studio-light #preview-viewport #status-summary,
     body.studio-light #preview-viewport #zoom-out,
     body.studio-light #preview-viewport #zoom-in {
-      color: #1c1917 !important;
+      color: #292524 !important;
     }
     body.studio-light #preview-viewport #zoom-out:hover,
     body.studio-light #preview-viewport #zoom-in:hover {
-      background-color: #ebe3d3 !important;
+      background-color: #f5f0e6 !important;
     }
     body.studio-light #preview-viewport #zoom-label {
       color: #b45309 !important;
     }
     body.studio-light #preview-viewport #zoom-fit {
-      background-color: #f3ede0 !important;
+      background-color: #faf7f0 !important;
       color: #292524 !important;
-      border: 1px solid #dcd3c1;
+      border: 1px solid #e5dec9;
     }
     body.studio-light #preview-viewport #zoom-fit:hover {
-      background-color: #e6decb !important;
+      background-color: #f0eadc !important;
     }
     body.studio-light #preview-viewport .h-3\.5.bg-zinc-700 {
-      background-color: #d6cebe !important;
+      background-color: #e2dacb !important;
     }
     body.studio-light .a4-page {
       box-shadow:
-        0 14px 36px rgba(45, 38, 26, 0.16),
-        inset 0 0 42px rgba(214, 198, 170, 0.24),
-        0 0 0 1px rgba(196, 182, 156, 0.65);
+        0 12px 32px rgba(45, 38, 26, 0.11),
+        inset 0 0 24px rgba(230, 220, 200, 0.14),
+        0 0 0 1px rgba(218, 209, 192, 0.65);
     }
 
     /* Help Modal Light Theme Overrides (語法手冊同步淡色主題) */
     body.studio-light #help-modal > div {
-      background-color: #faf7f0 !important;
-      border-color: #dcd3c1 !important;
+      background-color: #fdfcfa !important;
+      border-color: #e5dec9 !important;
       color: #292524 !important;
     }
     body.studio-light #help-modal > div > div:first-child,
     body.studio-light #help-modal > div > div:last-child {
-      background-color: #f3ede0 !important;
-      border-color: #e2dacb !important;
+      background-color: #faf7f0 !important;
+      border-color: #ece6da !important;
     }
     body.studio-light #help-modal h3 {
-      color: #1c1917 !important;
+      color: #292524 !important;
     }
     body.studio-light #help-modal h4 {
       color: #b45309 !important;
     }
     body.studio-light #help-modal .bg-zinc-950\/70 {
       background-color: #ffffff !important;
-      border-color: #e5dec9 !important;
-      box-shadow: 0 1px 3px rgba(28, 25, 23, 0.04);
+      border-color: #ede8dd !important;
+      box-shadow: 0 1px 2px rgba(28, 25, 23, 0.03);
     }
     body.studio-light #help-modal li,
     body.studio-light #help-modal .text-zinc-300 {
       color: #292524 !important;
     }
     body.studio-light #help-modal .text-zinc-400 {
-      color: #57534e !important;
+      color: #6b655e !important;
     }
     body.studio-light #help-modal #btn-close-help {
-      color: #57534e !important;
+      color: #6b655e !important;
     }
     body.studio-light #help-modal #btn-close-help:hover {
-      color: #1c1917 !important;
-      background-color: #e6decb !important;
+      color: #292524 !important;
+      background-color: #f3ede0 !important;
     }
 
     /* Pure A4 Print / PDF Output Rules */
@@ -246,11 +268,12 @@
         size: A4 portrait;
         margin: 0 !important;
       }
-      .beat-mismatch-highlight {
+      .beat-mismatch-highlight,
+      .selection-preview-highlight {
         display: none !important;
       }
       html, body {
-        background: #FAF6EE !important;
+        background: #FFFDF9 !important;
         margin: 0 !important;
         padding: 0 !important;
         width: 210mm !important;
@@ -316,12 +339,12 @@
     <!-- Top Brand Header -->
     <div class="px-4 py-3 bg-zinc-950 border-b border-zinc-800 flex items-center justify-between gap-2">
       <div class="flex items-center gap-2.5">
-        <div class="w-8 h-8 rounded-lg bg-gradient-to-br from-amber-400 to-amber-600 text-zinc-950 flex items-center justify-center font-bold text-base shadow-md">
-          1̇
+        <div class="w-8 h-8 rounded-lg bg-gradient-to-br from-amber-100 via-amber-200 to-orange-200 border border-amber-300/80 text-amber-600 flex items-center justify-center font-bold text-base shadow-sm">
+          ⚡
         </div>
         <div>
-          <h1 class="text-sm font-bold tracking-wide text-zinc-100 leading-tight">口琴簡譜專業排版引擎</h1>
-          <p class="text-[11px] text-zinc-400">Harmonica Jianpu Engraving Studio</p>
+          <h1 class="text-sm font-bold tracking-wide text-zinc-100 leading-tight">極速簡譜</h1>
+          <p class="text-[11px] text-zinc-400">打簡譜從來沒有這麼容易</p>
         </div>
       </div>
 
@@ -336,7 +359,7 @@
         </button>
         <button id="btn-print" type="button" class="px-3 py-1.5 rounded-lg bg-amber-500 hover:bg-amber-400 text-zinc-950 text-xs font-bold transition flex items-center gap-1.5 shadow-sm">
           <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"/></svg>
-          一鍵純淨 A4 列印 / PDF 輸出
+          PDF 輸出
         </button>
       </div>
     </div>
@@ -421,7 +444,7 @@
               <span>每行基準拍數</span>
               <span id="val-beats-per-line" class="text-amber-400 font-mono">16 拍</span>
             </div>
-            <input id="cfg-beats-per-line" type="range" min="12" max="28" step="2" value="16" class="w-full accent-amber-500" />
+            <input id="cfg-beats-per-line" type="range" min="8" max="28" step="2" value="16" class="w-full accent-amber-500" />
           </div>
           <div>
             <div class="flex justify-between text-[11px] text-zinc-400 mb-1">
@@ -474,16 +497,15 @@
           <button type="button" data-insert="''" class="sym-btn px-2 py-1 rounded bg-zinc-900 hover:bg-zinc-700 border border-zinc-700 text-xs jianpu-font text-zinc-100" title="倍高八度 (2點高音)">1̈ ('')</button>
           <button type="button" data-insert="," class="sym-btn px-2 py-1 rounded bg-zinc-900 hover:bg-zinc-700 border border-zinc-700 text-xs jianpu-font text-zinc-100" title="低八度 (1點低音)">1̣ (,)</button>
           <button type="button" data-insert=",," class="sym-btn px-2 py-1 rounded bg-zinc-900 hover:bg-zinc-700 border border-zinc-700 text-xs jianpu-font text-zinc-100" title="倍低八度 (2點低音)">1̤ (,,)</button>
-          <button type="button" id="btn-sym-eighth" data-lock-symbol="_" class="sym-btn px-2 py-1 rounded bg-zinc-900 hover:bg-zinc-700 border border-zinc-700 text-xs jianpu-font text-amber-300 transition" title="連按兩下鎖定自動加上八分音符減時線 (_)，再點一下取消">8分 (_)</button>
-          <button type="button" id="btn-sym-sixteenth" data-lock-symbol="=" class="sym-btn px-2 py-1 rounded bg-zinc-900 hover:bg-zinc-700 border border-zinc-700 text-xs jianpu-font text-amber-300 transition" title="連按兩下鎖定自動加上16分音符減時線 (=)，再點一下取消">16分 (=)</button>
+          <button type="button" id="btn-sym-eighth" data-lock-symbol="_" class="sym-btn px-2 py-1 rounded bg-zinc-900 hover:bg-zinc-700 border border-zinc-700 text-xs jianpu-font text-amber-300 transition" title="按鍵盤數字 8 或連按兩下鎖定自動加上八分音符減時線 (_)，再按一次取消">8分 (_)</button>
+          <button type="button" id="btn-sym-sixteenth" data-lock-symbol="=" class="sym-btn px-2 py-1 rounded bg-zinc-900 hover:bg-zinc-700 border border-zinc-700 text-xs jianpu-font text-amber-300 transition" title="按鍵盤數字 9 或連按兩下鎖定自動加上16分音符減時線 (=)，再按一次取消">16分 (=)</button>
           <button type="button" data-insert="~" class="sym-btn px-2 py-1 rounded bg-zinc-900 hover:bg-zinc-700 border border-zinc-700 text-xs jianpu-font text-amber-300" title="三十二分音符三減時線">32分 (~)</button>
           <button type="button" data-insert="." class="sym-btn px-2 py-1 rounded bg-zinc-900 hover:bg-zinc-700 border border-zinc-700 text-xs jianpu-font text-zinc-100" title="附點">附點 (.)</button>
           <button type="button" data-insert=" - " class="sym-btn px-2 py-1 rounded bg-zinc-900 hover:bg-zinc-700 border border-zinc-700 text-xs jianpu-font text-zinc-100" title="增時線">增時 (-)</button>
           <button type="button" data-insert="#" class="sym-btn px-2 py-1 rounded bg-zinc-900 hover:bg-zinc-700 border border-zinc-700 text-xs jianpu-font text-emerald-300" title="升記號">♯ (#)</button>
           <button type="button" data-insert="b" class="sym-btn px-2 py-1 rounded bg-zinc-900 hover:bg-zinc-700 border border-zinc-700 text-xs jianpu-font text-emerald-300" title="降記號">♭ (b)</button>
           <button type="button" data-insert="n" class="sym-btn px-2 py-1 rounded bg-zinc-900 hover:bg-zinc-700 border border-zinc-700 text-xs jianpu-font text-emerald-300" title="還原記號">♮ (n)</button>
-          <button type="button" data-insert="(" class="sym-btn px-2 py-1 rounded bg-zinc-900 hover:bg-zinc-700 border border-zinc-700 text-xs jianpu-font text-sky-300" title="圓滑線起點">圓滑起 (</button>
-          <button type="button" data-insert=")" class="sym-btn px-2 py-1 rounded bg-zinc-900 hover:bg-zinc-700 border border-zinc-700 text-xs jianpu-font text-sky-300" title="圓滑線終點">圓滑終 )</button>
+          <button type="button" id="btn-sym-slur" data-insert="( )" class="sym-btn px-2 py-1 rounded bg-zinc-900 hover:bg-zinc-700 border border-zinc-700 text-xs jianpu-font text-sky-300" title="反白一段簡譜後點擊，自動在頭尾包覆圓滑線 ( ... )">圓滑線 (...)</button>
           <button type="button" id="btn-sym-triplet" data-lock-symbol="triplet" class="sym-btn px-2 py-1 rounded bg-zinc-900 hover:bg-zinc-700 border border-zinc-700 text-xs jianpu-font text-purple-300 transition" title="連按兩下鎖定三連音模式：每輸入 3 個數字自動組成 3(...) 並依拍號加減時線，再點一下取消">三連音 3(...)</button>
           <button type="button" data-insert="8(1 2 3 4)" class="sym-btn px-2 py-1 rounded bg-zinc-900 hover:bg-zinc-700 border border-zinc-700 text-xs jianpu-font text-teal-300" title="八度音奏法（上方標示 ┌ - - - oct - - - ┐）">八度 8(...)</button>
           <button type="button" data-insert=" | " class="sym-btn px-2 py-1 rounded bg-zinc-900 hover:bg-zinc-700 border border-zinc-700 text-xs jianpu-font text-zinc-100" title="小節線">小節線 |</button>
@@ -511,6 +533,24 @@
           <!-- Part cards injected dynamically -->
         </div>
       </div>
+
+      <!-- Section 5: Built-in Unit Test Suite Report -->
+      <details id="unit-test-panel" open class="group bg-zinc-800/50 border border-zinc-800 rounded-xl overflow-hidden">
+        <summary class="px-3.5 py-2.5 bg-zinc-800/80 cursor-pointer flex items-center justify-between text-xs font-semibold text-zinc-200 select-none">
+          <span class="flex items-center gap-2">
+            <span id="unit-test-dot" class="w-2 h-2 rounded-full bg-emerald-400"></span>
+            <span>核心功能自動化單元測試報告</span>
+            <span id="unit-test-badge" class="text-[10px] px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-400 border border-emerald-500/40 font-mono">執行中...</span>
+          </span>
+          <div class="flex items-center gap-2">
+            <button id="btn-rerun-tests" type="button" class="px-2 py-0.5 rounded bg-zinc-900 hover:bg-zinc-700 border border-zinc-700 text-[10px] text-amber-400 font-medium transition">重新執行</button>
+            <span class="text-zinc-400 text-[11px] group-open:rotate-180 transition-transform">▼</span>
+          </div>
+        </summary>
+        <div id="unit-test-results" class="p-3 space-y-1.5 text-[11px] max-h-64 overflow-y-auto font-mono">
+          <!-- Unit test results injected here -->
+        </div>
+      </details>
 
     </div>
   </aside>
@@ -809,21 +849,33 @@
     },
     zoom: 0.85,
     activePartIndex: 0,
+    selectionRange: null, // { partIndex, start, end } when user highlights text in a part editor
     lockedSubdivision: null, // null | '_' | '=' | 'triplet'
     tripletStartOffset: null, // cursor index where the current 3-note triplet group began
-    autoBarline: false
+    autoBarline: false,
+    undoStacks: [], // per-part undo history snapshots: [{ value, selStart, selEnd }]
+    redoStacks: []  // per-part redo history snapshots
   };
 
   // --------------------------------------------------------------------------
   // 3. JIANPU LEXER & PARSER (簡譜語法解析器)
   // --------------------------------------------------------------------------
   function parsePartNotation(rawText) {
-    const cleaned = (rawText || '').replace(/\r?\n/g, ' ').trim();
-    if (!cleaned) return [];
+    const cleaned = (rawText || '').replace(/\r?\n/g, ' ');
+    if (!cleaned.trim()) return [];
 
-    // Tokenize barline delimiters: :|:, |:, :|, ||, |
+    // Tokenize barline delimiters: :|:, |:, :|, ||, | while preserving exact source offsets
     const barRegex = /(:\|:|\|:|:\||\|\||\|)/g;
-    const segments = cleaned.split(barRegex);
+    const segments = [];
+    let lastMatchEnd = 0;
+    let barMatch;
+    while ((barMatch = barRegex.exec(cleaned)) !== null) {
+      segments.push({ text: cleaned.slice(lastMatchEnd, barMatch.index), offset: lastMatchEnd });
+      segments.push({ text: barMatch[0], offset: barMatch.index });
+      lastMatchEnd = barMatch.index + barMatch[0].length;
+    }
+    segments.push({ text: cleaned.slice(lastMatchEnd), offset: lastMatchEnd });
+
     const measures = [];
     let slurCounter = 1;
     let tripletCounter = 1;
@@ -835,15 +887,16 @@
     let pendingLeftBar = 'single'; // 'single' | 'repeat-start'
     let i = 0;
 
-    if (segments.length > 0 && segments[0].trim() === '' && segments.length > 1) {
-      const leadBar = segments[1];
+    if (segments.length > 0 && segments[0].text.trim() === '' && segments.length > 1) {
+      const leadBar = segments[1].text;
       if (leadBar === '|:' || leadBar === ':|:') pendingLeftBar = 'repeat-start';
       i = 2;
     }
 
     while (i < segments.length) {
-      const mStr = (segments[i] || '').trim();
-      const rightBarToken = i + 1 < segments.length ? segments[i + 1] : null;
+      const segObj = segments[i] || { text: '', offset: 0 };
+      const mStr = segObj.text.trim();
+      const rightBarToken = i + 1 < segments.length ? segments[i + 1].text : null;
       i += 2;
 
       if (mStr === '' && rightBarToken === null) {
@@ -868,22 +921,33 @@
         continue;
       }
 
+      const leadingTrimLen = segObj.text.length - segObj.text.replace(/^\s+/, '').length;
+      let baseOffset = segObj.offset + leadingTrimLen;
       let volta = null;
       let cleanMStr = mStr;
       const voltaMatch = cleanMStr.match(/^\[([1-4]\.?)\s*/);
       if (voltaMatch) {
         volta = voltaMatch[1].endsWith('.') ? voltaMatch[1] : `${voltaMatch[1]}.`;
         cleanMStr = cleanMStr.slice(voltaMatch[0].length);
+        baseOffset += voltaMatch[0].length;
       }
 
       const tokens = [];
-      const rawWords = cleanMStr.split(/\s+/).filter(Boolean);
+      const wordRegex = /\S+/g;
+      const rawWords = [];
+      let wMatch;
+      while ((wMatch = wordRegex.exec(cleanMStr)) !== null) {
+        rawWords.push({ text: wMatch[0], offset: baseOffset + wMatch.index });
+      }
 
-      for (const word of rawWords) {
+      let pendingSlurStart = false;
+      let pendingTripletStart = false;
+      let pendingOctave8Start = false;
+
+      for (const wordObj of rawWords) {
+        const word = wordObj.text;
+        const wordOffset = wordObj.offset;
         let cursor = 0;
-        let pendingSlurStart = false;
-        let pendingTripletStart = false;
-        let pendingOctave8Start = false;
 
         while (cursor < word.length) {
           const ch = word[cursor];
@@ -934,6 +998,7 @@
             continue;
           }
 
+          const tokenSrcStart = wordOffset + cursor;
           let accidental = null;
           if ((ch === '#' || ch === 'b' || ch === 'n') && cursor + 1 < word.length && /[0-7]/.test(word[cursor + 1])) {
             accidental = ch;
@@ -972,6 +1037,7 @@
                 break;
               }
             }
+            const tokenSrcEnd = wordOffset + cursor;
 
             let baseDur = 1;
             if (!isDash) {
@@ -1016,6 +1082,8 @@
               beams: isDash ? 0 : beams,
               dots: isDash ? 0 : dots,
               duration,
+              srcStart: tokenSrcStart,
+              srcEnd: tokenSrcEnd,
               slurStart: slurStartIds.length > 0,
               slurStartIds,
               slurEnd: false,
@@ -1172,7 +1240,7 @@
     let currentBeats = 0;
 
     alignedMeasures.forEach((m, idx) => {
-      const targetBeats = systems.length === 0 ? Math.max(8, beatsPerLine - 4) : beatsPerLine;
+      const targetBeats = systems.length === 0 ? Math.max(4, beatsPerLine - 4) : beatsPerLine;
       if (current.length > 0 && currentBeats + m.measureBeats > targetBeats) {
         systems.push({ measures: current, isLastSystem: false });
         current = [];
@@ -1337,6 +1405,10 @@
 
     let pagesHTML = '';
 
+    // Track open slurs & octave-8 spans across system line breaks per part
+    const openSlursByPart = parts.map(() => new Map()); // Map<id, { octave }>
+    const openOct8ByPart = parts.map(() => new Set());  // Set<id>
+
     pages.forEach((pageSystems, pageIdx) => {
       let svgContent = '';
 
@@ -1357,6 +1429,7 @@
         const sysLeftX = MARGIN_X + sys.leftOffset;
         const sysRightX = sysLeftX + sys.totalWidth;
 
+        // First-system part labels
         if (sys.isFirstSystem) {
           parts.forEach((part, pIdx) => {
             const baseY = sys.topY + (sys.partYOffsets[pIdx] ?? pIdx * partGap);
@@ -1364,25 +1437,47 @@
           });
         }
 
+        // System-wide multi-part barlines & volta brackets
         const topBarY = sys.topY - fontSize * 0.95;
         const botBarY = sys.topY + (sys.partYOffsets[parts.length - 1] ?? (parts.length - 1) * partGap) + fontSize * 0.55;
 
+        // Leftmost barline
         const firstMeasure = sys.measureLayouts[0]?.measure;
         if (firstMeasure && firstMeasure.leftBar === 'repeat-start') {
           svgContent += `<line x1="${sysLeftX}" y1="${topBarY}" x2="${sysLeftX}" y2="${botBarY}" stroke="#1C1B18" stroke-width="2.6" />`;
           svgContent += `<line x1="${sysLeftX + 4.2}" y1="${topBarY}" x2="${sysLeftX + 4.2}" y2="${botBarY}" stroke="#1C1B18" stroke-width="1" />`;
           parts.forEach((_, pIdx) => {
             const cy = sys.topY + (sys.partYOffsets[pIdx] ?? pIdx * partGap) - fontSize * 0.28;
-            svgContent += `<circle cx="${sysLeftX + 8.5}" cy="${cy - 3}" r="1.5" fill="#1C1B18" />`;
-            svgContent += `<circle cx="${sysLeftX + 8.5}" cy="${cy + 3}" r="1.5" fill="#1C1B18" />`;
+            svgContent += `<circle class="repeat-dot" cx="${sysLeftX + 8.5}" cy="${cy - 3}" r="1.5" fill="#1C1B18" />`;
+            svgContent += `<circle class="repeat-dot" cx="${sysLeftX + 8.5}" cy="${cy + 3}" r="1.5" fill="#1C1B18" />`;
           });
         } else {
           svgContent += `<line x1="${sysLeftX}" y1="${topBarY}" x2="${sysLeftX}" y2="${botBarY}" stroke="#1C1B18" stroke-width="1.2" />`;
         }
 
-        sys.measureLayouts.forEach(mLayout => {
+        // Measure barlines & volta brackets
+        sys.measureLayouts.forEach((mLayout, mIdxInSys) => {
           const mX0 = sysLeftX + mLayout.xStart;
           const mX1 = sysLeftX + mLayout.xEnd;
+          const prevLayout = mIdxInSys > 0 ? sys.measureLayouts[mIdxInSys - 1] : null;
+          const isBackToBackRepeat = Boolean(
+            prevLayout &&
+            prevLayout.measure.rightBar === 'repeat-end' &&
+            mLayout.measure.leftBar === 'repeat-start'
+          );
+
+          // Render mid-system repeat-start barline (e.g., "1 2 3 4 |: 5 6 7 1'" or ":|:")
+          if (mIdxInSys > 0 && mLayout.measure.leftBar === 'repeat-start') {
+            if (!isBackToBackRepeat) {
+              svgContent += `<line x1="${mX0}" y1="${topBarY}" x2="${mX0}" y2="${botBarY}" stroke="#1C1B18" stroke-width="2.6" />`;
+            }
+            svgContent += `<line x1="${mX0 + 4.2}" y1="${topBarY}" x2="${mX0 + 4.2}" y2="${botBarY}" stroke="#1C1B18" stroke-width="1" />`;
+            parts.forEach((_, pIdx) => {
+              const cy = sys.topY + (sys.partYOffsets[pIdx] ?? pIdx * partGap) - fontSize * 0.28;
+              svgContent += `<circle class="repeat-dot" cx="${mX0 + 8.5}" cy="${cy - 3}" r="1.5" fill="#1C1B18" />`;
+              svgContent += `<circle class="repeat-dot" cx="${mX0 + 8.5}" cy="${cy + 3}" r="1.5" fill="#1C1B18" />`;
+            });
+          }
 
           if (mLayout.measure.volta) {
             const vY = topBarY - 25;
@@ -1395,8 +1490,8 @@
             svgContent += `<line x1="${mX1}" y1="${topBarY}" x2="${mX1}" y2="${botBarY}" stroke="#1C1B18" stroke-width="2.6" />`;
             parts.forEach((_, pIdx) => {
               const cy = sys.topY + (sys.partYOffsets[pIdx] ?? pIdx * partGap) - fontSize * 0.28;
-              svgContent += `<circle cx="${mX1 - 8.5}" cy="${cy - 3}" r="1.5" fill="#1C1B18" />`;
-              svgContent += `<circle cx="${mX1 - 8.5}" cy="${cy + 3}" r="1.5" fill="#1C1B18" />`;
+              svgContent += `<circle class="repeat-dot" cx="${mX1 - 8.5}" cy="${cy - 3}" r="1.5" fill="#1C1B18" />`;
+              svgContent += `<circle class="repeat-dot" cx="${mX1 - 8.5}" cy="${cy + 3}" r="1.5" fill="#1C1B18" />`;
             });
           } else if (mLayout.measure.rightBar === 'double') {
             svgContent += `<line x1="${mX1 - 4.2}" y1="${topBarY}" x2="${mX1 - 4.2}" y2="${botBarY}" stroke="#1C1B18" stroke-width="1" />`;
@@ -1408,17 +1503,37 @@
 
         const partLowestZones = parts.map(() => []);
 
+        // Render notes per part in this system
         parts.forEach((_, pIdx) => {
           const baseY = sys.topY + (sys.partYOffsets[pIdx] ?? pIdx * partGap);
-          const slurPoints = [];
+          const slurSegments = [];
+          const activeSlurs = openSlursByPart[pIdx];
+          const firstMLayout = sys.measureLayouts[0];
+          const lastMLayout = sys.measureLayouts[sys.measureLayouts.length - 1];
+          const lineSlurStartX = firstMLayout ? (sysLeftX + firstMLayout.leftPad + 2) : (sysLeftX + 6);
+          const lineSlurEndX = lastMLayout ? (sysRightX - lastMLayout.rightPad - 2) : (sysRightX - 6);
+
+          // Seed slurs that remained open from the previous system line
+          activeSlurs.forEach((info, id) => {
+            slurSegments.push({ id, x0: lineSlurStartX, octave0: info.octave, x1: null, octave1: info.octave, continuedFromPrev: true });
+          });
+
           const tripletPoints = [];
-          const oct8Points = [];
+          const oct8Segments = [];
+          const activeOct8 = openOct8ByPart[pIdx];
+          activeOct8.forEach(id => {
+            oct8Segments.push({ id, x0: lineSlurStartX, x1: null });
+          });
 
           for (const mLayout of sys.measureLayouts) {
             const events = mLayout.measure.partEvents[pIdx] || [];
             const actualBeats = mLayout.measure.partExactBeats ? mLayout.measure.partExactBeats[pIdx] : null;
             const measureX0 = sysLeftX + mLayout.xStart;
             const measureX1 = sysLeftX + mLayout.xEnd;
+            const selectedNoteRects = [];
+            const activeSel = state.selectionRange && state.selectionRange.partIndex === pIdx && state.selectionRange.end > state.selectionRange.start
+              ? state.selectionRange
+              : null;
 
             if (expectedBeatsPerMeasure !== null && actualBeats !== null && actualBeats > 0.015 && Math.abs(actualBeats - expectedBeatsPerMeasure) > 0.015) {
               const hlTop = baseY - fontSize * 1.15;
@@ -1432,11 +1547,13 @@
               svgContent += `</g>`;
             }
 
+            // Compute beat X boundaries
             const beatXStarts = [measureX0 + mLayout.leftPad];
             for (let b = 0; b < mLayout.beatWidths.length; b++) {
               beatXStarts.push(beatXStarts[b] + mLayout.beatWidths[b]);
             }
 
+            // Group events by integer beat slot
             for (let b = 0; b < mLayout.beatWidths.length; b++) {
               const bX0 = beatXStarts[b];
               const bW = mLayout.beatWidths[b];
@@ -1491,12 +1608,64 @@
               }
 
               noteXs.forEach(({ nx, ev, accOffset }) => {
-                if (ev.slurStart) slurPoints.push({ type: 'start', x: nx, octave: ev.octave });
-                if (ev.slurEnd) slurPoints.push({ type: 'end', x: nx, octave: ev.octave });
+                // Track highlighted selection bounds per note
+                if (
+                  activeSel &&
+                  typeof ev.srcStart === 'number' &&
+                  typeof ev.srcEnd === 'number' &&
+                  ev.srcEnd > activeSel.start &&
+                  ev.srcStart < activeSel.end
+                ) {
+                  const leftEdge = nx - (ev.accidental ? (accOffset || fontSize * 0.48) + fontSize * 0.24 : fontSize * 0.42);
+                  const rightEdge = nx + (ev.dots > 1 ? fontSize * 0.78 : ev.dots === 1 ? fontSize * 0.58 : fontSize * 0.42);
+                  selectedNoteRects.push({
+                    x0: leftEdge,
+                    x1: rightEdge,
+                    srcStart: ev.srcStart,
+                    srcEnd: ev.srcEnd
+                  });
+                }
+
+                // Track Slur starts & ends with ID-matched segments across barlines and line breaks
+                if (ev.slurStart && Array.isArray(ev.slurStartIds)) {
+                  ev.slurStartIds.forEach(id => {
+                    activeSlurs.set(id, { octave: ev.octave });
+                    slurSegments.push({ id, x0: nx, octave0: ev.octave, x1: null, octave1: ev.octave, continuedFromPrev: false });
+                  });
+                }
+                if (ev.slurEnd && Array.isArray(ev.slurEndIds)) {
+                  ev.slurEndIds.forEach(id => {
+                    activeSlurs.delete(id);
+                    const seg = [...slurSegments].reverse().find(s => s.id === id && s.x1 === null);
+                    if (seg) {
+                      seg.x1 = nx;
+                      seg.octave1 = ev.octave;
+                    } else {
+                      slurSegments.push({ id, x0: lineSlurStartX, octave0: ev.octave, x1: nx, octave1: ev.octave, continuedFromPrev: true });
+                    }
+                  });
+                }
+
                 if (ev.tripletStart) tripletPoints.push({ type: 'start', x: nx, octave: ev.octave });
                 if (ev.tripletEnd) tripletPoints.push({ type: 'end', x: nx, octave: ev.octave });
-                if (ev.octave8Start) oct8Points.push({ type: 'start', x: nx, octave: ev.octave });
-                if (ev.octave8End) oct8Points.push({ type: 'end', x: nx, octave: ev.octave });
+
+                if (ev.octave8Start && Array.isArray(ev.octave8StartIds)) {
+                  ev.octave8StartIds.forEach(id => {
+                    activeOct8.add(id);
+                    oct8Segments.push({ id, x0: nx, x1: null });
+                  });
+                }
+                if (ev.octave8End && Array.isArray(ev.octave8EndIds)) {
+                  ev.octave8EndIds.forEach(id => {
+                    activeOct8.delete(id);
+                    const seg = [...oct8Segments].reverse().find(s => s.id === id && s.x1 === null);
+                    if (seg) {
+                      seg.x1 = nx;
+                    } else {
+                      oct8Segments.push({ id, x0: lineSlurStartX, x1: nx });
+                    }
+                  });
+                }
 
                 if (ev.type === 'dash') {
                   svgContent += `<line x1="${nx - fontSize * 0.34}" y1="${baseY - fontSize * 0.3}" x2="${nx + fontSize * 0.34}" y2="${baseY - fontSize * 0.3}" stroke="#1C1B18" stroke-width="1.5" stroke-linecap="round" />`;
@@ -1557,8 +1726,23 @@
                 }
               }
             }
+
+            // Render merged selection highlight box across selected notes (including gaps between notes)
+            if (activeSel && selectedNoteRects.length > 0) {
+              const firstRect = selectedNoteRects[0];
+              const lastRect = selectedNoteRects[selectedNoteRects.length - 1];
+              const spanX0 = activeSel.start < firstRect.srcStart ? Math.max(measureX0 + 1, firstRect.x0 - 3) : firstRect.x0;
+              const spanX1 = activeSel.end > lastRect.srcEnd ? Math.min(measureX1 - 1, lastRect.x1 + 3) : lastRect.x1;
+              const hlTop = baseY - fontSize * 1.15;
+              const hlHeight = fontSize * 1.85;
+              const hlWidth = Math.max(8, spanX1 - spanX0);
+              svgContent += `<g class="selection-preview-highlight">`;
+              svgContent += `<rect x="${spanX0.toFixed(2)}" y="${hlTop.toFixed(2)}" width="${hlWidth.toFixed(2)}" height="${hlHeight.toFixed(2)}" rx="4" fill="rgba(245, 158, 11, 0.16)" stroke="#D97706" stroke-width="1.2" stroke-dasharray="3,2" />`;
+              svgContent += `</g>`;
+            }
           }
 
+          // Render Triplet brackets "3"
           for (let t = 0; t < tripletPoints.length; t += 2) {
             const pA = tripletPoints[t];
             const pB = tripletPoints[t + 1] || { x: sysRightX - 6, octave: pA.octave };
@@ -1569,28 +1753,44 @@
             svgContent += `<polyline points="${midX + 7},${yTop} ${pB.x + 4},${yTop} ${pB.x + 4},${yTop + 4}" fill="none" stroke="#1C1B18" stroke-width="1" />`;
           }
 
-          for (let o = 0; o < oct8Points.length; o += 2) {
-            const pA = oct8Points[o];
-            const pB = oct8Points[o + 1] || { x: sysRightX - 6 };
+          // Render Octave brackets: ┌ - - - oct - - - ┐
+          for (const seg of oct8Segments) {
+            const leftX = seg.x0 - 5;
+            const rightX = (seg.x1 !== null ? seg.x1 : lineSlurEndX) + 5;
             const yTop = baseY - fontSize * 1.62;
-            const midX = (pA.x + pB.x) * 0.5;
-            const leftX = pA.x - 5;
-            const rightX = pB.x + 5;
+            const midX = (leftX + rightX) * 0.5;
             svgContent += `<polyline points="${leftX},${yTop + 5} ${leftX},${yTop} ${Math.max(leftX + 4, midX - 13)},${yTop}" fill="none" stroke="#1C1B18" stroke-width="1.05" stroke-dasharray="3,2.5" />`;
             svgContent += `<text x="${midX}" y="${yTop + 3}" text-anchor="middle" font-size="10.5" font-style="italic" font-weight="700" fill="#1C1B18" class="jianpu-font">oct</text>`;
             svgContent += `<polyline points="${Math.min(rightX - 4, midX + 13)},${yTop} ${rightX},${yTop} ${rightX},${yTop + 5}" fill="none" stroke="#1C1B18" stroke-width="1.05" stroke-dasharray="3,2.5" />`;
           }
 
+          // Render Slurs (with smooth asymmetric continuation curves across line breaks)
           const upperZones = pIdx > 0 ? partLowestZones[pIdx - 1] : [];
-          for (let s = 0; s < slurPoints.length; s += 2) {
-            const sA = slurPoints[s];
-            const sB = slurPoints[s + 1] || { x: sysRightX - 4, octave: sA.octave };
-            const hasTwoHighDots = (sA.octave >= 2) || (sB.octave >= 2);
-            const hasOneHighDot = (sA.octave >= 1) || (sB.octave >= 1);
+          for (const seg of slurSegments) {
+            const isOpenAtRight = seg.x1 === null;
+            const isOpenAtLeft = Boolean(seg.continuedFromPrev);
+
+            // Keep line-break endpoints compact and balanced near the outer notes
+            const rightBreakX = Math.min(lineSlurEndX, seg.x0 + fontSize * 1.45);
+            const leftBreakX = seg.x1 !== null
+              ? Math.max(lineSlurStartX, seg.x1 - fontSize * 1.45)
+              : lineSlurStartX;
+
+            const sA = {
+              x: isOpenAtLeft ? leftBreakX : seg.x0,
+              octave: seg.octave0
+            };
+            const sB = isOpenAtRight
+              ? { x: rightBreakX, octave: seg.octave0 }
+              : { x: seg.x1, octave: seg.octave1 };
+
+            const effectiveOctave = Math.max(sA.octave, sB.octave);
+            const hasTwoHighDots = effectiveOctave >= 2;
+            const hasOneHighDot = effectiveOctave >= 1;
             const baseClearance = hasTwoHighDots ? fontSize * 1.38 : hasOneHighDot ? fontSize * 1.15 : fontSize * 0.96;
             let yAnchor = baseY - baseClearance;
-            const span = Math.max(12, sB.x - sA.x);
-            let arch = Math.min(13.5, Math.max(6.5, span * 0.13));
+            const span = Math.max(10, sB.x - sA.x);
+            let arch = Math.min(12.5, Math.max(5.5, span * 0.13));
 
             if (upperZones.length > 0) {
               let maxUpperBottom = -Infinity;
@@ -1611,10 +1811,25 @@
               }
             }
 
-            const c1x = sA.x + span * 0.25;
-            const c2x = sA.x + span * 0.75;
-            const d = `M ${sA.x.toFixed(1)} ${yAnchor.toFixed(1)} C ${c1x.toFixed(1)} ${(yAnchor - arch).toFixed(1)}, ${c2x.toFixed(1)} ${(yAnchor - arch).toFixed(1)}, ${sB.x.toFixed(1)} ${yAnchor.toFixed(1)}`;
-            svgContent += `<path d="${d}" fill="none" stroke="#1C1B18" stroke-width="1.35" stroke-linecap="round" />`;
+            let d = '';
+            if (isOpenAtRight && !isOpenAtLeft) {
+              // Line-end continuation: rises smoothly from note head and levels off toward barline
+              const endY = yAnchor - arch * 0.72;
+              const c1x = sA.x + span * 0.35;
+              const c2x = sA.x + span * 0.72;
+              d = `M ${sA.x.toFixed(1)} ${yAnchor.toFixed(1)} C ${c1x.toFixed(1)} ${(yAnchor - arch * 0.78).toFixed(1)}, ${c2x.toFixed(1)} ${endY.toFixed(1)}, ${sB.x.toFixed(1)} ${endY.toFixed(1)}`;
+            } else if (isOpenAtLeft && !isOpenAtRight) {
+              // Line-start continuation: enters smoothly from barline height and curves down onto target note
+              const startY = yAnchor - arch * 0.72;
+              const c1x = sA.x + span * 0.28;
+              const c2x = sA.x + span * 0.65;
+              d = `M ${sA.x.toFixed(1)} ${startY.toFixed(1)} C ${c1x.toFixed(1)} ${startY.toFixed(1)}, ${c2x.toFixed(1)} ${(yAnchor - arch * 0.78).toFixed(1)}, ${sB.x.toFixed(1)} ${yAnchor.toFixed(1)}`;
+            } else {
+              const c1x = sA.x + span * 0.25;
+              const c2x = sA.x + span * 0.75;
+              d = `M ${sA.x.toFixed(1)} ${yAnchor.toFixed(1)} C ${c1x.toFixed(1)} ${(yAnchor - arch).toFixed(1)}, ${c2x.toFixed(1)} ${(yAnchor - arch).toFixed(1)}, ${sB.x.toFixed(1)} ${yAnchor.toFixed(1)}`;
+            }
+            svgContent += `<path class="slur-curve" d="${d}" fill="none" stroke="#1C1B18" stroke-width="1.35" stroke-linecap="round" />`;
           }
         });
       });
@@ -1748,7 +1963,50 @@
     }
   }
 
-  function tryAutoInsertBarline(textarea) {
+  function ensurePartHistoryStacks(idx) {
+    if (!state.undoStacks[idx]) {
+      state.undoStacks[idx] = [{
+        value: state.parts[idx]?.notation || '',
+        selStart: (state.parts[idx]?.notation || '').length,
+        selEnd: (state.parts[idx]?.notation || '').length
+      }];
+    }
+    if (!state.redoStacks[idx]) {
+      state.redoStacks[idx] = [];
+    }
+  }
+
+  function recordPartHistorySnapshot(idx, textarea) {
+    if (!state.parts[idx] || !textarea) return;
+    ensurePartHistoryStacks(idx);
+    const stack = state.undoStacks[idx];
+    const snap = {
+      value: textarea.value,
+      selStart: textarea.selectionStart ?? textarea.value.length,
+      selEnd: textarea.selectionEnd ?? textarea.value.length
+    };
+    const top = stack[stack.length - 1];
+    if (top && top.value === snap.value) {
+      top.selStart = snap.selStart;
+      top.selEnd = snap.selEnd;
+      return;
+    }
+    stack.push(snap);
+    if (stack.length > 200) stack.shift();
+    state.redoStacks[idx] = [];
+  }
+
+  function hasUnclosedSpanInSegment(segmentText) {
+    let depth = 0;
+    for (let i = 0; i < segmentText.length; i++) {
+      const ch = segmentText[i];
+      if (ch === '(') depth++;
+      else if (ch === ')') depth = Math.max(0, depth - 1);
+    }
+    return depth > 0;
+  }
+
+  function tryAutoInsertBarline(textarea, triggerMode = 'immediate') {
     if (!state.autoBarline || !textarea) return false;
     const expectedBeats = getExpectedQuarterBeatsPerMeasure(state.meta.time);
     if (expectedBeats === null || expectedBeats <= 0) return false;
@@ -1762,6 +2020,11 @@
     if (/(?:\|\||:\|:|\|:|:\||\|)\s*$/.test(beforeText)) return false;
     if (/^\s*(?:\|\||:\|:|\|:|:\||\|)/.test(afterText)) return false;
 
+    // Only auto-insert when editing at the end of the current measure (not splitting existing notes after cursor)
+    const nextBarMatch = afterText.search(/(:\|:|\|:|:\||\|\||\|)/);
+    const restOfCurrentMeasure = nextBarMatch === -1 ? afterText : afterText.slice(0, nextBarMatch);
+    if (restOfCurrentMeasure.trim().length > 0) return false;
+
     const barRegex = /(:\|:|\|:|:\||\|\||\|)/g;
     let lastBarEnd = 0;
     let match;
@@ -1770,6 +2033,49 @@
     }
     const currentMeasureSegment = beforeText.slice(lastBarEnd);
     if (!currentMeasureSegment.trim()) return false;
+
+    // Mode A ('space'): User just typed a space after finishing a note/group -> check if measure before space equals expectedBeats
+    if (triggerMode === 'space') {
+      const trimmedBefore = beforeText.replace(/[ ]+$/, '');
+      const segBeforeSpace = trimmedBefore.slice(lastBarEnd);
+      if (!segBeforeSpace.trim()) return false;
+      const parsed = parsePartNotation(segBeforeSpace);
+      if (parsed.length === 0) return false;
+      const measureBeats = parsed[parsed.length - 1].tokens.reduce((sum, t) => sum + t.duration, 0);
+      if (Math.abs(measureBeats - expectedBeats) <= 1e-4) {
+        const barToInsert = '| ';
+        textarea.value = beforeText + barToInsert + afterText;
+        const newPos = pos + barToInsert.length;
+        textarea.setSelectionRange(newPos, newPos);
+        return true;
+      }
+      return false;
+    }
+
+    // Mode B ('before-next-note'): User just typed the start of a new note (digit or accidental) without pressing space first,
+    // while the previous tokens in this measure already sum to expectedBeats -> insert ' | ' right BEFORE the new note!
+    if (triggerMode === 'before-next-note') {
+      const newTokenMatch = currentMeasureSegment.match(/([#bn]?[0-7])$/);
+      if (!newTokenMatch) return false;
+      const prevSegment = currentMeasureSegment.slice(0, currentMeasureSegment.length - newTokenMatch[0].length);
+      if (!prevSegment.trim()) return false;
+      if (hasUnclosedSpanInSegment(prevSegment)) return false;
+      const parsedPrev = parsePartNotation(prevSegment);
+      if (parsedPrev.length === 0) return false;
+      const prevBeats = parsedPrev[parsedPrev.length - 1].tokens.reduce((sum, t) => sum + t.duration, 0);
+      if (Math.abs(prevBeats - expectedBeats) <= 1e-4) {
+        const prefixBeforeNewNote = beforeText.slice(0, beforeText.length - newTokenMatch[0].length);
+        const sep = prefixBeforeNewNote.endsWith(' ') ? '| ' : ' | ';
+        textarea.value = prefixBeforeNewNote + sep + newTokenMatch[0] + afterText;
+        const newPos = prefixBeforeNewNote.length + sep.length + newTokenMatch[0].length;
+        textarea.setSelectionRange(newPos, newPos);
+        return true;
+      }
+      return false;
+    }
+
+    // Mode C ('immediate'): For tokens whose beat count is already finalized (locked 8th/16th, completed triplet, closing ')', or '-')
+    if (hasUnclosedSpanInSegment(currentMeasureSegment)) return false;
 
     const parsedMeasures = parsePartNotation(currentMeasureSegment);
     if (parsedMeasures.length === 0) return false;
@@ -1784,6 +2090,50 @@
       return true;
     }
     return false;
+  }
+
+  function applyHistorySnapshot(idx, snap, textarea) {
+    if (!snap || !state.parts[idx]) return;
+    state.parts[idx].notation = snap.value;
+    if (textarea) {
+      textarea.value = snap.value;
+      textarea.focus();
+      const s = Math.min(snap.selStart ?? snap.value.length, snap.value.length);
+      const e = Math.min(snap.selEnd ?? s, snap.value.length);
+      textarea.setSelectionRange(s, e);
+    }
+    if (state.lockedSubdivision === 'triplet') {
+      state.tripletStartOffset = textarea ? (textarea.selectionStart ?? snap.value.length) : null;
+      updateSubdivisionLockUI();
+    }
+    renderScore();
+  }
+
+  function undoPartNotation(idx, textarea) {
+    ensurePartHistoryStacks(idx);
+    const undoStack = state.undoStacks[idx];
+    if (undoStack.length <= 1) {
+      showToast('已無更早的輸入步驟可復原');
+      return false;
+    }
+    const currentSnap = undoStack.pop();
+    state.redoStacks[idx].push(currentSnap);
+    const prevSnap = undoStack[undoStack.length - 1];
+    applyHistorySnapshot(idx, prevSnap, textarea);
+    return true;
+  }
+
+  function redoPartNotation(idx, textarea) {
+    ensurePartHistoryStacks(idx);
+    const redoStack = state.redoStacks[idx];
+    if (redoStack.length === 0) {
+      showToast('已無可重做的步驟');
+      return false;
+    }
+    const nextSnap = redoStack.pop();
+    state.undoStacks[idx].push(nextSnap);
+    applyHistorySnapshot(idx, nextSnap, textarea);
+    return true;
   }
 
   // --------------------------------------------------------------------------
@@ -1905,6 +2255,77 @@
     } catch (e) {}
   }
 
+  function syncConfigInputs() {
+    const beatsEl = document.getElementById('cfg-beats-per-line');
+    const beatsVal = document.getElementById('val-beats-per-line');
+    if (beatsEl) beatsEl.value = state.config.beatsPerLine;
+    if (beatsVal) beatsVal.textContent = `${state.config.beatsPerLine} 拍`;
+
+    const fontEl = document.getElementById('cfg-font-size');
+    const fontVal = document.getElementById('val-font-size');
+    if (fontEl) fontEl.value = state.config.fontSize;
+    if (fontVal) fontVal.textContent = `${state.config.fontSize} px`;
+
+    const clusterEl = document.getElementById('cfg-cluster');
+    const clusterVal = document.getElementById('val-cluster');
+    if (clusterEl) clusterEl.value = state.config.clusterFactor;
+    if (clusterVal) {
+      const v = state.config.clusterFactor;
+      clusterVal.textContent = v <= 0.88 ? '極緊密' : v <= 0.98 ? '標準緊密' : '寬鬆';
+    }
+
+    const gapEl = document.getElementById('cfg-part-gap');
+    const gapVal = document.getElementById('val-part-gap');
+    if (gapEl) gapEl.value = state.config.partGap;
+    if (gapVal) gapVal.textContent = `${state.config.partGap} px`;
+
+    const spacingEl = document.getElementById('cfg-beat-spacing');
+    const spacingVal = document.getElementById('val-beat-spacing');
+    if (spacingEl) spacingEl.value = state.config.beatSpacing;
+    if (spacingVal) spacingVal.textContent = `${Number(state.config.beatSpacing).toFixed(2)}x`;
+  }
+
+  function applyOctaveToSelection(textarea, octaveSymbol) {
+    const start = textarea.selectionStart ?? 0;
+    const end = textarea.selectionEnd ?? 0;
+    if (end <= start) return false;
+
+    const val = textarea.value;
+    const selectedText = val.slice(start, end);
+
+    // Replace octave marks on note digits 1-7 while skipping 0, 3(, 8(, and volta [1.
+    const transformed = selectedText.replace(
+      /(\[[1-4]\.?)|([38]\()|([#bn]?[1-7])([',]*)/g,
+      (match, voltaGrp, tupletOctGrp, notePart) => {
+        if (voltaGrp || tupletOctGrp) return match;
+        return `${notePart}${octaveSymbol}`;
+      }
+    );
+
+    textarea.value = val.slice(0, start) + transformed + val.slice(end);
+    textarea.focus();
+    textarea.setSelectionRange(start, start + transformed.length);
+    return true;
+  }
+
+  function applyOctaveAtCursor(textarea, octaveSymbol) {
+    const pos = textarea.selectionStart ?? textarea.value.length;
+    const val = textarea.value;
+    const before = val.slice(0, pos);
+    const after = val.slice(pos);
+
+    const m = before.match(/([#bn]?[1-7])([',]*)$/);
+    if (m) {
+      const prefix = before.slice(0, before.length - m[0].length);
+      const updated = `${prefix}${m[1]}${octaveSymbol}`;
+      textarea.value = updated + after;
+      textarea.focus();
+      textarea.setSelectionRange(updated.length, updated.length);
+      return true;
+    }
+    return false;
+  }
+
   function initEvents() {
     const savedTheme = (() => {
       try { return localStorage.getItem('jianpu_studio_theme') || 'light'; } catch (e) { return 'light'; }
@@ -1920,7 +2341,6 @@
       });
     }
 
-    // Auto barline checkbox
     const autoBarlineChk = document.getElementById('chk-auto-barline');
     if (autoBarlineChk) {
       autoBarlineChk.checked = state.autoBarline;
@@ -1930,7 +2350,6 @@
       });
     }
 
-    // Metadata inputs
     const metaBindings = [
       ['meta-title', 'title'],
       ['meta-subtitle', 'subtitle'],
@@ -1950,7 +2369,6 @@
       }
     });
 
-    // Calibration sliders
     document.getElementById('cfg-beats-per-line').addEventListener('input', e => {
       state.config.beatsPerLine = Number(e.target.value);
       document.getElementById('val-beats-per-line').textContent = `${state.config.beatsPerLine} 拍`;
@@ -1983,21 +2401,44 @@
       renderScore();
     });
 
-    // Preset selector
     document.getElementById('preset-select').addEventListener('change', e => {
       const preset = PRESETS[e.target.value];
       if (!preset) return;
       state.meta = JSON.parse(JSON.stringify(preset.meta));
       state.parts = JSON.parse(JSON.stringify(preset.parts));
       state.activePartIndex = 0;
+      state.selectionRange = null;
+      state.undoStacks = [];
+      state.redoStacks = [];
+      state.parts.forEach((_, i) => ensurePartHistoryStacks(i));
       syncMetadataInputs();
       renderPartsEditorList();
       renderScore();
       showToast('已載入範例樂譜');
     });
 
-    // Dynamic Part List Delegation
     const listEl = document.getElementById('parts-editor-list');
+
+    const syncSelectionHighlight = target => {
+      if (!target || !target.classList || !target.classList.contains('part-notation-input')) return;
+      const idx = Number(target.dataset.idx);
+      const s = target.selectionStart ?? 0;
+      const e = target.selectionEnd ?? 0;
+      const nextSel = e > s ? { partIndex: idx, start: s, end: e } : null;
+      const prevSel = state.selectionRange;
+      const changed =
+        (Boolean(nextSel) !== Boolean(prevSel)) ||
+        (nextSel && prevSel && (nextSel.partIndex !== prevSel.partIndex || nextSel.start !== prevSel.start || nextSel.end !== prevSel.end));
+      if (changed) {
+        state.selectionRange = nextSel;
+        renderScore();
+      }
+    };
+
+    listEl.addEventListener('select', e => syncSelectionHighlight(e.target), true);
+    listEl.addEventListener('mouseup', e => syncSelectionHighlight(e.target));
+    listEl.addEventListener('keyup', e => syncSelectionHighlight(e.target));
+
     listEl.addEventListener('focusin', e => {
       const card = e.target.closest('.part-card');
       if (card) {
@@ -2020,6 +2461,61 @@
       }
     });
 
+    listEl.addEventListener('keydown', e => {
+      if (!e.target.classList || !e.target.classList.contains('part-notation-input')) return;
+      const idx = Number(e.target.dataset.idx);
+      if (Number.isNaN(idx)) return;
+
+      // Toggle 8th-note ('_') lock mode when pressing digit '8' (without modifier keys)
+      if (e.key === '8' && !e.ctrlKey && !e.metaKey && !e.altKey && !e.isComposing) {
+        e.preventDefault();
+        if (state.lockedSubdivision === '_') {
+          state.lockedSubdivision = null;
+          state.tripletStartOffset = null;
+          updateSubdivisionLockUI();
+          showToast('已取消 8 分音符鎖定狀態');
+        } else {
+          state.lockedSubdivision = '_';
+          state.tripletStartOffset = null;
+          updateSubdivisionLockUI();
+          showToast('已進入 8 分音符鎖定狀態（快捷鍵 8）：輸入數字自動加上 _（再按一次 8 取消）');
+        }
+        return;
+      }
+
+      // Toggle 16th-note ('=') lock mode when pressing digit '9' (without modifier keys)
+      if (e.key === '9' && !e.ctrlKey && !e.metaKey && !e.altKey && !e.isComposing) {
+        e.preventDefault();
+        if (state.lockedSubdivision === '=') {
+          state.lockedSubdivision = null;
+          state.tripletStartOffset = null;
+          updateSubdivisionLockUI();
+          showToast('已取消 16 分音符鎖定狀態');
+        } else {
+          state.lockedSubdivision = '=';
+          state.tripletStartOffset = null;
+          updateSubdivisionLockUI();
+          showToast('已進入 16 分音符鎖定狀態（快捷鍵 9）：輸入數字自動加上 =（再按一次 9 取消）');
+        }
+        return;
+      }
+
+      const isMod = e.ctrlKey || e.metaKey;
+      if (isMod && !e.altKey) {
+        const keyLower = e.key.toLowerCase();
+        if (keyLower === 'z' && !e.shiftKey) {
+          e.preventDefault();
+          undoPartNotation(idx, e.target);
+          return;
+        }
+        if (keyLower === 'y' || (keyLower === 'z' && e.shiftKey)) {
+          e.preventDefault();
+          redoPartNotation(idx, e.target);
+          return;
+        }
+      }
+    });
+
     listEl.addEventListener('input', e => {
       const idx = Number(e.target.dataset.idx);
       if (Number.isNaN(idx) || !state.parts[idx]) return;
@@ -2033,50 +2529,11 @@
         const ta = e.target;
         const isInsertEvent = !e.inputType || e.inputType.startsWith('insert');
         const insertedData = e.data || '';
+        let tripletStillPending = false;
+        let autoBarTriggered = false;
 
-        // 1) Triplet lock mode ('triplet'): collect 3 notes and auto-wrap into 3(...) with time-sig subdivision
-        let tripletGroupCompleted = false;
-        let tripletInProgress = false;
-
-        if (state.lockedSubdivision === 'triplet' && !e.isComposing) {
-          const curPos = ta.selectionStart ?? ta.value.length;
-          if (
-            state.tripletStartOffset === null ||
-            state.tripletStartOffset > curPos ||
-            ta.value.slice(state.tripletStartOffset, curPos).includes('|')
-          ) {
-            // Anchor start right before the first typed character of this triplet
-            const insertedLen = isInsertEvent ? insertedData.length : 0;
-            state.tripletStartOffset = Math.max(0, curPos - insertedLen);
-          }
-
-          const rawSlice = ta.value.slice(state.tripletStartOffset, curPos);
-          const noteCount = countNotesInSlice(rawSlice);
-
-          if (noteCount >= 3) {
-            const subMark = getTripletSubdivisionByTimeSig(state.meta.time);
-            const wrapped = formatTripletGroup(rawSlice, subMark);
-            if (wrapped) {
-              const beforeSlice = ta.value.slice(0, state.tripletStartOffset);
-              const afterSlice = ta.value.slice(curPos);
-              const needsLeadingSpace = beforeSlice.length > 0 && !/[\s(|]$/.test(beforeSlice);
-              const finalTripletStr = (needsLeadingSpace ? ' ' : '') + wrapped;
-              ta.value = beforeSlice + finalTripletStr + afterSlice;
-              const nextCursor = beforeSlice.length + finalTripletStr.length;
-              ta.setSelectionRange(nextCursor, nextCursor);
-              state.tripletStartOffset = nextCursor;
-              tripletGroupCompleted = true;
-            } else {
-              state.tripletStartOffset = curPos;
-            }
-          } else if (noteCount > 0) {
-            // Still collecting the 3 notes of the triplet -> defer auto-barline check
-            tripletInProgress = true;
-          }
-          updateSubdivisionLockUI();
-        }
-        // 2) If 8th ('_') or 16th ('=') subdivision lock is active and user typed a single note digit 0-7
-        else if (
+        // 1) Locked 8th ('_') or 16th ('=') subdivision mode
+        if (
           (state.lockedSubdivision === '_' || state.lockedSubdivision === '=') &&
           isInsertEvent &&
           insertedData.length === 1 &&
@@ -2086,23 +2543,81 @@
           const curPos = ta.selectionStart ?? ta.value.length;
           const before = ta.value.slice(0, curPos);
           const after = ta.value.slice(curPos);
-          if (!after.startsWith(state.lockedSubdivision)) {
+          if (!after.startsWith(state.lockedSubdivision) && !after.startsWith('(')) {
             ta.value = before + state.lockedSubdivision + after;
             const nextPos = curPos + state.lockedSubdivision.length;
             ta.setSelectionRange(nextPos, nextPos);
+            if (state.autoBarline) {
+              tryAutoInsertBarline(ta, 'before-next-note');
+              tryAutoInsertBarline(ta, 'immediate');
+              autoBarTriggered = true;
+            }
+          }
+        } else if (
+          (state.lockedSubdivision === '_' || state.lockedSubdivision === '=') &&
+          isInsertEvent &&
+          insertedData.length === 1 &&
+          (insertedData === "'" || insertedData === ',') &&
+          !e.isComposing
+        ) {
+          const curPos = ta.selectionStart ?? ta.value.length;
+          const before = ta.value.slice(0, curPos);
+          const swapRe = new RegExp(`([0-7][',]*)(${state.lockedSubdivision === '_' ? '_' : '='})([',])$`);
+          const m = before.match(swapRe);
+          if (m) {
+            const fixedBefore = before.slice(0, before.length - m[0].length) + m[1] + m[3] + m[2];
+            ta.value = fixedBefore + ta.value.slice(curPos);
+            ta.setSelectionRange(fixedBefore.length, fixedBefore.length);
           }
         }
 
-        // 3) Auto-insert barline '|' ONLY after active lock formatting finishes (never mid-triplet)
-        if (isInsertEvent && !e.isComposing && insertedData !== '|' && !tripletInProgress) {
-          const barInserted = tryAutoInsertBarline(ta);
-          if (barInserted && state.lockedSubdivision === 'triplet') {
+        // 2) Locked Triplet ('triplet') mode
+        if (state.lockedSubdivision === 'triplet' && isInsertEvent && !e.isComposing) {
+          const curPos = ta.selectionStart ?? ta.value.length;
+          if (state.tripletStartOffset === null || curPos < state.tripletStartOffset) {
+            state.tripletStartOffset = Math.max(0, curPos - insertedData.length);
+          }
+          const slice = ta.value.slice(state.tripletStartOffset, curPos);
+          const noteCount = countNotesInSlice(slice);
+          if (noteCount > 0 && noteCount < 3) {
+            tripletStillPending = true;
+          } else if (noteCount >= 3) {
+            const subMark = getTripletSubdivisionByTimeSig(state.meta.time);
+            const formatted = formatTripletGroup(slice, subMark);
+            if (formatted) {
+              const beforeTrip = ta.value.slice(0, state.tripletStartOffset);
+              const afterTrip = ta.value.slice(curPos);
+              ta.value = beforeTrip + formatted + afterTrip;
+              const nextPos = beforeTrip.length + formatted.length;
+              ta.setSelectionRange(nextPos, nextPos);
+              state.tripletStartOffset = nextPos;
+              if (state.autoBarline) {
+                tryAutoInsertBarline(ta, 'immediate');
+                state.tripletStartOffset = ta.selectionStart ?? nextPos;
+                autoBarTriggered = true;
+              }
+            }
+          }
+          updateSubdivisionLockUI();
+        }
+
+        // 3) Auto-Barline check (priority strictly below active lock modes)
+        if (!autoBarTriggered && !tripletStillPending && state.autoBarline && isInsertEvent && !e.isComposing && insertedData !== '|') {
+          if (insertedData === ' ') {
+            tryAutoInsertBarline(ta, 'space');
+          } else if (insertedData.length === 1 && /[0-7#bn]/.test(insertedData)) {
+            tryAutoInsertBarline(ta, 'before-next-note');
+          } else if (insertedData.length === 1 && (insertedData === '-' || insertedData === ')')) {
+            tryAutoInsertBarline(ta, 'immediate');
+          }
+          if (state.lockedSubdivision === 'triplet') {
             state.tripletStartOffset = ta.selectionStart ?? ta.value.length;
-            updateSubdivisionLockUI();
           }
         }
 
+        state.selectionRange = null;
         state.parts[idx].notation = ta.value;
+        recordPartHistorySnapshot(idx, ta);
         renderScore();
       }
     });
@@ -2113,7 +2628,10 @@
         const idx = Number(btn.dataset.removeIdx);
         if (state.parts.length > 1 && !Number.isNaN(idx)) {
           state.parts.splice(idx, 1);
+          state.undoStacks.splice(idx, 1);
+          state.redoStacks.splice(idx, 1);
           state.activePartIndex = Math.max(0, Math.min(state.activePartIndex, state.parts.length - 1));
+          state.selectionRange = null;
           renderPartsEditorList();
           renderScore();
           showToast('已移除聲部');
@@ -2121,7 +2639,6 @@
       }
     });
 
-    // Add new part
     document.getElementById('btn-add-part').addEventListener('click', () => {
       const nextNum = state.parts.length + 1;
       state.parts.push({
@@ -2130,36 +2647,104 @@
         notation: '1 2 3 4 | 5 6 7 1\' | 1 - - -'
       });
       state.activePartIndex = state.parts.length - 1;
+      ensurePartHistoryStacks(state.activePartIndex);
       renderPartsEditorList();
       renderScore();
       showToast(`已新增 Harmonica ${nextNum}`);
     });
 
-    // Quick symbol insertion into active part textarea (double-click lock for _, =, and triplet; no single-click insert)
+    // Quick symbol toolbar buttons
     const lastClickTimeBySymbol = {};
     const DOUBLE_CLICK_MS = 380;
 
     function insertSymbolIntoActiveTextarea(sym) {
-      const textarea = document.getElementById(`part-textarea-${state.activePartIndex}`);
+      const idx = state.activePartIndex;
+      const textarea = document.getElementById(`part-textarea-${idx}`);
       if (!textarea) return;
+
       const start = textarea.selectionStart ?? textarea.value.length;
       const end = textarea.selectionEnd ?? textarea.value.length;
+
+      // 1) Octave buttons: set exact octave (' / '' / , / ,,) on highlighted notes or note before cursor
+      if (sym === "'" || sym === "''" || sym === ',' || sym === ',,') {
+        if (end > start) {
+          applyOctaveToSelection(textarea, sym);
+        } else if (!applyOctaveAtCursor(textarea, sym)) {
+          const before = textarea.value.slice(0, start);
+          const after = textarea.value.slice(end);
+          textarea.value = before + sym + after;
+          textarea.focus();
+          textarea.setSelectionRange(start + sym.length, start + sym.length);
+        }
+        state.selectionRange = null;
+        state.parts[idx].notation = textarea.value;
+        recordPartHistorySnapshot(idx, textarea);
+        renderScore();
+        return;
+      }
+
+      // 2) Octave 8(...) button: wrap highlighted selection as `8( ... )`
+      if (sym === '8(1 2 3 4)' && end > start) {
+        const before = textarea.value.slice(0, start);
+        const selected = textarea.value.slice(start, end);
+        const after = textarea.value.slice(end);
+        const wrapped = `8( ${selected} )`;
+        textarea.value = before + wrapped + after;
+        textarea.focus();
+        const newPos = start + wrapped.length;
+        textarea.setSelectionRange(newPos, newPos);
+        state.selectionRange = null;
+        if (state.autoBarline) {
+          tryAutoInsertBarline(textarea, 'immediate');
+        }
+        state.parts[idx].notation = textarea.value;
+        recordPartHistorySnapshot(idx, textarea);
+        renderScore();
+        return;
+      }
+
+      // 3) Slur (...) button: wrap highlighted selection as `( ... )` (or insert `(  )` with cursor centered)
+      if (sym === '( )') {
+        const before = textarea.value.slice(0, start);
+        const selected = textarea.value.slice(start, end);
+        const after = textarea.value.slice(end);
+        if (end > start) {
+          const wrapped = `( ${selected} )`;
+          textarea.value = before + wrapped + after;
+          textarea.focus();
+          const newPos = start + wrapped.length;
+          textarea.setSelectionRange(newPos, newPos);
+        } else {
+          const emptySlur = '(  )';
+          textarea.value = before + emptySlur + after;
+          textarea.focus();
+          textarea.setSelectionRange(start + 2, start + 2);
+        }
+        state.selectionRange = null;
+        if (state.autoBarline && end > start) {
+          tryAutoInsertBarline(textarea, 'immediate');
+        }
+        state.parts[idx].notation = textarea.value;
+        recordPartHistorySnapshot(idx, textarea);
+        renderScore();
+        return;
+      }
+
+      // 4) Default insertion at cursor
       const before = textarea.value.slice(0, start);
       const after = textarea.value.slice(end);
       textarea.value = before + sym + after;
       textarea.focus();
       const newPos = start + sym.length;
       textarea.setSelectionRange(newPos, newPos);
+      state.selectionRange = null;
 
-      if (sym.trim() !== '|') {
-        tryAutoInsertBarline(textarea);
+      if (state.autoBarline && sym.trim() !== '|') {
+        tryAutoInsertBarline(textarea, 'immediate');
       }
 
-      if (state.lockedSubdivision === 'triplet') {
-        updateSubdivisionLockUI();
-      }
-
-      state.parts[state.activePartIndex].notation = textarea.value;
+      state.parts[idx].notation = textarea.value;
+      recordPartHistorySnapshot(idx, textarea);
       renderScore();
     }
 
@@ -2173,41 +2758,38 @@
           const prevTime = lastClickTimeBySymbol[lockSym] || 0;
           lastClickTimeBySymbol[lockSym] = now;
 
-          // If already locked on this symbol, a single click unlocks it
           if (state.lockedSubdivision === lockSym) {
             state.lockedSubdivision = null;
             state.tripletStartOffset = null;
             updateSubdivisionLockUI();
             const textarea = document.getElementById(`part-textarea-${state.activePartIndex}`);
             if (textarea) textarea.focus();
-            const cancelMsg =
+            showToast(
               lockSym === '_'
                 ? '已取消 8 分音符鎖定狀態'
                 : lockSym === '='
                 ? '已取消 16 分音符鎖定狀態'
-                : '已取消三連音鎖定狀態';
-            showToast(cancelMsg);
+                : '已取消三連音鎖定狀態'
+            );
             return;
           }
 
-          // Detect double-click within threshold -> enter lock mode (without inserting any symbol)
           if (now - prevTime <= DOUBLE_CLICK_MS) {
             lastClickTimeBySymbol[lockSym] = 0;
             const textarea = document.getElementById(`part-textarea-${state.activePartIndex}`);
             if (textarea) textarea.focus();
             state.lockedSubdivision = lockSym;
-            state.tripletStartOffset = lockSym === 'triplet' && textarea ? (textarea.selectionStart ?? textarea.value.length) : null;
+            state.tripletStartOffset = lockSym === 'triplet' && textarea
+              ? (textarea.selectionStart ?? textarea.value.length)
+              : null;
             updateSubdivisionLockUI();
-
-            if (lockSym === '_') {
-              showToast('已進入 8 分音符鎖定狀態：輸入數字自動加上 _（再點一下取消）');
-            } else if (lockSym === '=') {
-              showToast('已進入 16 分音符鎖定狀態：輸入數字自動加上 =（再點一下取消）');
-            } else if (lockSym === 'triplet') {
-              const subMark = getTripletSubdivisionByTimeSig(state.meta.time);
-              const subDesc = subMark === '' ? '無減時線' : subMark === '=' ? '16分減時線 (=)' : subMark === '~' ? '32分減時線 (~)' : '8分減時線 (_)';
-              showToast(`已進入三連音鎖定狀態：每輸入 3 個數字自動組成 3(...) 並依目前拍號加上${subDesc}`);
-            }
+            showToast(
+              lockSym === '_'
+                ? '已進入 8 分音符鎖定狀態：輸入數字自動加上 _（再點一下取消）'
+                : lockSym === '='
+                ? '已進入 16 分音符鎖定狀態：輸入數字自動加上 =（再點一下取消）'
+                : '已進入三連音鎖定狀態：每輸入 3 個數字自動組成 3(...)（再點一下取消）'
+            );
           }
           return;
         }
@@ -2294,6 +2876,10 @@
               syncConfigInputs();
             }
             state.activePartIndex = 0;
+            state.selectionRange = null;
+            state.undoStacks = [];
+            state.redoStacks = [];
+            state.parts.forEach((_, i) => ensurePartHistoryStacks(i));
             syncMetadataInputs();
             renderPartsEditorList();
             renderScore();
@@ -2308,44 +2894,462 @@
     });
   }
 
-  function syncConfigInputs() {
-    const beatsEl = document.getElementById('cfg-beats-per-line');
-    const beatsVal = document.getElementById('val-beats-per-line');
-    if (beatsEl) beatsEl.value = state.config.beatsPerLine;
-    if (beatsVal) beatsVal.textContent = `${state.config.beatsPerLine} 拍`;
+  // --------------------------------------------------------------------------
+  // 10. BUILT-IN UNIT TEST RUNNER (核心功能自動化單元測試套件)
+  // --------------------------------------------------------------------------
+  function runAllUnitTests() {
+    const results = [];
+    const assert = (cond, msg) => {
+      if (!cond) throw new Error(msg || 'Assertion failed');
+    };
+    const assertNear = (actual, expected, msg, eps = 1e-3) => {
+      if (Math.abs(actual - expected) > eps) {
+        throw new Error(`${msg || 'Value mismatch'}: 預期 ${expected}，實際 ${actual}`);
+      }
+    };
 
-    const fontEl = document.getElementById('cfg-font-size');
-    const fontVal = document.getElementById('val-font-size');
-    if (fontEl) fontEl.value = state.config.fontSize;
-    if (fontVal) fontVal.textContent = `${state.config.fontSize} px`;
+    const runCase = (name, fn) => {
+      // Save full state snapshot before each isolated test case
+      const savedMeta = JSON.parse(JSON.stringify(state.meta));
+      const savedParts = JSON.parse(JSON.stringify(state.parts));
+      const savedConfig = JSON.parse(JSON.stringify(state.config));
+      const savedActiveIdx = state.activePartIndex;
+      const savedLock = state.lockedSubdivision;
+      const savedTripletOffset = state.tripletStartOffset;
+      const savedAutoBar = state.autoBarline;
+      const savedSel = state.selectionRange ? { ...state.selectionRange } : null;
+      const savedUndo = JSON.parse(JSON.stringify(state.undoStacks));
+      const savedRedo = JSON.parse(JSON.stringify(state.redoStacks));
 
-    const clusterEl = document.getElementById('cfg-cluster');
-    const clusterVal = document.getElementById('val-cluster');
-    if (clusterEl) clusterEl.value = state.config.clusterFactor;
-    if (clusterVal) {
-      const v = state.config.clusterFactor;
-      clusterVal.textContent = v <= 0.88 ? '極緊密' : v <= 0.98 ? '標準緊密' : '寬鬆';
+      try {
+        fn();
+        results.push({ name, passed: true, detail: 'PASS' });
+      } catch (err) {
+        results.push({ name, passed: false, detail: err && err.message ? err.message : String(err) });
+      } finally {
+        // Restore state cleanly after each test
+        state.meta = savedMeta;
+        state.parts = savedParts;
+        state.config = savedConfig;
+        state.activePartIndex = savedActiveIdx;
+        state.lockedSubdivision = savedLock;
+        state.tripletStartOffset = savedTripletOffset;
+        state.autoBarline = savedAutoBar;
+        state.selectionRange = savedSel;
+        state.undoStacks = savedUndo;
+        state.redoStacks = savedRedo;
+        syncMetadataInputs();
+        renderPartsEditorList();
+        updateSubdivisionLockUI();
+        const chk = document.getElementById('chk-auto-barline');
+        if (chk) chk.checked = state.autoBarline;
+      }
+    };
+
+    // Test 1: Basic Parser & Rhythmic Durations
+    runCase('T01 簡譜詞法解析與音符時值計算（四分/八分/十六分/附點/增時線）', () => {
+      const parsed = parsePartNotation("1 2_ 3_ 4= 5= 6= 7= | 1. 2_ - |");
+      assert(parsed.length === 2, '應解析出 2 個小節');
+      const m1Beats = parsed[0].tokens.reduce((s, t) => s + t.duration, 0);
+      const m2Beats = parsed[1].tokens.reduce((s, t) => s + t.duration, 0);
+      assertNear(m1Beats, 3.0, '第 1 小節拍數錯誤');
+      assertNear(m2Beats, 3.0, '第 2 小節拍數錯誤');
+    });
+
+    // Test 2: Triplet & Spaced Octave 8( ... ) Parser
+    runCase('T02 三連音 3(...) 與含空白八度奏法 8( ... ) 解析', () => {
+      const parsed = parsePartNotation("3(1_ 2_ 3_) 8( 4 5 | 6 )");
+      assert(parsed.length === 2, '跨小節八度應解析出 2 個小節');
+      const tripBeats = parsed[0].tokens.slice(0, 3).reduce((s, t) => s + t.duration, 0);
+      assertNear(tripBeats, 1.0, '三連音三音總拍數應為 1.0 拍');
+      assert(parsed[0].tokens[3].octave8Start === true, '8( 後帶空白時第 4 音仍應標記 octave8Start');
+      assert(parsed[1].tokens[0].octave8End === true, '第 2 小節結尾應標記 octave8End');
+    });
+
+    // Test 3: Equal-Width Multi-Part Beat Alignment & Mismatch Detection
+    runCase('T03 多聲部每拍等寬對齊與小節拍數檢查', () => {
+      const p1 = parsePartNotation("1= 2= 3= 4= 5 6 7");
+      const p2 = parsePartNotation("1 - 5 -");
+      const aligned = buildAlignedMeasures([p1, p2], 17, 0.85, 1.0);
+      assert(aligned.length === 1, '應對齊為 1 個小節');
+      assert(aligned[0].measureBeats === 4, '小節總拍數應取最大聲部 4 拍');
+      assert(aligned[0].beatWidths[0] > aligned[0].beatWidths[1], '含 4 個 16 分音符的第 1 拍寬度應自動撐開大於單音拍');
+    });
+
+    // Test 4: Single-Click vs Double-Click Lock on 8th (_) and 16th (=)
+    runCase('T04 8分(_)/16分(=) 取消單擊插入、雙擊進入鎖定、單擊解除鎖定', () => {
+      state.parts = [{ id: 't', name: 'P1', notation: '1 ' }];
+      state.activePartIndex = 0;
+      state.lockedSubdivision = null;
+      renderPartsEditorList();
+
+      const btn8 = document.getElementById('btn-sym-eighth');
+      const ta = document.getElementById('part-textarea-0');
+      ta.focus();
+      ta.setSelectionRange(2, 2);
+
+      // Single click should NOT insert '_'
+      btn8.click();
+      assert(ta.value === '1 ', '單擊 8分(_) 不應插入底線');
+      assert(state.lockedSubdivision === null, '單擊不應進入鎖定狀態');
+
+      // Second rapid click -> double-click lock
+      btn8.click();
+      assert(state.lockedSubdivision === '_', '連按兩下應進入 8分(_) 鎖定狀態');
+      assert(ta.value === '1 ', '進入鎖定時不應多插入多餘符號');
+
+      // Typing digit '2' while locked auto-appends '_'
+      ta.value = '1 2';
+      ta.setSelectionRange(3, 3);
+      ta.dispatchEvent(new InputEvent('input', { bubbles: true, data: '2', inputType: 'insertText' }));
+      assert(ta.value === '1 2_', `鎖定狀態輸入 2 應自動變成 '1 2_'，實際為 '${ta.value}'`);
+
+      // Single click again unlocks
+      btn8.click();
+      assert(state.lockedSubdivision === null, '鎖定中單擊應解除鎖定');
+    });
+
+    // Test 5: Double-Click Triplet Lock + Time Signature Subdivision
+    runCase('T05 三連音雙擊鎖定與依拍號自動加減時線（4/4加_、2/2不加、6/8加=）', () => {
+      state.meta.time = '4/4';
+      state.parts = [{ id: 't', name: 'P1', notation: '' }];
+      state.activePartIndex = 0;
+      state.lockedSubdivision = null;
+      renderPartsEditorList();
+
+      const btnTrip = document.getElementById('btn-sym-triplet');
+      const ta = document.getElementById('part-textarea-0');
+      ta.focus();
+
+      // Double click triplet button
+      btnTrip.click();
+      btnTrip.click();
+      assert(state.lockedSubdivision === 'triplet', '連按兩下應進入三連音鎖定');
+
+      // Type 3 notes sequentially: 1, 2, 3
+      ta.value = '1';
+      ta.setSelectionRange(1, 1);
+      ta.dispatchEvent(new InputEvent('input', { bubbles: true, data: '1', inputType: 'insertText' }));
+      assert(ta.value === '1', '輸入第 1 個音尚未湊滿 3 音不應提前包裝');
+
+      ta.value = '1 2';
+      ta.setSelectionRange(3, 3);
+      ta.dispatchEvent(new InputEvent('input', { bubbles: true, data: '2', inputType: 'insertText' }));
+      assert(ta.value === '1 2', '輸入第 2 個音尚未湊滿 3 音不應提前包裝');
+
+      ta.value = '1 2 3';
+      ta.setSelectionRange(5, 5);
+      ta.dispatchEvent(new InputEvent('input', { bubbles: true, data: '3', inputType: 'insertText' }));
+      assert(ta.value === '3(1_ 2_ 3_) ', `4/4 拍輸入第 3 個音應自動組成 '3(1_ 2_ 3_) '，實際為 '${ta.value}'`);
+
+      // Verify 2/2 time signature omits underline
+      const sub22 = getTripletSubdivisionByTimeSig('2/2');
+      const sub68 = getTripletSubdivisionByTimeSig('6/8');
+      assert(sub22 === '', '2/2 拍三連音不應加減時線');
+      assert(sub68 === '=', '6/8 拍三連音應加 16 分減時線 (=)');
+    });
+
+    // Test 6: Lock Priority Over Auto-Barline
+    runCase('T06 按鍵鎖定優先於自動新增小節線（三連音湊滿第4拍後才斷小節）', () => {
+      state.meta.time = '4/4';
+      state.autoBarline = true;
+      state.parts = [{ id: 't', name: 'P1', notation: '1 2 3 ' }];
+      state.activePartIndex = 0;
+      state.lockedSubdivision = 'triplet';
+      state.tripletStartOffset = 6;
+      renderPartsEditorList();
+
+      const ta = document.getElementById('part-textarea-0');
+      ta.focus();
+      ta.setSelectionRange(6, 6);
+
+      // Beat 4 will be a triplet (3 beats already present + 1 beat triplet = 4 beats)
+      ta.value = '1 2 3 4';
+      ta.setSelectionRange(7, 7);
+      ta.dispatchEvent(new InputEvent('input', { bubbles: true, data: '4', inputType: 'insertText' }));
+      assert(!ta.value.includes('|'), '三連音第 1 音輸入時絕不可提前插入小節線');
+
+      ta.value = '1 2 3 4 5';
+      ta.setSelectionRange(9, 9);
+      ta.dispatchEvent(new InputEvent('input', { bubbles: true, data: '5', inputType: 'insertText' }));
+      assert(!ta.value.includes('|'), '三連音第 2 音輸入時絕不可提前插入小節線');
+
+      ta.value = '1 2 3 4 5 6';
+      ta.setSelectionRange(11, 11);
+      ta.dispatchEvent(new InputEvent('input', { bubbles: true, data: '6', inputType: 'insertText' }));
+      assert(ta.value === '1 2 3 3(4_ 5_ 6_) | ', `三連音完成後滿 4 拍應自動補上小節線，實際為 '${ta.value}'`);
+    });
+
+    // Test 7: Auto-Barline Does Not Prematurely Cut 4th Beat Modifier
+    runCase('T07 自動小節線不搶拍（第4拍可繼續加 _ / . / \'，空白或下一音才補 |）', () => {
+      state.meta.time = '4/4';
+      state.autoBarline = true;
+      state.lockedSubdivision = null;
+      state.parts = [{ id: 't', name: 'P1', notation: '1 2 3 ' }];
+      state.activePartIndex = 0;
+      renderPartsEditorList();
+
+      const ta = document.getElementById('part-textarea-0');
+      ta.focus();
+
+      // Type 4th beat digit '4' -> should wait for modifier or space
+      ta.value = '1 2 3 4';
+      ta.setSelectionRange(7, 7);
+      ta.dispatchEvent(new InputEvent('input', { bubbles: true, data: '4', inputType: 'insertText' }));
+      assert(ta.value === '1 2 3 4', '剛打完第 4 拍數字時不應立刻插入 |，須允許繼續打修飾符');
+
+      // Press space to confirm 4th beat -> should now auto-insert '| '
+      ta.value = '1 2 3 4 ';
+      ta.setSelectionRange(8, 8);
+      ta.dispatchEvent(new InputEvent('input', { bubbles: true, data: ' ', inputType: 'insertText' }));
+      assert(ta.value === '1 2 3 4 | ', `按下空白鍵確認第 4 拍後應自動補上 '| '，實際為 '${ta.value}'`);
+    });
+
+    // Test 8: Highlighted Selection Octave Set (High / Double-High / Low / Double-Low)
+    runCase('T08 反白選段批次設定高/倍高/低/倍低八度（忽略 0、3(、8(、[1.）', () => {
+      state.parts = [{ id: 't', name: 'P1', notation: "[1. 3(1_ 2''_ 0_) 8(4, 5)" }];
+      state.activePartIndex = 0;
+      renderPartsEditorList();
+
+      const ta = document.getElementById('part-textarea-0');
+      ta.focus();
+      ta.setSelectionRange(0, ta.value.length);
+
+      const btnHigh = document.querySelector('.sym-btn[data-insert="\'"]');
+      btnHigh.click();
+      assert(ta.value === "[1. 3(1'_ 2'_ 0_) 8(4' 5')", `高八度轉換結果不符：${ta.value}`);
+
+      ta.setSelectionRange(0, ta.value.length);
+      const btnDoubleLow = document.querySelector('.sym-btn[data-insert=",,"]');
+      btnDoubleLow.click();
+      assert(ta.value === "[1. 3(1,,_ 2,,_ 0_) 8(4,, 5,,)", `倍低八度轉換結果不符：${ta.value}`);
+    });
+
+    // Test 9: Highlighted Selection Wrap with Octave 8( ... )
+    runCase('T09 反白一段簡譜按八度音快捷鈕自動頭尾包覆 8( ... )', () => {
+      state.parts = [{ id: 't', name: 'P1', notation: '1 2 3 | 4' }];
+      state.activePartIndex = 0;
+      renderPartsEditorList();
+
+      const ta = document.getElementById('part-textarea-0');
+      ta.focus();
+      ta.setSelectionRange(0, ta.value.length);
+
+      const btnOct8 = document.querySelector('.sym-btn[data-insert="8(1 2 3 4)"]');
+      btnOct8.click();
+      assert(ta.value === '8( 1 2 3 | 4 )', `反白包覆八度記號結果不符：${ta.value}`);
+    });
+
+    // Test 10: Highlighted Selection Wrap with Slur ( ... )
+    runCase('T10 反白一段簡譜按圓滑線快捷鈕自動頭尾包覆 ( ... )', () => {
+      state.parts = [{ id: 't', name: 'P1', notation: '1 2 3 | 4' }];
+      state.activePartIndex = 0;
+      renderPartsEditorList();
+
+      const ta = document.getElementById('part-textarea-0');
+      ta.focus();
+      ta.setSelectionRange(0, ta.value.length);
+
+      const btnSlur = document.getElementById('btn-sym-slur');
+      btnSlur.click();
+      assert(ta.value === '( 1 2 3 | 4 )', `反白包覆圓滑線結果不符：${ta.value}`);
+    });
+
+    // Test 11: Undo (Ctrl+Z) & Redo (Ctrl+Y) History Stack
+    runCase('T11 輸入與快捷操作支援 Ctrl+Z 復原與 Ctrl+Y 重做', () => {
+      state.parts = [{ id: 't', name: 'P1', notation: '1 2' }];
+      state.activePartIndex = 0;
+      state.undoStacks = [];
+      state.redoStacks = [];
+      ensurePartHistoryStacks(0);
+      renderPartsEditorList();
+
+      const ta = document.getElementById('part-textarea-0');
+      ta.focus();
+      ta.value = '1 2 3';
+      ta.setSelectionRange(5, 5);
+      ta.dispatchEvent(new InputEvent('input', { bubbles: true, data: '3', inputType: 'insertText' }));
+      assert(state.parts[0].notation === '1 2 3', '步驟 1 應為 1 2 3');
+
+      // Trigger Ctrl+Z
+      ta.dispatchEvent(new KeyboardEvent('keydown', { key: 'z', ctrlKey: true, bubbles: true }));
+      assert(state.parts[0].notation === '1 2', `按 Ctrl+Z 應還原為 '1 2'，實際為 '${state.parts[0].notation}'`);
+
+      // Trigger Ctrl+Y
+      ta.dispatchEvent(new KeyboardEvent('keydown', { key: 'y', ctrlKey: true, bubbles: true }));
+      assert(state.parts[0].notation === '1 2 3', `按 Ctrl+Y 應重做為 '1 2 3'，實際為 '${state.parts[0].notation}'`);
+    });
+
+    // Test 12: Mid-Score Repeat Start (|:) and Back-to-Back Repeat (:|:) Rendering
+    runCase('T12 樂譜中間插入反覆起 (|:) 與雙向反覆 (:|:) 正確解析並繪製粗細線與圓點', () => {
+      const parsed = parsePartNotation("1 2 3 4 |: 5 6 7 1' :|: 2' 3' 4' 5' :|");
+      assert(parsed.length === 3, '應解析出 3 個小節');
+      assert(parsed[1].leftBar === 'repeat-start', '第 2 小節左側應為 repeat-start');
+      assert(parsed[1].rightBar === 'repeat-end', '第 2 小節右側應為 repeat-end');
+      assert(parsed[2].leftBar === 'repeat-start', '第 3 小節左側應為 repeat-start');
+
+      state.parts = [{ id: 't', name: 'P1', notation: "1 2 3 4 |: 5 6 7 1' :|: 2' 3' 4' 5' :|" }];
+      renderScore();
+      const repeatDots = document.querySelectorAll('#pages-container svg circle.repeat-dot');
+      // 1 part * (2 dots for m2 left + 2 dots for m2 right + 2 dots for m3 left + 2 dots for m3 right) = 8 repeat dots
+      assert(repeatDots.length === 8, `單聲部中間 |: 與 :|: 應繪製 8 顆反覆圓點，實際為 ${repeatDots.length}`);
+    });
+
+    // Test 13: Keyboard Shortcut '8' Toggle for 8th-Note ('_') Lock Mode
+    runCase('T13 按下鍵盤數字 8 進入 8分(_) 鎖定模式，再按一次 8 取消鎖定', () => {
+      state.parts = [{ id: 't', name: 'P1', notation: '1 ' }];
+      state.activePartIndex = 0;
+      state.lockedSubdivision = null;
+      renderPartsEditorList();
+
+      const ta = document.getElementById('part-textarea-0');
+      ta.focus();
+      ta.setSelectionRange(2, 2);
+
+      // Press '8' to enter '_' lock mode
+      ta.dispatchEvent(new KeyboardEvent('keydown', { key: '8', bubbles: true, cancelable: true }));
+      assert(state.lockedSubdivision === '_', '按下數字 8 應進入 8分(_) 鎖定模式');
+      assert(ta.value === '1 ', '按下數字 8 切換鎖定時不應在編輯區插入字元 8');
+
+      // Typing note '3' while locked should auto-append '_'
+      ta.value = '1 3';
+      ta.setSelectionRange(3, 3);
+      ta.dispatchEvent(new InputEvent('input', { bubbles: true, data: '3', inputType: 'insertText' }));
+      assert(ta.value === '1 3_', `鎖定狀態輸入 3 應自動變成 '1 3_'，實際為 '${ta.value}'`);
+
+      // Press '8' again to exit '_' lock mode
+      ta.dispatchEvent(new KeyboardEvent('keydown', { key: '8', bubbles: true, cancelable: true }));
+      assert(state.lockedSubdivision === null, '再次按下數字 8 應取消 8分(_) 鎖定模式');
+    });
+
+    // Test 14: Keyboard Shortcut '9' Toggle for 16th-Note ('=') Lock Mode
+    runCase('T14 按下鍵盤數字 9 進入 16分(=) 鎖定模式，再按一次 9 取消鎖定', () => {
+      state.parts = [{ id: 't', name: 'P1', notation: '1 ' }];
+      state.activePartIndex = 0;
+      state.lockedSubdivision = null;
+      renderPartsEditorList();
+
+      const ta = document.getElementById('part-textarea-0');
+      ta.focus();
+      ta.setSelectionRange(2, 2);
+
+      // Press '9' to enter '=' lock mode
+      ta.dispatchEvent(new KeyboardEvent('keydown', { key: '9', bubbles: true, cancelable: true }));
+      assert(state.lockedSubdivision === '=', '按下數字 9 應進入 16分(=) 鎖定模式');
+      assert(ta.value === '1 ', '按下數字 9 切換鎖定時不應在編輯區插入字元 9');
+
+      // Typing note '4' while locked should auto-append '='
+      ta.value = '1 4';
+      ta.setSelectionRange(3, 3);
+      ta.dispatchEvent(new InputEvent('input', { bubbles: true, data: '4', inputType: 'insertText' }));
+      assert(ta.value === '1 4=', `鎖定狀態輸入 4 應自動變成 '1 4='，實際為 '${ta.value}'`);
+
+      // Press '9' again to exit '=' lock mode
+      ta.dispatchEvent(new KeyboardEvent('keydown', { key: '9', bubbles: true, cancelable: true }));
+      assert(state.lockedSubdivision === null, '再次按下數字 9 應取消 16分(=) 鎖定模式');
+    });
+
+    // Test 15: Unclosed Slur Guard in Auto-Barline ('before-next-note') & Locked 8th Cross-Measure Continuity
+    runCase('T15 未閉合圓滑線跨小節不誤插 | ，且 8分(_) 鎖定滿拍後連打新音自動補小節線', () => {
+      state.meta.time = '4/4';
+      state.autoBarline = true;
+      state.lockedSubdivision = '_';
+      state.parts = [{ id: 't', name: 'P1', notation: '1_ 2_ 3_ 4_ 5_ 6_ 7_ ' }];
+      state.activePartIndex = 0;
+      renderPartsEditorList();
+
+      const ta = document.getElementById('part-textarea-0');
+      ta.focus();
+
+      // 8th eighth-note completes 4.0 beats -> should auto-insert ' | '
+      ta.value = '1_ 2_ 3_ 4_ 5_ 6_ 7_ 1';
+      ta.setSelectionRange(ta.value.length, ta.value.length);
+      ta.dispatchEvent(new InputEvent('input', { bubbles: true, data: '1', inputType: 'insertText' }));
+      assert(ta.value === '1_ 2_ 3_ 4_ 5_ 6_ 7_ 1_ | ', `8分鎖定滿8音應自動補小節線，實際為 '${ta.value}'`);
+
+      // Next note typed directly after ' | ' starts measure 2 cleanly with '_'
+      ta.value = ta.value + '2';
+      ta.setSelectionRange(ta.value.length, ta.value.length);
+      ta.dispatchEvent(new InputEvent('input', { bubbles: true, data: '2', inputType: 'insertText' }));
+      assert(ta.value === '1_ 2_ 3_ 4_ 5_ 6_ 7_ 1_ | 2_', `第2小節首音應為 '2_'，實際為 '${ta.value}'`);
+
+      // Unclosed slur '(' must prevent premature barline in 'before-next-note' mode
+      state.lockedSubdivision = null;
+      ta.value = '(1 2 3 4 5';
+      ta.setSelectionRange(ta.value.length, ta.value.length);
+      ta.dispatchEvent(new InputEvent('input', { bubbles: true, data: '5', inputType: 'insertText' }));
+      assert(!ta.value.includes('|'), `未閉合圓滑線 '(' 內即使滿4拍也不應在音符中間強行插入 |，實際為 '${ta.value}'`);
+    });
+
+    // Test 16: Cross-Measure & Cross-Line Slur Continuity
+    runCase('T16 跨小節與跨行換行圓滑線 ( ... | ... ) 兩行皆正確接續且不穿過小節線', () => {
+      state.config.beatsPerLine = 8; // First line holds 4 beats (1 measure), forcing measure 2 onto line 2
+      state.parts = [{ id: 't', name: 'P1', notation: "(1 2 3 4 | 5 6 7 1')" }];
+      renderScore();
+      const slurs = document.querySelectorAll('#pages-container svg path.slur-curve');
+      assert(slurs.length === 2, `跨小節且跨行時，上下兩行應各繪製 1 段圓滑線（共 2 段），實際為 ${slurs.length}`);
+      const d1 = slurs[0].getAttribute('d') || '';
+      const d2 = slurs[1].getAttribute('d') || '';
+      const m1Coords = d1.match(/M\s+([\d.]+)\s+([\d.]+).*?([\d.]+)\s+([\d.]+)$/);
+      const m2Coords = d2.match(/M\s+([\d.]+)\s+([\d.]+).*?([\d.]+)\s+([\d.]+)$/);
+      assert(m1Coords && m2Coords, '跨行圓滑線 SVG path 座標格式應完整');
+      assert(parseFloat(m1Coords[3]) < 740, `第一行圓滑線終點 (${m1Coords[3]}) 不應超出右側小節線`);
+      assert(parseFloat(m2Coords[1]) > 54, `第二行圓滑線起點 (${m2Coords[1]}) 不應壓在左側小節線上`);
+    });
+
+    // Render Test Report in Left Panel & Re-render Active Score
+    renderScore();
+    const badgeEl = document.getElementById('unit-test-badge');
+    const dotEl = document.getElementById('unit-test-dot');
+    const listContainer = document.getElementById('unit-test-results');
+    const passedCount = results.filter(r => r.passed).length;
+    const allPassed = passedCount === results.length;
+
+    if (badgeEl) {
+      badgeEl.textContent = `${passedCount}/${results.length} 通過`;
+      badgeEl.className = allPassed
+        ? 'text-[10px] px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-500 border border-emerald-500/40 font-mono'
+        : 'text-[10px] px-2 py-0.5 rounded bg-rose-500/20 text-rose-500 border border-rose-500/40 font-mono';
     }
-
-    const gapEl = document.getElementById('cfg-part-gap');
-    const gapVal = document.getElementById('val-part-gap');
-    if (gapEl) gapEl.value = state.config.partGap;
-    if (gapVal) gapVal.textContent = `${state.config.partGap} px`;
-
-    const spacingEl = document.getElementById('cfg-beat-spacing');
-    const spacingVal = document.getElementById('val-beat-spacing');
-    if (spacingEl) spacingEl.value = state.config.beatSpacing;
-    if (spacingVal) spacingVal.textContent = `${Number(state.config.beatSpacing).toFixed(2)}x`;
+    if (dotEl) {
+      dotEl.className = allPassed
+        ? 'w-2 h-2 rounded-full bg-emerald-400'
+        : 'w-2 h-2 rounded-full bg-rose-500 animate-ping';
+    }
+    if (listContainer) {
+      listContainer.innerHTML = results.map(r => `
+        <div class="px-2.5 py-1.5 rounded-lg border ${r.passed ? 'bg-emerald-500/10 border-emerald-500/30 text-emerald-600' : 'bg-rose-500/15 border-rose-500/40 text-rose-500'}">
+          <div class="flex items-start justify-between gap-2">
+            <span class="font-semibold">${r.passed ? '✔' : '✘'} ${escapeXml(r.name)}</span>
+            <span class="shrink-0 font-bold">${r.passed ? 'PASS' : 'FAIL'}</span>
+          </div>
+          ${r.passed ? '' : `<div class="mt-1 text-[10px] opacity-90">${escapeXml(r.detail)}</div>`}
+        </div>
+      `).join('');
+    }
   }
 
   // Boot application
   window.addEventListener('DOMContentLoaded', () => {
+    state.parts.forEach((_, i) => ensurePartHistoryStacks(i));
     syncMetadataInputs();
     syncConfigInputs();
     renderPartsEditorList();
     updateSubdivisionLockUI();
     initEvents();
     renderScore();
+    runAllUnitTests();
+
+    const rerunBtn = document.getElementById('btn-rerun-tests');
+    if (rerunBtn) {
+      rerunBtn.addEventListener('click', e => {
+        e.preventDefault();
+        e.stopPropagation();
+        runAllUnitTests();
+        showToast('已完成 15 項核心功能單元測試');
+      });
+    }
+
     if (window.innerWidth < 1024) {
       fitZoomToViewport();
     }
