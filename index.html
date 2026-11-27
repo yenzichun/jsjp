@@ -1,1 +1,3518 @@
-c:\Users\yenpi\Desktop\極速簡譜\code_artifact_聲部編輯區.html
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>極速簡譜 | 打簡譜從來沒有這麼容易</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Jost:wght@400;500;600;700&family=Noto+Sans+TC:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --paper-bg: #FFFDF9;
+      --ink-color: #292724;
+      --font-jianpu: 'Futura', 'Tw Cen MT', 'Jost', 'Century Gothic', 'Noto Sans TC', sans-serif;
+    }
+
+    body {
+      font-family: 'Noto Sans TC', -apple-system, BlinkMacSystemFont, sans-serif;
+      background-color: #f4f1ea;
+      color: #292524;
+      margin: 0;
+      padding: 0;
+    }
+
+    .jianpu-font {
+      font-family: var(--font-jianpu);
+      font-weight: 500;
+    }
+
+    /* Warm Archival A4 Sheet */
+    .a4-page {
+      width: 210mm;
+      min-height: 297mm;
+      height: 297mm;
+      background-color: var(--paper-bg);
+      background-image:
+        radial-gradient(rgba(180, 165, 140, 0.04) 0.8px, transparent 0),
+        radial-gradient(rgba(155, 140, 115, 0.025) 0.6px, transparent 0),
+        linear-gradient(180deg, rgba(255, 255, 255, 0.65) 0%, rgba(253, 250, 244, 0.45) 55%, rgba(250, 246, 238, 0.5) 100%);
+      background-size: 16px 16px, 23px 23px, 100% 100%;
+      background-position: 0 0, 7px 11px, 0 0;
+      color: var(--ink-color);
+      box-shadow:
+        0 14px 36px rgba(45, 38, 26, 0.12),
+        inset 0 0 20px rgba(230, 220, 200, 0.12),
+        0 0 0 1px rgba(226, 218, 203, 0.7);
+      position: relative;
+      overflow: hidden;
+      box-sizing: border-box;
+      margin: 0 auto 28px auto;
+      transition: transform 0.2s ease;
+    }
+
+    /* Locked Symbol Button State */
+    .sym-btn.is-locked {
+      background-color: rgba(245, 158, 11, 0.24) !important;
+      border-color: #f59e0b !important;
+      color: #fcd34d !important;
+      box-shadow: 0 0 0 1px rgba(245, 158, 11, 0.45), 0 0 12px rgba(245, 158, 11, 0.22);
+      font-weight: 700;
+    }
+    body.studio-light aside .sym-btn.is-locked {
+      background-color: #fef3c7 !important;
+      border-color: #f59e0b !important;
+      color: #92400e !important;
+      box-shadow: 0 0 0 1px rgba(245, 158, 11, 0.4);
+    }
+
+    /* Custom Scrollbar for Editor */
+    ::-webkit-scrollbar {
+      width: 8px;
+      height: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #1f1f23;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #3f3f46;
+      border-radius: 4px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #52525b;
+    }
+
+    /* ==========================================================================
+       LEFT STUDIO PANEL LIGHT THEME OVERRIDES (淡色主題樣式)
+       ========================================================================== */
+    body.studio-light ::selection {
+      background-color: rgba(245, 158, 11, 0.22);
+      color: #78350f;
+    }
+    body.studio-light ::-webkit-scrollbar-track {
+      background: #f9f7f2;
+    }
+    body.studio-light ::-webkit-scrollbar-thumb {
+      background: #e2dcd0;
+    }
+    body.studio-light ::-webkit-scrollbar-thumb:hover {
+      background: #cfc7b8;
+    }
+    body.studio-light aside {
+      background-color: #fdfcfa !important;
+      border-color: #ece6da !important;
+      color: #292524 !important;
+    }
+    body.studio-light aside > div:first-child {
+      background-color: #faf7f0 !important;
+      border-color: #ece6da !important;
+    }
+    body.studio-light aside > div:nth-child(2) {
+      background-color: #fcfaf5 !important;
+      border-color: #ece6da !important;
+    }
+    body.studio-light aside h1,
+    body.studio-light aside h2,
+    body.studio-light aside summary {
+      color: #292524 !important;
+    }
+    body.studio-light aside p,
+    body.studio-light aside label,
+    body.studio-light aside span.text-zinc-400 {
+      color: #6b655e !important;
+    }
+    body.studio-light aside details,
+    body.studio-light aside .bg-zinc-800\/60 {
+      background-color: #ffffff !important;
+      border-color: #ede8dd !important;
+      box-shadow: 0 1px 2px rgba(28, 25, 23, 0.03);
+    }
+    body.studio-light aside summary {
+      background-color: #faf7f0 !important;
+    }
+    body.studio-light aside input[type="text"],
+    body.studio-light aside select,
+    body.studio-light aside textarea {
+      background-color: #ffffff !important;
+      border-color: #e2dbd0 !important;
+      color: #292524 !important;
+    }
+    body.studio-light aside input[type="text"]:focus,
+    body.studio-light aside select:focus,
+    body.studio-light aside textarea:focus {
+      border-color: #f59e0b !important;
+      background-color: #ffffff !important;
+    }
+    body.studio-light aside .part-card {
+      background-color: #ffffff !important;
+      border-color: #ede8dd !important;
+      box-shadow: 0 1px 2px rgba(28, 25, 23, 0.03);
+    }
+    body.studio-light aside .part-card.border-amber-500\/70 {
+      border-color: #f59e0b !important;
+    }
+    body.studio-light aside .part-card .part-index-badge {
+      background-color: #fef3c7 !important;
+      border: 1px solid #fcd34d !important;
+      color: #b45309 !important;
+    }
+    body.studio-light aside .sym-btn,
+    body.studio-light code {
+      background-color: #faf6ed !important;
+      border-color: #e8e1d3 !important;
+      color: #b45309 !important;
+    }
+    body.studio-light aside .sym-btn:hover {
+      background-color: #f3ecdd !important;
+    }
+    body.studio-light aside #auto-barline-wrap {
+      background-color: #faf6ed !important;
+      border-color: #e6dfd1 !important;
+      color: #44403c !important;
+    }
+    body.studio-light aside #active-part-badge,
+    body.studio-light aside #lock-status-pill {
+      background-color: #fef3c7 !important;
+      border-color: #f59e0b !important;
+      color: #92400e !important;
+      font-weight: 600;
+    }
+    body.studio-light aside #btn-theme-toggle,
+    body.studio-light aside #btn-help,
+    body.studio-light aside #btn-export-json,
+    body.studio-light aside #btn-import-json,
+    body.studio-light aside #btn-add-part,
+    body.studio-light aside #btn-rerun-tests,
+    body.studio-light aside #btn-collapse-sidebar {
+      background-color: #ffffff !important;
+      border-color: #e5dec9 !important;
+      color: #44403c !important;
+    }
+    body.studio-light aside #btn-theme-toggle:hover,
+    body.studio-light aside #btn-help:hover,
+    body.studio-light aside #btn-export-json:hover,
+    body.studio-light aside #btn-import-json:hover,
+    body.studio-light aside #btn-add-part:hover,
+    body.studio-light aside #btn-rerun-tests:hover,
+    body.studio-light aside #btn-collapse-sidebar:hover {
+      background-color: #f7f3ea !important;
+    }
+    body.studio-light #btn-expand-sidebar {
+      background-color: rgba(255, 254, 251, 0.94) !important;
+      border-color: #e5dec9 !important;
+      color: #292524 !important;
+    }
+    body.studio-light #btn-expand-sidebar:hover {
+      background-color: #faf7f0 !important;
+    }
+
+    /* Sidebar Collapsible Transitions */
+    #studio-sidebar {
+      transition: width 0.25s cubic-bezier(0.4, 0, 0.2, 1), height 0.25s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.2s ease;
+    }
+    #studio-sidebar.sidebar-collapsed {
+      width: 0 !important;
+      min-width: 0 !important;
+      height: 0 !important;
+      min-height: 0 !important;
+      overflow: hidden !important;
+      border-width: 0 !important;
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    /* Right Preview Viewport Light Theme Overrides */
+    body.studio-light #preview-viewport {
+      background-color: #f4f1ea !important;
+    }
+    body.studio-light #preview-toolbar {
+      background-color: rgba(255, 254, 251, 0.94) !important;
+      border-color: #e5dec9 !important;
+      color: #292524 !important;
+      box-shadow: 0 6px 20px rgba(28, 25, 23, 0.07);
+    }
+    body.studio-light #preview-viewport #status-summary,
+    body.studio-light #preview-viewport #zoom-out,
+    body.studio-light #preview-viewport #zoom-in {
+      color: #292524 !important;
+    }
+    body.studio-light #preview-viewport #zoom-out:hover,
+    body.studio-light #preview-viewport #zoom-in:hover {
+      background-color: #f5f0e6 !important;
+    }
+    body.studio-light #preview-viewport #zoom-label {
+      color: #b45309 !important;
+    }
+    body.studio-light #preview-viewport #zoom-fit {
+      background-color: #faf7f0 !important;
+      color: #292524 !important;
+      border: 1px solid #e5dec9;
+    }
+    body.studio-light #preview-viewport #zoom-fit:hover {
+      background-color: #f0eadc !important;
+    }
+    body.studio-light #preview-viewport .h-3\.5.bg-zinc-700 {
+      background-color: #e2dacb !important;
+    }
+    body.studio-light .a4-page {
+      box-shadow:
+        0 12px 32px rgba(45, 38, 26, 0.11),
+        inset 0 0 24px rgba(230, 220, 200, 0.14),
+        0 0 0 1px rgba(218, 209, 192, 0.65);
+    }
+
+    /* Help Modal Light Theme Overrides */
+    body.studio-light #help-modal > div {
+      background-color: #fdfcfa !important;
+      border-color: #e5dec9 !important;
+      color: #292524 !important;
+    }
+    body.studio-light #help-modal > div > div:first-child,
+    body.studio-light #help-modal > div > div:last-child {
+      background-color: #faf7f0 !important;
+      border-color: #ece6da !important;
+    }
+    body.studio-light #help-modal h3 {
+      color: #292524 !important;
+    }
+    body.studio-light #help-modal h4 {
+      color: #b45309 !important;
+    }
+    body.studio-light #help-modal .bg-zinc-950\/70 {
+      background-color: #ffffff !important;
+      border-color: #ede8dd !important;
+      box-shadow: 0 1px 2px rgba(28, 25, 23, 0.03);
+    }
+    body.studio-light #help-modal li,
+    body.studio-light #help-modal .text-zinc-300 {
+      color: #292524 !important;
+    }
+    body.studio-light #help-modal .text-zinc-400 {
+      color: #6b655e !important;
+    }
+    body.studio-light #help-modal #btn-close-help {
+      color: #6b655e !important;
+    }
+    body.studio-light #help-modal #btn-close-help:hover {
+      color: #292524 !important;
+      background-color: #f3ede0 !important;
+    }
+
+    /* Unit Test Item Theme Adaptive Colors */
+    .test-item-pass {
+      background-color: rgba(16, 185, 129, 0.12);
+      border-color: rgba(16, 185, 129, 0.35);
+      color: #6ee7b7;
+    }
+    body.studio-light .test-item-pass {
+      background-color: rgba(16, 185, 129, 0.10);
+      border-color: rgba(16, 185, 129, 0.30);
+      color: #047857;
+    }
+    .test-item-fail {
+      background-color: rgba(244, 63, 94, 0.15);
+      border-color: rgba(244, 63, 94, 0.40);
+      color: #fda4af;
+    }
+    body.studio-light .test-item-fail {
+      background-color: rgba(244, 63, 94, 0.12);
+      border-color: rgba(244, 63, 94, 0.35);
+      color: #be123c;
+    }
+
+    /* Pure A4 Print / PDF Output Rules */
+    @media print {
+      @page {
+        size: A4 portrait;
+        margin: 0 !important;
+      }
+      .beat-mismatch-highlight,
+      .selection-preview-highlight {
+        display: none !important;
+      }
+      html, body {
+        background: #FFFDF9 !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        width: 210mm !important;
+        min-width: 210mm !important;
+        max-width: 210mm !important;
+        height: auto !important;
+        overflow: visible !important;
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+      }
+      .no-print {
+        display: none !important;
+      }
+      #app-shell {
+        display: block !important;
+        position: static !important;
+        width: 210mm !important;
+        height: auto !important;
+        overflow: visible !important;
+      }
+      #preview-viewport {
+        display: block !important;
+        position: static !important;
+        padding: 0 !important;
+        margin: 0 !important;
+        background: transparent !important;
+        overflow: visible !important;
+        width: 210mm !important;
+        height: auto !important;
+      }
+      #pages-container {
+        display: block !important;
+        transform: none !important;
+        scale: 1 !important;
+        width: 210mm !important;
+        margin: 0 !important;
+        padding: 0 !important;
+      }
+      .a4-page {
+        display: block !important;
+        width: 210mm !important;
+        height: 297mm !important;
+        min-height: 297mm !important;
+        margin: 0 !important;
+        box-shadow: none !important;
+        page-break-after: always !important;
+        break-after: page !important;
+      }
+      .a4-page:last-child {
+        page-break-after: auto !important;
+        break-after: auto !important;
+      }
+    }
+  </style>
+</head>
+<body class="studio-light antialiased selection:bg-amber-500/30 selection:text-amber-200">
+
+<div id="app-shell" class="flex flex-col lg:flex-row h-screen w-full overflow-hidden">
+
+  <!-- LEFT STUDIO CONTROL PANEL -->
+  <aside id="studio-sidebar" class="no-print w-full lg:w-[440px] xl:w-[480px] bg-zinc-900 border-b lg:border-b-0 lg:border-r border-zinc-800 flex flex-col h-[52vh] lg:h-screen shrink-0 z-20">
+    
+    <!-- Top Brand Header -->
+    <div class="px-4 py-3 bg-zinc-950 border-b border-zinc-800 flex items-center justify-between gap-2">
+      <div class="flex items-center gap-2.5">
+        <div class="w-8 h-8 rounded-lg bg-gradient-to-br from-amber-100 via-amber-200 to-orange-200 border border-amber-300/80 text-amber-600 flex items-center justify-center font-bold text-base shadow-sm">
+          ⚡
+        </div>
+        <div>
+          <h1 class="text-sm font-bold tracking-wide text-zinc-100 leading-tight">極速簡譜</h1>
+          <p class="text-[11px] text-zinc-400">打簡譜從來沒有這麼容易</p>
+        </div>
+      </div>
+
+      <div class="flex items-center gap-1.5">
+        <button id="btn-theme-toggle" type="button" class="px-2.5 py-1.5 rounded-lg bg-zinc-800 hover:bg-zinc-700 text-zinc-200 text-xs font-medium transition flex items-center gap-1 border border-zinc-700" title="切換左側編輯區淡色 / 深色主題">
+          <span id="theme-toggle-icon">🌙</span>
+          <span id="theme-toggle-label">深色</span>
+        </button>
+        <button id="btn-help" type="button" class="px-2.5 py-1.5 rounded-lg bg-zinc-800 hover:bg-zinc-700 text-zinc-200 text-xs font-medium transition flex items-center gap-1 border border-zinc-700" title="語法說明與快捷鍵">
+          <svg class="w-3.5 h-3.5 text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+          手冊
+        </button>
+        <button id="btn-print" type="button" class="px-3 py-1.5 rounded-lg bg-amber-500 hover:bg-amber-400 text-zinc-950 text-xs font-bold transition flex items-center gap-1.5 shadow-sm">
+          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"/></svg>
+          PDF
+        </button>
+        <button id="btn-collapse-sidebar" type="button" class="p-1.5 rounded-lg bg-zinc-800 hover:bg-zinc-700 text-zinc-200 text-xs font-medium transition flex items-center justify-center border border-zinc-700" title="收合側邊編輯欄">
+          <svg class="w-4 h-4 hidden lg:block" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 19l-7-7 7-7m8 14l-7-7 7-7"/></svg>
+          <svg class="w-4 h-4 lg:hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7"/></svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- Preset Selector & Quick Tools -->
+    <div class="px-4 py-2.5 bg-zinc-900/90 border-b border-zinc-800 flex flex-wrap items-center justify-between gap-2">
+      <div class="flex items-center gap-2 flex-1 min-w-[200px]">
+        <label for="preset-select" class="text-xs text-zinc-400 shrink-0">範例範本：</label>
+        <select id="preset-select" class="w-full bg-zinc-800 border border-zinc-700 rounded-lg px-2.5 py-1.5 text-xs text-zinc-100 focus:outline-none focus:border-amber-500">
+          <option value="ensemble_demo">經典三重奏練習曲（Harmonica1 / Bass / Chord）</option>
+          <option value="quartet_demo">經典四重奏範本（Harmonica1 / Harmonica2 / Bass / Chord）</option>
+          <option value="bach_air">巴哈 G弦之歌（三重奏：Harmonica1 / Bass / Chord）</option>
+          <option value="chromatic_etude">半音階口琴技巧練習曲（連續16個升降十六分音符）</option>
+          <option value="blank_trio">空白三重奏範本（Harmonica1 / Bass / Chord）</option>
+          <option value="blank_quartet">空白四重奏範本（Harmonica1 / Harmonica2 / Bass / Chord）</option>
+        </select>
+      </div>
+      <div class="flex items-center gap-1.5">
+        <button id="btn-export-json" type="button" class="px-2 py-1 rounded bg-zinc-800 hover:bg-zinc-700 text-[11px] text-zinc-300 border border-zinc-700 transition" title="匯出樂譜設定檔">匯出</button>
+        <button id="btn-import-json" type="button" class="px-2 py-1 rounded bg-zinc-800 hover:bg-zinc-700 text-[11px] text-zinc-300 border border-zinc-700 transition" title="匯入樂譜設定檔">匯入</button>
+      </div>
+    </div>
+
+    <!-- Scrollable Editor Body -->
+    <div class="flex-1 overflow-y-auto p-4 space-y-4">
+
+      <!-- Section 1: Score Basic Metadata -->
+      <details open class="group bg-zinc-800/50 border border-zinc-800 rounded-xl overflow-hidden">
+        <summary class="px-3.5 py-2.5 bg-zinc-800/80 cursor-pointer flex items-center justify-between text-xs font-semibold text-zinc-200 select-none">
+          <span class="flex items-center gap-2">
+            <span class="w-1.5 h-1.5 rounded-full bg-amber-400"></span>
+            樂譜基本資料設定
+          </span>
+          <span class="text-zinc-400 text-[11px] group-open:rotate-180 transition-transform">▼</span>
+        </summary>
+        <div class="p-3.5 grid grid-cols-2 gap-2.5 text-xs">
+          <div class="col-span-2 sm:col-span-1">
+            <label class="block text-zinc-400 mb-1 text-[11px]">曲名 (Title)</label>
+            <input id="meta-title" type="text" class="w-full bg-zinc-950 border border-zinc-700 rounded-lg px-2.5 py-1.5 text-zinc-100 focus:border-amber-500 focus:outline-none" />
+          </div>
+          <div class="col-span-2 sm:col-span-1">
+            <label class="block text-zinc-400 mb-1 text-[11px]">副標題 (Subtitle)</label>
+            <input id="meta-subtitle" type="text" class="w-full bg-zinc-950 border border-zinc-700 rounded-lg px-2.5 py-1.5 text-zinc-100 focus:border-amber-500 focus:outline-none" />
+          </div>
+          <div class="col-span-2 sm:col-span-1">
+            <label class="block text-zinc-400 mb-1 text-[11px]">作曲 / 編曲 (Composer / Arr.)</label>
+            <input id="meta-composer" type="text" class="w-full bg-zinc-950 border border-zinc-700 rounded-lg px-2.5 py-1.5 text-zinc-100 focus:border-amber-500 focus:outline-none" />
+          </div>
+          <div class="grid grid-cols-3 gap-2 col-span-2">
+            <div>
+              <label class="block text-zinc-400 mb-1 text-[11px]">調號 (Key)</label>
+              <input id="meta-key" type="text" placeholder="1 = C" class="w-full bg-zinc-950 border border-zinc-700 rounded-lg px-2 py-1.5 text-zinc-100 focus:border-amber-500 focus:outline-none jianpu-font" />
+            </div>
+            <div>
+              <label class="block text-zinc-400 mb-1 text-[11px]">拍號 (Time)</label>
+              <input id="meta-time" type="text" placeholder="4/4" class="w-full bg-zinc-950 border border-zinc-700 rounded-lg px-2 py-1.5 text-zinc-100 focus:border-amber-500 focus:outline-none jianpu-font" />
+            </div>
+            <div>
+              <label class="block text-zinc-400 mb-1 text-[11px]">速度 (Tempo)</label>
+              <input id="meta-tempo" type="text" placeholder="♩ = 108" class="w-full bg-zinc-950 border border-zinc-700 rounded-lg px-2 py-1.5 text-zinc-100 focus:border-amber-500 focus:outline-none jianpu-font" />
+            </div>
+          </div>
+          <div class="col-span-2">
+            <label class="block text-zinc-400 mb-1 text-[11px]">頁尾左下文字 (Footer Bottom-Left)</label>
+            <input id="meta-footer" type="text" class="w-full bg-zinc-950 border border-zinc-700 rounded-lg px-2.5 py-1.5 text-zinc-100 focus:border-amber-500 focus:outline-none" />
+          </div>
+        </div>
+      </details>
+
+      <!-- Section 2: Engraving Engine Calibration -->
+      <details class="group bg-zinc-800/50 border border-zinc-800 rounded-xl overflow-hidden">
+        <summary class="px-3.5 py-2.5 bg-zinc-800/80 cursor-pointer flex items-center justify-between text-xs font-semibold text-zinc-200 select-none">
+          <span class="flex items-center gap-2">
+            <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
+            排版引擎參數微調 (每拍等寬 / 字級 / 行距)
+          </span>
+          <span class="text-zinc-400 text-[11px] group-open:rotate-180 transition-transform">▼</span>
+        </summary>
+        <div class="p-3.5 grid grid-cols-2 gap-3 text-xs">
+          <div>
+            <div class="flex justify-between text-[11px] text-zinc-400 mb-1">
+              <span>每行基準拍數</span>
+              <span id="val-beats-per-line" class="text-amber-400 font-mono">16 拍</span>
+            </div>
+            <input id="cfg-beats-per-line" type="range" min="8" max="28" step="2" value="16" class="w-full accent-amber-500" />
+          </div>
+          <div>
+            <div class="flex justify-between text-[11px] text-zinc-400 mb-1">
+              <span>音符基準字級</span>
+              <span id="val-font-size" class="text-amber-400 font-mono">17 px</span>
+            </div>
+            <input id="cfg-font-size" type="range" min="14" max="22" step="1" value="17" class="w-full accent-amber-500" />
+          </div>
+          <div>
+            <div class="flex justify-between text-[11px] text-zinc-400 mb-1">
+              <span>同拍緊密度 (靠攏)</span>
+              <span id="val-cluster" class="text-amber-400 font-mono">極緊密</span>
+            </div>
+            <input id="cfg-cluster" type="range" min="0.82" max="1.15" step="0.03" value="0.85" class="w-full accent-amber-500" />
+          </div>
+          <div>
+            <div class="flex justify-between text-[11px] text-zinc-400 mb-1">
+              <span>聲部垂直行距</span>
+              <span id="val-part-gap" class="text-amber-400 font-mono">34 px</span>
+            </div>
+            <input id="cfg-part-gap" type="range" min="28" max="64" step="2" value="34" class="w-full accent-amber-500" />
+          </div>
+          <div class="col-span-2">
+            <div class="flex justify-between text-[11px] text-zinc-400 mb-1">
+              <span>每拍間距 (拍與拍之間水平寬度)</span>
+              <span id="val-beat-spacing" class="text-amber-400 font-mono">1.00x</span>
+            </div>
+            <input id="cfg-beat-spacing" type="range" min="0.70" max="1.60" step="0.05" value="1.00" class="w-full accent-amber-500" />
+          </div>
+        </div>
+      </details>
+
+      <!-- Section 3: Quick Symbol Toolbar -->
+      <div class="bg-zinc-800/60 border border-zinc-800 rounded-xl p-2.5">
+        <div class="flex flex-wrap items-center justify-between gap-1.5 mb-2">
+          <div class="flex items-center gap-1.5">
+            <span class="text-[11px] font-medium text-zinc-400">快捷符號插入</span>
+            <span id="lock-status-pill" class="hidden text-[10px] px-1.5 py-0.5 rounded bg-amber-500/20 text-amber-400 border border-amber-500/40 font-semibold"></span>
+          </div>
+          <div class="flex items-center gap-2">
+            <label id="auto-barline-wrap" for="chk-auto-barline" class="inline-flex items-center gap-1.5 px-2 py-0.5 rounded bg-zinc-900/90 border border-zinc-700/80 text-[11px] text-zinc-300 cursor-pointer select-none hover:border-amber-500/50 transition" title="勾選後，每當輸入音符累積拍數與拍號吻合時，自動插入小節線 |">
+              <input id="chk-auto-barline" type="checkbox" class="rounded accent-amber-500 w-3 h-3 cursor-pointer" />
+              <span>自動增加小節線</span>
+            </label>
+            <span id="active-part-badge" class="text-[10px] px-2 py-0.5 rounded bg-amber-500/20 text-amber-300 border border-amber-500/30">目前：第 1 部</span>
+          </div>
+        </div>
+        <div class="flex flex-wrap gap-1">
+          <button type="button" data-insert="'" class="sym-btn px-2 py-1 rounded bg-zinc-900 hover:bg-zinc-700 border border-zinc-700 text-xs jianpu-font text-zinc-100" title="高八度 (1點高音)">1̇ (')</button>
+          <button type="button" data-insert="''" class="sym-btn px-2 py-1 rounded bg-zinc-900 hover:bg-zinc-700 border border-zinc-700 text-xs jianpu-font text-zinc-100" title="倍高八度 (2點高音)">1̈ ('')</button>
+          <button type="button" data-insert="," class="sym-btn px-2 py-1 rounded bg-zinc-900 hover:bg-zinc-700 border border-zinc-700 text-xs jianpu-font text-zinc-100" title="低八度 (1點低音)">1̣ (,)</button>
+          <button type="button" data-insert=",," class="sym-btn px-2 py-1 rounded bg-zinc-900 hover:bg-zinc-700 border border-zinc-700 text-xs jianpu-font text-zinc-100" title="倍低八度 (2點低音)">1̤ (,,)</button>
+          <button type="button" id="btn-sym-eighth" data-lock-symbol="_" class="sym-btn px-2 py-1 rounded bg-zinc-900 hover:bg-zinc-700 border border-zinc-700 text-xs jianpu-font text-amber-300 transition" title="按鍵盤數字 8 或連按兩下鎖定自動加上八分音符減時線 (_)，再按一次或 Esc 取消">8分 (_)</button>
+          <button type="button" id="btn-sym-sixteenth" data-lock-symbol="=" class="sym-btn px-2 py-1 rounded bg-zinc-900 hover:bg-zinc-700 border border-zinc-700 text-xs jianpu-font text-amber-300 transition" title="按鍵盤數字 9 或連按兩下鎖定自動加上16分音符減時線 (=)，再按一次或 Esc 取消">16分 (=)</button>
+          <button type="button" data-insert="~" class="sym-btn px-2 py-1 rounded bg-zinc-900 hover:bg-zinc-700 border border-zinc-700 text-xs jianpu-font text-amber-300" title="三十二分音符三減時線">32分 (~)</button>
+          <button type="button" data-insert="." class="sym-btn px-2 py-1 rounded bg-zinc-900 hover:bg-zinc-700 border border-zinc-700 text-xs jianpu-font text-zinc-100" title="附點">附點 (.)</button>
+          <button type="button" data-insert=" - " class="sym-btn px-2 py-1 rounded bg-zinc-900 hover:bg-zinc-700 border border-zinc-700 text-xs jianpu-font text-zinc-100" title="增時線">增時 (-)</button>
+          <button type="button" data-insert="#" class="sym-btn px-2 py-1 rounded bg-zinc-900 hover:bg-zinc-700 border border-zinc-700 text-xs jianpu-font text-emerald-300" title="升記號">♯ (#)</button>
+          <button type="button" data-insert="b" class="sym-btn px-2 py-1 rounded bg-zinc-900 hover:bg-zinc-700 border border-zinc-700 text-xs jianpu-font text-emerald-300" title="降記號">♭ (b)</button>
+          <button type="button" data-insert="n" class="sym-btn px-2 py-1 rounded bg-zinc-900 hover:bg-zinc-700 border border-zinc-700 text-xs jianpu-font text-emerald-300" title="還原記號">♮ (n)</button>
+          <button type="button" id="btn-sym-slur" data-insert="( )" class="sym-btn px-2 py-1 rounded bg-zinc-900 hover:bg-zinc-700 border border-zinc-700 text-xs jianpu-font text-sky-300" title="反白一段簡譜後點擊，自動在頭尾包覆圓滑線 ( ... )">圓滑線 (...)</button>
+          <button type="button" id="btn-sym-triplet" data-lock-symbol="triplet" class="sym-btn px-2 py-1 rounded bg-zinc-900 hover:bg-zinc-700 border border-zinc-700 text-xs jianpu-font text-purple-300 transition" title="連按兩下鎖定三連音模式：每輸入 3 個數字自動組成 3(...) 並依拍號加減時線，再點一下或 Esc 取消">三連音 3(...)</button>
+          <button type="button" data-insert="8(1 2 3 4)" class="sym-btn px-2 py-1 rounded bg-zinc-900 hover:bg-zinc-700 border border-zinc-700 text-xs jianpu-font text-teal-300" title="八度音奏法（上方標示 ┌ - - - oct - - - ┐）">八度 8(...)</button>
+          <button type="button" data-insert=" | " class="sym-btn px-2 py-1 rounded bg-zinc-900 hover:bg-zinc-700 border border-zinc-700 text-xs jianpu-font text-zinc-100" title="小節線">小節線 |</button>
+          <button type="button" data-insert=" ||" class="sym-btn px-2 py-1 rounded bg-zinc-900 hover:bg-zinc-700 border border-zinc-700 text-xs jianpu-font text-amber-300" title="樂曲終止線（細線+粗線）">終結線 ||</button>
+          <button type="button" data-insert=" |: " class="sym-btn px-2 py-1 rounded bg-zinc-900 hover:bg-zinc-700 border border-zinc-700 text-xs jianpu-font text-amber-300" title="反覆開始記號">反覆起 |:</button>
+          <button type="button" data-insert=" :| " class="sym-btn px-2 py-1 rounded bg-zinc-900 hover:bg-zinc-700 border border-zinc-700 text-xs jianpu-font text-amber-300" title="反覆結束記號">反覆終 :|</button>
+          <button type="button" data-insert="[1. " class="sym-btn px-2 py-1 rounded bg-zinc-900 hover:bg-zinc-700 border border-zinc-700 text-xs jianpu-font text-rose-300" title="一括弧 (第一遍跳房子)">一括弧 [1.</button>
+          <button type="button" data-insert="[2. " class="sym-btn px-2 py-1 rounded bg-zinc-900 hover:bg-zinc-700 border border-zinc-700 text-xs jianpu-font text-rose-300" title="二括弧 (第二遍跳房子)">二括弧 [2.</button>
+        </div>
+      </div>
+
+      <!-- Section 4: Multi-Part Editors -->
+      <div class="space-y-3">
+        <div class="flex items-center justify-between">
+          <h2 class="text-xs font-semibold text-zinc-200 flex items-center gap-2">
+            <span class="w-1.5 h-1.5 rounded-full bg-sky-400"></span>
+            聲部簡譜編輯區（以 <code class="px-1 py-0.5 bg-zinc-800 rounded text-amber-300">|</code> 分隔小節）
+          </h2>
+          <button id="btn-add-part" type="button" class="px-2.5 py-1 rounded-lg bg-zinc-800 hover:bg-zinc-700 text-amber-400 text-xs font-medium border border-zinc-700 transition flex items-center gap-1">
+            <span>+ 新增聲部</span>
+          </button>
+        </div>
+
+        <div id="parts-editor-list" class="space-y-3">
+          <!-- Part cards injected dynamically -->
+        </div>
+      </div>
+
+      <!-- Section 5: Built-in Unit Test Suite Report -->
+      <details id="unit-test-panel" open class="group bg-zinc-800/50 border border-zinc-800 rounded-xl overflow-hidden">
+        <summary class="px-3.5 py-2.5 bg-zinc-800/80 cursor-pointer flex items-center justify-between text-xs font-semibold text-zinc-200 select-none">
+          <span class="flex items-center gap-2">
+            <span id="unit-test-dot" class="w-2 h-2 rounded-full bg-emerald-400"></span>
+            <span>核心功能自動化單元測試報告</span>
+            <span id="unit-test-badge" class="text-[10px] px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-400 border border-emerald-500/40 font-mono">執行中...</span>
+          </span>
+          <div class="flex items-center gap-2">
+            <button id="btn-rerun-tests" type="button" class="px-2 py-0.5 rounded bg-zinc-900 hover:bg-zinc-700 border border-zinc-700 text-[10px] text-amber-400 font-medium transition">重新執行</button>
+            <span class="text-zinc-400 text-[11px] group-open:rotate-180 transition-transform">▼</span>
+          </div>
+        </summary>
+        <div id="unit-test-results" class="p-3 space-y-1.5 text-[11px] max-h-64 overflow-y-auto font-mono">
+          <!-- Unit test results injected here -->
+        </div>
+      </details>
+
+    </div>
+  </aside>
+
+  <!-- RIGHT A4 SCORE PREVIEW CANVAS -->
+  <main id="preview-viewport" class="flex-1 bg-zinc-950/90 overflow-auto flex flex-col items-center relative">
+    
+    <!-- Floating Expand Sidebar Button (Visible when sidebar is collapsed) -->
+    <button id="btn-expand-sidebar" type="button" class="no-print hidden fixed top-3 left-3 z-30 px-3 py-1.5 rounded-full bg-zinc-900/90 backdrop-blur border border-zinc-700/80 shadow-xl text-xs font-semibold text-zinc-200 hover:bg-zinc-800 transition flex items-center gap-1.5" title="展開側邊編輯欄">
+      <svg class="w-3.5 h-3.5 text-amber-500 hidden lg:block" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" d="M13 5l7 7-7 7M5 5l7 7-7 7"/></svg>
+      <svg class="w-3.5 h-3.5 text-amber-500 lg:hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" d="M19 9l-7 7-7-7"/></svg>
+      <span>展開編輯欄</span>
+    </button>
+
+    <!-- Floating Zoom & Status Toolbar -->
+    <div id="preview-toolbar" class="no-print sticky top-3 z-10 mb-4 px-3.5 py-1.5 rounded-full bg-zinc-900/90 backdrop-blur border border-zinc-700/80 shadow-xl flex items-center gap-3 text-xs text-zinc-300">
+      <div class="flex items-center gap-1.5">
+        <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+        <span id="status-summary" class="font-medium text-zinc-200">已渲染 1 頁 A4</span>
+      </div>
+      <div class="h-3.5 w-[1px] bg-zinc-700"></div>
+      <div class="flex items-center gap-1">
+        <button id="zoom-out" type="button" class="w-6 h-6 rounded-full hover:bg-zinc-800 flex items-center justify-center text-zinc-300 font-bold" title="縮小">−</button>
+        <span id="zoom-label" class="w-11 text-center font-mono text-[11px] text-amber-400">85%</span>
+        <button id="zoom-in" type="button" class="w-6 h-6 rounded-full hover:bg-zinc-800 flex items-center justify-center text-zinc-300 font-bold" title="放大">+</button>
+        <button id="zoom-fit" type="button" class="ml-1 px-2 py-0.5 rounded bg-zinc-800 hover:bg-zinc-700 text-[11px] text-zinc-300" title="適合視窗寬度">適合寬度</button>
+      </div>
+    </div>
+
+    <!-- Container for A4 Sheets -->
+    <div id="pages-container" class="origin-top transition-transform duration-150 pb-12 px-4">
+      <!-- A4 SVG Pages rendered here -->
+    </div>
+
+  </main>
+</div>
+
+<!-- SYNTAX HELP MODAL -->
+<div id="help-modal" class="no-print fixed inset-0 bg-black/75 backdrop-blur-sm z-50 hidden items-center justify-center p-4">
+  <div class="bg-zinc-900 border border-zinc-700 rounded-2xl max-w-2xl w-full max-h-[88vh] flex flex-col shadow-2xl overflow-hidden">
+    <div class="px-5 py-3.5 bg-zinc-950 border-b border-zinc-800 flex items-center justify-between">
+      <h3 class="text-sm font-bold text-zinc-100 flex items-center gap-2">
+        <span class="text-amber-400">♬</span> 口琴簡譜輸入語法與排版規則手冊
+      </h3>
+      <button id="btn-close-help" type="button" class="text-zinc-400 hover:text-white p-1 rounded-lg">✕</button>
+    </div>
+    <div class="p-5 overflow-y-auto space-y-4 text-xs text-zinc-300 leading-relaxed">
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+        <div class="bg-zinc-950/70 p-3 rounded-xl border border-zinc-800">
+          <h4 class="font-bold text-amber-400 mb-1.5">1. 音符、休止符與時值</h4>
+          <ul class="space-y-1 text-zinc-300">
+            <li><code class="text-amber-300">1</code> ~ <code class="text-amber-300">7</code>：唱名音符（四分音符 = 1 拍）</li>
+            <li><code class="text-amber-300">0</code>：休止符</li>
+            <li><code class="text-amber-300">-</code>：增時線（每條佔 1 拍，如 <code class="text-amber-300">1 -</code> 為二分音符）</li>
+            <li><code class="text-amber-300">1_</code>：八分音符（單底線，0.5 拍；按鍵盤 <code class="text-amber-300">8</code> 或連按兩下快捷鈕鎖定）</li>
+            <li><code class="text-amber-300">1=</code>：十六分音符（雙底線，0.25 拍；按鍵盤 <code class="text-amber-300">9</code> 或連按兩下快捷鈕鎖定）</li>
+            <li><code class="text-amber-300">1~</code>：三十二分音符（三底線，0.125 拍）</li>
+            <li><code class="text-amber-300">1.</code> / <code class="text-amber-300">1_.</code>：附點音符（垂直置中於數字中心）</li>
+          </ul>
+        </div>
+        <div class="bg-zinc-950/70 p-3 rounded-xl border border-zinc-800">
+          <h4 class="font-bold text-amber-400 mb-1.5">2. 高低音點（口琴音域）</h4>
+          <ul class="space-y-1 text-zinc-300">
+            <li><code class="text-amber-300">1'</code>：高八度（數字上方 1 個圓點）</li>
+            <li><code class="text-amber-300">1''</code>：倍高八度（數字上方 2 個圓點）</li>
+            <li><code class="text-amber-300">5,</code>：低八度（數字下方 1 個圓點）</li>
+            <li><code class="text-amber-300">1,,</code>：倍低八度（數字下方 2 個圓點）</li>
+            <li class="text-zinc-400 pt-1">※ 低音圓點自動位於所有減時線下方，絕不重疊。</li>
+          </ul>
+        </div>
+        <div class="bg-zinc-950/70 p-3 rounded-xl border border-zinc-800">
+          <h4 class="font-bold text-amber-400 mb-1.5">3. 升降還原記號（半音階口琴）</h4>
+          <ul class="space-y-1 text-zinc-300">
+            <li><code class="text-emerald-300">#4</code>：升記號（♯）</li>
+            <li><code class="text-emerald-300">b7</code>：降記號（♭）</li>
+            <li><code class="text-emerald-300">n4</code>：還原記號（♮）</li>
+            <li>可與八度、時值組合：<code class="text-emerald-300">#1'=</code>、<code class="text-emerald-300">b3,=</code></li>
+            <li class="text-zinc-400 pt-1">※ 連續 16 個帶升降記號的 16 分音符會自動撐開拍寬並保留 4 音一組間隙。</li>
+          </ul>
+        </div>
+        <div class="bg-zinc-950/70 p-3 rounded-xl border border-zinc-800">
+          <h4 class="font-bold text-amber-400 mb-1.5">4. 圓滑線、三連音、八度、反覆記號與括弧</h4>
+          <ul class="space-y-1 text-zinc-300">
+            <li><code class="text-sky-300">(1_ 2_ 3_ 4_)</code> / <code class="text-sky-300">(5 6 | 1' -)</code>：同小節或跨小節圓滑線</li>
+            <li><code class="text-purple-300">3(1_ 2_ 3_)</code> / <code class="text-purple-300">3(1 2 3)</code>：三連音（上方自動標示 <code class="text-purple-300">3</code> 與連音括弧，三音均分一拍）</li>
+            <li><code class="text-teal-300">8(1 2 3 4)</code> / <code class="text-teal-300">8(1_ 2_ | 3 -)</code>：八度音奏法（上方自動繪製 <code class="text-teal-300">┌ - - - oct - - - ┐</code> 虛線括弧，支援跨小節）</li>
+            <li><code class="text-amber-300">|:</code> 反覆開始、<code class="text-amber-300">:|</code> 反覆結束、<code class="text-amber-300">:|:</code> 雙向反覆</li>
+            <li><code class="text-rose-300">[1.</code> 一括弧、<code class="text-rose-300">[2.</code> 二括弧（置於小節開頭，自動跨越至反覆終止或該段結尾）</li>
+            <li><code class="text-amber-300">|</code> 小節分隔線、<code class="text-amber-300">||</code> 樂曲終結線（細線加粗線，多聲部自動上下貫穿相連）。</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="px-5 py-3 bg-zinc-950 border-t border-zinc-800 flex justify-end">
+      <button id="btn-close-help-2" type="button" class="px-4 py-1.5 rounded-lg bg-amber-500 hover:bg-amber-400 text-zinc-950 font-bold text-xs">了解，開始製譜</button>
+    </div>
+  </div>
+</div>
+
+<!-- HIDDEN FILE INPUT FOR JSON IMPORT -->
+<input id="file-import-input" type="file" accept=".json" class="hidden" />
+
+<!-- NOTIFICATION TOAST -->
+<div id="toast-box" class="no-print fixed bottom-5 right-5 z-50 pointer-events-none opacity-0 transition-opacity duration-200 bg-zinc-800 border border-amber-500/40 text-zinc-100 px-4 py-2.5 rounded-xl shadow-2xl text-xs font-medium flex items-center gap-2">
+  <span class="w-2 h-2 rounded-full bg-amber-400"></span>
+  <span id="toast-msg">訊息提示</span>
+</div>
+
+<script>
+/**
+ * ============================================================================
+ * HARMONICA JIANPU ENGRAVING ENGINE (口琴簡譜專業排版引擎)
+ * ============================================================================
+ */
+
+(function () {
+  'use strict';
+
+  // --------------------------------------------------------------------------
+  // 1. PRESET SCORES (範例曲目庫)
+  // --------------------------------------------------------------------------
+  const PRESETS = {
+    ensemble_demo: {
+      meta: {
+        title: '口琴重奏練習曲 — 晨光與流轉',
+        subtitle: 'Harmonica Ensemble Study in C Major (含三連音、反覆記號、一/二括弧與跨小節圓滑線)',
+        composer: '作曲 / 編曲：林口琴工作室',
+        key: '1 = C',
+        time: '4/4',
+        tempo: '♩ = 104',
+        footer: '© 2026 台灣口琴重奏團 Harmonica Ensemble Engraving'
+      },
+      parts: [
+        {
+          id: 'p1',
+          name: 'Harmonica1',
+          notation:
+            "|: (3_ 5_ 1' 7_) (6_ 5_ 3 5_) | 3(6_ 1'_ 2'_) 3(3'_ 2'_ 1'_) 6 5 | [1. #1= #2= 3= #4= 5= #5= 6= b7= n7= 1'= #1'= 2'= #2'= 3'= 4'= #4'= | 8(5' - 3' 1') :| " +
+            "[2. (2'_ 1'_ 7_ 6_) 3(5_ #4_ 5_) 6 | (7_ 1'_ 2'_ 3'_ | 4'_ 3'_ 2'_ 1'_) | b7= 6= b6= 5= #4= 4= 3= b3= 2= b2= 1= 7,= b7,= 6,= #5,= 5,= | 8(1' - - -) ||"
+        },
+        {
+          id: 'p2',
+          name: 'Bass',
+          notation:
+            "|: 1, - 5,, - | 4,, - 1, - | [1. 1, 5,, 1, 5,, | 1, - 5,, - :| " +
+            "[2. 5,, - 2,, - | 5,, - 1, - | 5,, 2,, 5,, 5,, | 1,, - - - ||"
+        },
+        {
+          id: 'p3',
+          name: 'Chord',
+          notation:
+            "|: 0 3_ 5_ 0 5_ 1'_ | 0 4_ 6_ 0 3_ 5_ | [1. 1, 5,, 1, 5,, | 0 3_ 5_ 0 5_ 1'_ :| " +
+            "[2. 0 2_ 5_ 0 2_ #4_ | 0 2_ 5_ 0 3_ 5_ | 5,, 2,, 5,, 5,, | 3 - - - ||"
+        }
+      ]
+    },
+    quartet_demo: {
+      meta: {
+        title: '口琴四重奏練習曲 — 晨光與流轉',
+        subtitle: 'Harmonica Quartet Study in C Major (含三連音、反覆記號與一/二括弧跳房子示範)',
+        composer: '作曲 / 編曲：林口琴工作室',
+        key: '1 = C',
+        time: '4/4',
+        tempo: '♩ = 104',
+        footer: '© 2026 台灣口琴重奏團 Harmonica Ensemble Engraving'
+      },
+      parts: [
+        {
+          id: 'p1',
+          name: 'Harmonica1',
+          notation:
+            "|: (3_ 5_ 1' 7_) (6_ 5_ 3 5_) | 3(6_ 1'_ 2'_) 3(3'_ 2'_ 1'_) 6 5 | [1. #1= #2= 3= #4= 5= #5= 6= b7= n7= 1'= #1'= 2'= #2'= 3'= 4'= #4'= | (5' - 3' 1') :| " +
+            "[2. (2'_ 1'_ 7_ 6_) 3(5_ #4_ 5_) 6 | (7_ 1'_ 2'_ 3'_ | 4'_ 3'_ 2'_ 1'_) | b7= 6= b6= 5= #4= 4= 3= b3= 2= b2= 1= 7,= b7,= 6,= #5,= 5,= | (1' - - -) ||"
+        },
+        {
+          id: 'p2',
+          name: 'Harmonica2',
+          notation:
+            "|: (1_ 3_ 5 5_) (4_ 3_ 1 3_) | 3(4_ 6_ 7_) 3(1'_ 7_ 6_) 4 3 | [1. 1= 2= b3= 3= 4= #4= 5= b6= 6= b7= 7= 1'= b2'= 2'= b3'= 3'= | (3' - 1' 5) :| " +
+            "[2. (7_ 6_ 5_ 4_) 3(3_ 2_ 3_) 4 | (5_ 6_ 7_ 1'_ | 2'_ 1'_ 7_ 6_) | 5= #4= 4= 3= b3= 2= b2= 1= 7,= b7,= 6,= b6,= 5,= #4,= 4,= 3,= | (5 - - -) ||"
+        },
+        {
+          id: 'p3',
+          name: 'Bass',
+          notation:
+            "|: 1, - 5,, - | 4,, - 1, - | [1. 1, 5,, 1, 5,, | 1, - 5,, - :| " +
+            "[2. 5,, - 2,, - | 5,, - 1, - | 5,, 2,, 5,, 5,, | 1,, - - - ||"
+        },
+        {
+          id: 'p4',
+          name: 'Chord',
+          notation:
+            "|: 0 3 0 5 | 0 4 0 3 | [1. 1 5, 1 5, | 0 3 0 5 :| " +
+            "[2. 0 2 0 #4 | 0 2 0 3 | 5, 2, 5, 5, | 3 - - - ||"
+        }
+      ]
+    },
+    bach_air: {
+      meta: {
+        title: 'G 弦之歌 (Air on the G String)',
+        subtitle: '選自第三號管弦樂組曲 BWV 1068（口琴三重奏改編版）',
+        composer: 'J. S. Bach / 編曲：口琴重奏坊',
+        key: '1 = C',
+        time: '4/4',
+        tempo: '♩ = 66',
+        footer: 'Harmonica Chamber Series • 典藏精印版'
+      },
+      parts: [
+        {
+          id: 'p1',
+          name: 'Harmonica1',
+          notation:
+            "(3' - - -) | (3'_ 4'_ 2'_ 3'_ 1'_ 2'_ 7_ 1'_) | (6 - - 6_) (7_ 1'_ | 2'_ #4_ 5_ 6_ 7_ 1'_ 2'_ 3'_) | (1'_ 7_ 1' -) ||"
+        },
+        {
+          id: 'p2',
+          name: 'Bass',
+          notation:
+            "1, - 7,, - | 6,, - 5,, - | 4,, - #4,, - | 5,, - 2,, - | 1, - 1,, - ||"
+        },
+        {
+          id: 'p3',
+          name: 'Chord',
+          notation:
+            "(5 - 1' -) | (7 - 5 -) | (4 - #4 -) | (5 - 7_ 6_ 5_ #4_) | (5 - 5 -) ||"
+        }
+      ]
+    },
+    chromatic_etude: {
+      meta: {
+        title: '半音階口琴十六分音符音階與半音練習曲',
+        subtitle: 'Chromatic Scale & Articulation Etude (檢驗連續16音升降記號與4音分組間隙)',
+        composer: '編寫：半音階口琴教研室',
+        key: '1 = C',
+        time: '4/4',
+        tempo: '♩ = 92',
+        footer: 'Chromatic Harmonica Technical Studies'
+      },
+      parts: [
+        {
+          id: 'p1',
+          name: 'Harmonica1',
+          notation:
+            "#1= #2= #3= #4= #5= #6= #7= #1'= b2'= b3'= b4'= b5'= b6'= b7'= n7'= n6'= | " +
+            "(1= 2= 3= 4= 5= 6= 7= 1'=) (2'= 1'= 7= 6= 5= 4= 3= 2=) | " +
+            "1. 2_ 3. #4_ | (5_ #5_ 6_ b7_ | 7_ 1'_ 2'_ #2'_) | 3' - - - ||"
+        },
+        {
+          id: 'p2',
+          name: 'Bass',
+          notation:
+            "1, 5,, 1, 5,, | 1, 5,, 2,, 5,, | 1, - 6,, - | 5,, - 5,, - | 1, - - - ||"
+        }
+      ]
+    },
+    blank_trio: {
+      meta: {
+        title: '未命名口琴三重奏曲',
+        subtitle: '副標題（可於左側欄位修改）',
+        composer: '作曲 / 編曲',
+        key: '1 = C',
+        time: '4/4',
+        tempo: '♩ = 120',
+        footer: '口琴簡譜專業排版引擎'
+      },
+      parts: [
+        { id: 'p1', name: 'Harmonica1', notation: '1 2 3 4 | 5 6 7 1\' | (1\'_ 7_ 6_ 5_) (4_ 3_ 2_ 1_) | 1 - - - ||' },
+        { id: 'p2', name: 'Bass', notation: '1, - 5,, - | 1, - 5,, - | 4,, - 5,, - | 1,, - - - ||' },
+        { id: 'p3', name: 'Chord', notation: '3 4 5 6 | 3 4 5 5 | (6_ 5_ 4_ 3_) (2_ 1_ 7,_ 5,_) | 1 - - - ||' }
+      ]
+    },
+    blank_quartet: {
+      meta: {
+        title: '未命名口琴四重奏曲',
+        subtitle: '副標題（可於左側欄位修改）',
+        composer: '作曲 / 編曲',
+        key: '1 = C',
+        time: '4/4',
+        tempo: '♩ = 120',
+        footer: '口琴簡譜專業排版引擎'
+      },
+      parts: [
+        { id: 'p1', name: 'Harmonica1', notation: '1 2 3 4 | 5 6 7 1\' | (1\'_ 7_ 6_ 5_) (4_ 3_ 2_ 1_) | 1 - - - ||' },
+        { id: 'p2', name: 'Harmonica2', notation: '3 4 5 6 | 3 4 5 5 | (6_ 5_ 4_ 3_) (2_ 1_ 7,_ 5,_) | 1 - - - ||' },
+        { id: 'p3', name: 'Bass', notation: '1, - 5,, - | 1, - 5,, - | 4,, - 5,, - | 1,, - - - ||' },
+        { id: 'p4', name: 'Chord', notation: '0 3 0 5 | 0 3 0 5 | 0 4 0 5 | 3 - - - ||' }
+      ]
+    }
+  };
+
+  // --------------------------------------------------------------------------
+  // 2. APPLICATION STATE
+  // --------------------------------------------------------------------------
+  let state = {
+    meta: JSON.parse(JSON.stringify(PRESETS.ensemble_demo.meta)),
+    parts: JSON.parse(JSON.stringify(PRESETS.ensemble_demo.parts)),
+    config: {
+      beatsPerLine: 16,
+      fontSize: 17,
+      clusterFactor: 0.85,
+      partGap: 34,
+      beatSpacing: 1.0
+    },
+    zoom: 0.85,
+    sidebarCollapsed: false,
+    activePartIndex: 0,
+    selectionRange: null, // { partIndex, start, end }
+    lockedSubdivision: null, // null | '_' | '=' | 'triplet'
+    tripletStartOffset: null,
+    autoBarline: false,
+    undoStacks: [],
+    redoStacks: []
+  };
+
+  // --------------------------------------------------------------------------
+  // 3. JIANPU LEXER & PARSER (簡譜語法解析器)
+  // --------------------------------------------------------------------------
+  function normalizeInputSymbols(text) {
+    // Preserve exact 1:1 character length so source selection offsets remain completely accurate
+    return (text || '')
+      .replace(/[\r\n\u3000]/g, ' ')
+      .replace(/[—－–]/g, '-');
+  }
+
+  function parsePartNotation(rawText) {
+    const cleaned = normalizeInputSymbols(rawText);
+    if (!cleaned.trim()) return [];
+
+    // Tokenize barline delimiters: :|:, |:, :|, ||, | while preserving exact source offsets
+    const barRegex = /(:\|:|\|:|:\||\|\||\|)/g;
+    const segments = [];
+    let lastMatchEnd = 0;
+    let barMatch;
+    while ((barMatch = barRegex.exec(cleaned)) !== null) {
+      segments.push({ text: cleaned.slice(lastMatchEnd, barMatch.index), offset: lastMatchEnd });
+      segments.push({ text: barMatch[0], offset: barMatch.index });
+      lastMatchEnd = barMatch.index + barMatch[0].length;
+    }
+    segments.push({ text: cleaned.slice(lastMatchEnd), offset: lastMatchEnd });
+
+    const measures = [];
+    let slurCounter = 1;
+    let tripletCounter = 1;
+    let octave8Counter = 1;
+    const slurStack = [];
+    const tupletStack = [];
+    const octave8Stack = [];
+
+    let pendingLeftBar = 'single'; // 'single' | 'repeat-start'
+    let i = 0;
+
+    if (segments.length > 0 && segments[0].text.trim() === '' && segments.length > 1) {
+      const leadBar = segments[1].text;
+      if (leadBar === '|:' || leadBar === ':|:') pendingLeftBar = 'repeat-start';
+      i = 2;
+    }
+
+    while (i < segments.length) {
+      const segObj = segments[i] || { text: '', offset: 0 };
+      const mStr = segObj.text.trim();
+      const rightBarToken = i + 1 < segments.length ? segments[i + 1].text : null;
+      i += 2;
+
+      if (mStr === '' && rightBarToken === null) {
+        continue;
+      }
+
+      let rightBar = 'single';
+      let nextLeftBar = 'single';
+      if (rightBarToken === ':|') {
+        rightBar = 'repeat-end';
+      } else if (rightBarToken === '|:') {
+        nextLeftBar = 'repeat-start';
+      } else if (rightBarToken === ':|:') {
+        rightBar = 'repeat-end';
+        nextLeftBar = 'repeat-start';
+      } else if (rightBarToken === '||') {
+        rightBar = 'double';
+      }
+
+      if (mStr === '') {
+        pendingLeftBar = nextLeftBar;
+        continue;
+      }
+
+      const leadingTrimLen = segObj.text.length - segObj.text.replace(/^\s+/, '').length;
+      let baseOffset = segObj.offset + leadingTrimLen;
+      let volta = null;
+      let cleanMStr = mStr;
+      // Support single or multi-ending volta markers such as [1., [2., [1.2., [1-2.
+      const voltaMatch = cleanMStr.match(/^\[([1-4](?:[.,-][1-4])*\.?)\s*/);
+      if (voltaMatch) {
+        volta = voltaMatch[1].endsWith('.') ? voltaMatch[1] : `${voltaMatch[1]}.`;
+        cleanMStr = cleanMStr.slice(voltaMatch[0].length);
+        baseOffset += voltaMatch[0].length;
+      }
+
+      const tokens = [];
+      const wordRegex = /\S+/g;
+      const rawWords = [];
+      let wMatch;
+      while ((wMatch = wordRegex.exec(cleanMStr)) !== null) {
+        rawWords.push({ text: wMatch[0], offset: baseOffset + wMatch.index });
+      }
+
+      let pendingSlurStart = false;
+      let pendingTripletStart = false;
+      let pendingOctave8Start = false;
+
+      for (const wordObj of rawWords) {
+        const word = wordObj.text;
+        const wordOffset = wordObj.offset;
+        let cursor = 0;
+
+        while (cursor < word.length) {
+          const ch = word[cursor];
+
+          if (ch === '8' && cursor + 1 < word.length && word[cursor + 1] === '(') {
+            pendingOctave8Start = true;
+            cursor += 2;
+            continue;
+          }
+
+          if (ch === '3' && cursor + 1 < word.length && word[cursor + 1] === '(') {
+            pendingTripletStart = true;
+            cursor += 2;
+            continue;
+          }
+
+          if (ch === '(') {
+            pendingSlurStart = true;
+            cursor++;
+            continue;
+          }
+
+          if (ch === ')') {
+            if (tokens.length > 0 && tupletStack.length > 0) {
+              const tInfo = tupletStack.pop();
+              tokens[tokens.length - 1].tripletEnd = true;
+              tokens[tokens.length - 1].tripletEndIds.push(tInfo.id);
+              const slice = tokens.slice(tInfo.startTokenIdx);
+              const rawSum = slice.reduce((acc, t) => acc + t.duration, 0);
+              const targetBeats = rawSum >= 2.5 ? 2.0 : 1.0;
+              if (rawSum > 0) {
+                const scale = targetBeats / rawSum;
+                slice.forEach(t => {
+                  t.duration = t.duration * scale;
+                  t.inTriplet = true;
+                });
+              }
+            } else if (tokens.length > 0 && octave8Stack.length > 0) {
+              const closedOct8Id = octave8Stack.pop();
+              tokens[tokens.length - 1].octave8End = true;
+              tokens[tokens.length - 1].octave8EndIds.push(closedOct8Id);
+            } else if (tokens.length > 0 && slurStack.length > 0) {
+              const closedId = slurStack.pop();
+              tokens[tokens.length - 1].slurEnd = true;
+              tokens[tokens.length - 1].slurEndIds.push(closedId);
+            }
+            cursor++;
+            continue;
+          }
+
+          const tokenSrcStart = wordOffset + cursor;
+          let accidental = null;
+          if ((ch === '#' || ch === 'b' || ch === 'n') && cursor + 1 < word.length && /[0-7]/.test(word[cursor + 1])) {
+            accidental = ch;
+            cursor++;
+          }
+
+          const mainChar = word[cursor];
+          if (/[0-7]/.test(mainChar) || mainChar === '-') {
+            cursor++;
+            const isDash = mainChar === '-';
+            let octave = 0;
+            let beams = 0;
+            let dots = 0;
+
+            while (cursor < word.length) {
+              const mod = word[cursor];
+              if (mod === "'") {
+                octave = Math.min(2, octave + 1);
+                cursor++;
+              } else if (mod === ',') {
+                octave = Math.max(-2, octave - 1);
+                cursor++;
+              } else if (mod === '_') {
+                beams = Math.max(beams, 1);
+                cursor++;
+              } else if (mod === '=') {
+                beams = Math.max(beams, 2);
+                cursor++;
+              } else if (mod === '~' || mod === '≡') {
+                beams = Math.max(beams, 3);
+                cursor++;
+              } else if (mod === '.') {
+                dots = Math.min(2, dots + 1);
+                cursor++;
+              } else {
+                break;
+              }
+            }
+            const tokenSrcEnd = wordOffset + cursor;
+
+            let baseDur = 1;
+            if (!isDash) {
+              if (beams === 1) baseDur = 0.5;
+              else if (beams === 2) baseDur = 0.25;
+              else if (beams === 3) baseDur = 0.125;
+            }
+            let duration = baseDur;
+            if (dots === 1) duration = baseDur * 1.5;
+            else if (dots === 2) duration = baseDur * 1.75;
+
+            const slurStartIds = [];
+            if (pendingSlurStart) {
+              const newId = slurCounter++;
+              slurStack.push(newId);
+              slurStartIds.push(newId);
+              pendingSlurStart = false;
+            }
+
+            const octave8StartIds = [];
+            if (pendingOctave8Start) {
+              const newOct8Id = octave8Counter++;
+              octave8Stack.push(newOct8Id);
+              octave8StartIds.push(newOct8Id);
+              pendingOctave8Start = false;
+            }
+
+            const tripletStartIds = [];
+            let tripletStart = false;
+            if (pendingTripletStart) {
+              const newTripId = tripletCounter++;
+              tripletStart = true;
+              tripletStartIds.push(newTripId);
+              tupletStack.push({ id: newTripId, startTokenIdx: tokens.length });
+              pendingTripletStart = false;
+            }
+
+            tokens.push({
+              type: isDash ? 'dash' : 'note',
+              digit: mainChar,
+              accidental: isDash ? null : accidental,
+              octave: isDash ? 0 : octave,
+              beams: isDash ? 0 : beams,
+              dots: isDash ? 0 : dots,
+              duration,
+              srcStart: tokenSrcStart,
+              srcEnd: tokenSrcEnd,
+              slurStart: slurStartIds.length > 0,
+              slurStartIds,
+              slurEnd: false,
+              slurEndIds: [],
+              octave8Start: octave8StartIds.length > 0,
+              octave8StartIds,
+              octave8End: false,
+              octave8EndIds: [],
+              inOctave8: octave8Stack.length > 0,
+              tripletStart,
+              tripletStartIds,
+              tripletEnd: false,
+              tripletEndIds: [],
+              inTriplet: tupletStack.length > 0
+            });
+
+            while (cursor < word.length && word[cursor] === ')') {
+              if (tupletStack.length > 0) {
+                const tInfo = tupletStack.pop();
+                tokens[tokens.length - 1].tripletEnd = true;
+                tokens[tokens.length - 1].tripletEndIds.push(tInfo.id);
+                const slice = tokens.slice(tInfo.startTokenIdx);
+                const rawSum = slice.reduce((acc, t) => acc + t.duration, 0);
+                const targetBeats = rawSum >= 2.5 ? 2.0 : 1.0;
+                if (rawSum > 0) {
+                  const scale = targetBeats / rawSum;
+                  slice.forEach(t => {
+                    t.duration = t.duration * scale;
+                    t.inTriplet = true;
+                  });
+                }
+              } else if (octave8Stack.length > 0) {
+                const closedOct8Id = octave8Stack.pop();
+                tokens[tokens.length - 1].octave8End = true;
+                tokens[tokens.length - 1].octave8EndIds.push(closedOct8Id);
+              } else if (slurStack.length > 0) {
+                const closedId = slurStack.pop();
+                tokens[tokens.length - 1].slurEnd = true;
+                tokens[tokens.length - 1].slurEndIds.push(closedId);
+              }
+              cursor++;
+            }
+          } else {
+            cursor++;
+          }
+        }
+      }
+
+      measures.push({
+        index: measures.length,
+        leftBar: pendingLeftBar,
+        rightBar,
+        volta,
+        tokens
+      });
+      pendingLeftBar = nextLeftBar;
+    }
+
+    return measures;
+  }
+
+  // --------------------------------------------------------------------------
+  // 4. EQUAL-WIDTH BEAT GROUPING & ALIGNMENT ENGINE (每拍等寬分組排版引擎)
+  // --------------------------------------------------------------------------
+  function buildAlignedMeasures(parsedParts, fontSize, clusterFactor, beatSpacing = 1.0) {
+    const maxMeasures = Math.max(1, ...parsedParts.map(p => p.length));
+    const alignedMeasures = [];
+
+    const digitWidth = fontSize * 0.62;
+    const accidentalWidth = fontSize * 0.40;
+    const baseQuarterWidth = fontSize * 1.85 * beatSpacing;
+
+    for (let mIdx = 0; mIdx < maxMeasures; mIdx++) {
+      const partBeatEvents = parsedParts.map(partMeasures => {
+        const measure = partMeasures[mIdx] || { tokens: [] };
+        const events = [];
+        let beatPos = 0;
+        for (const tok of measure.tokens) {
+          events.push({
+            ...tok,
+            beatStart: beatPos,
+            beatEnd: beatPos + tok.duration
+          });
+          beatPos += tok.duration;
+        }
+        return {
+          events,
+          exactBeats: beatPos,
+          totalBeats: Math.max(1, Math.ceil(beatPos - 1e-6))
+        };
+      });
+
+      const measureBeats = Math.max(1, ...partBeatEvents.map(p => p.totalBeats));
+      const beatWidths = [];
+
+      for (let b = 0; b < measureBeats; b++) {
+        let reqW = baseQuarterWidth;
+        for (const pData of partBeatEvents) {
+          const inBeat = pData.events.filter(ev => ev.beatStart >= b - 1e-6 && ev.beatStart < b + 1 - 1e-6);
+          if (inBeat.length > 1) {
+            let slotSum = 0;
+            for (let k = 0; k < inBeat.length; k++) {
+              const ev = inBeat[k];
+              slotSum += digitWidth + (ev.accidental ? accidentalWidth * 1.15 : 0) + (ev.dots > 0 ? fontSize * 0.28 : 0) + fontSize * 0.32;
+            }
+            reqW = Math.max(reqW, slotSum);
+          } else if (inBeat.length === 1 && inBeat[0].accidental) {
+            reqW = Math.max(reqW, baseQuarterWidth + accidentalWidth * 0.6);
+          }
+        }
+        beatWidths.push(reqW);
+      }
+
+      const leftBarType = parsedParts.find(p => p[mIdx] && p[mIdx].leftBar !== 'single')?.[mIdx]?.leftBar || 'single';
+      const rightBarType = parsedParts.find(p => p[mIdx] && p[mIdx].rightBar !== 'single')?.[mIdx]?.rightBar || 'single';
+      const baseMeasureSidePad = Math.max(6, fontSize * 0.42);
+      const leftPad = baseMeasureSidePad + (leftBarType === 'repeat-start' ? 11 : 0);
+      const rightPad = baseMeasureSidePad + (rightBarType === 'repeat-end' ? 11 : rightBarType === 'double' ? 4 : 0);
+      const naturalWidth = beatWidths.reduce((a, b) => a + b, 0) + leftPad + rightPad;
+
+      alignedMeasures.push({
+        measureIndex: mIdx,
+        measureBeats,
+        beatWidths,
+        leftPad,
+        rightPad,
+        naturalWidth,
+        leftBar: leftBarType,
+        rightBar: rightBarType,
+        volta: (parsedParts.find(p => p[mIdx] && p[mIdx].volta)?.[mIdx]?.volta) || null,
+        partEvents: partBeatEvents.map(p => p.events),
+        partExactBeats: partBeatEvents.map(p => p.exactBeats)
+      });
+    }
+
+    return alignedMeasures;
+  }
+
+  function getExpectedQuarterBeatsPerMeasure(timeSigStr) {
+    const cleaned = String(timeSigStr || '').trim();
+    const match = cleaned.match(/^(\d+)\s*\/\s*(\d+)$/);
+    if (!match) return null;
+    const numerator = parseInt(match[1], 10);
+    const denominator = parseInt(match[2], 10);
+    if (!numerator || !denominator) return null;
+    return numerator * (4 / denominator);
+  }
+
+  // --------------------------------------------------------------------------
+  // 5. FULL-WIDTH SYSTEM LINE BREAKER & A4 PAGINATOR
+  // --------------------------------------------------------------------------
+  function layoutSystems(alignedMeasures, beatsPerLine, firstLineWidth, otherLineWidth) {
+    const systems = [];
+    let current = [];
+    let currentBeats = 0;
+
+    alignedMeasures.forEach((m, idx) => {
+      const targetBeats = systems.length === 0 ? Math.max(4, beatsPerLine - 4) : beatsPerLine;
+      if (current.length > 0 && currentBeats + m.measureBeats > targetBeats) {
+        systems.push({ measures: current, isLastSystem: false });
+        current = [];
+        currentBeats = 0;
+      }
+      current.push(m);
+      currentBeats += m.measureBeats;
+      if (idx === alignedMeasures.length - 1 && current.length > 0) {
+        systems.push({ measures: current, isLastSystem: true });
+      }
+    });
+
+    return systems.map((sys, sysIdx) => {
+      const isFirstSystem = sysIdx === 0;
+      const availWidth = isFirstSystem ? firstLineWidth : otherLineWidth;
+      const totalNat = sys.measures.reduce((acc, m) => acc + m.naturalWidth, 0);
+      const scale = sys.isLastSystem && totalNat < availWidth * 0.72
+        ? Math.min(1.18, Math.max(1.0, (availWidth * 0.75) / Math.max(1, totalNat)))
+        : availWidth / Math.max(1, totalNat);
+
+      let cursorX = 0;
+      const measureLayouts = sys.measures.map(m => {
+        const w = m.naturalWidth * scale;
+        const beatScale = (w - (m.leftPad + m.rightPad) * scale) / Math.max(1, m.beatWidths.reduce((a, b) => a + b, 0));
+        const scaledBeatWidths = m.beatWidths.map(bw => bw * beatScale);
+        const layout = {
+          measure: m,
+          xStart: cursorX,
+          xEnd: cursorX + w,
+          leftPad: m.leftPad * scale,
+          rightPad: m.rightPad * scale,
+          beatWidths: scaledBeatWidths
+        };
+        cursorX += w;
+        return layout;
+      });
+
+      return {
+        sysIdx,
+        isFirstSystem,
+        isLastSystem: sys.isLastSystem,
+        leftOffset: isFirstSystem ? (otherLineWidth - firstLineWidth) : 0,
+        totalWidth: cursorX,
+        measureLayouts
+      };
+    });
+  }
+
+  // --------------------------------------------------------------------------
+  // 6. SVG SCORE RENDERER
+  // --------------------------------------------------------------------------
+  function escapeXml(str) {
+    return String(str || '')
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;')
+      .replace(/'/g, '&apos;');
+  }
+
+  function renderScore() {
+    const container = document.getElementById('pages-container');
+    if (!container) return;
+
+    const { meta, parts, config } = state;
+    const { beatsPerLine, fontSize, clusterFactor, partGap, beatSpacing } = config;
+
+    const PAGE_W = 794;
+    const PAGE_H = 1123;
+    const MARGIN_X = 52;
+    const CONTENT_W = PAGE_W - MARGIN_X * 2;
+    const HEADER_H = meta.subtitle && meta.subtitle.trim() ? 132 : 114;
+    const FOOTER_H = 44;
+
+    const parsedParts = parts.map(p => parsePartNotation(p.notation));
+    const alignedMeasures = buildAlignedMeasures(parsedParts, fontSize, clusterFactor, beatSpacing);
+    const expectedBeatsPerMeasure = getExpectedQuarterBeatsPerMeasure(meta.time);
+    const mismatchTracker = parts.map(() => []);
+
+    if (expectedBeatsPerMeasure !== null) {
+      alignedMeasures.forEach(am => {
+        parts.forEach((_, pIdx) => {
+          const actual = am.partExactBeats[pIdx] ?? 0;
+          if (actual > 0.015 && Math.abs(actual - expectedBeatsPerMeasure) > 0.015) {
+            mismatchTracker[pIdx].push({
+              measureNum: am.measureIndex + 1,
+              actual: Math.round(actual * 100) / 100,
+              expected: Math.round(expectedBeatsPerMeasure * 100) / 100
+            });
+          }
+        });
+      });
+    }
+
+    const labelColW = 92;
+    const systems = layoutSystems(alignedMeasures, beatsPerLine, CONTENT_W - labelColW, CONTENT_W);
+
+    const pages = [];
+    let currentPageSystems = [];
+    let curY = HEADER_H + 22;
+
+    systems.forEach(sys => {
+      const hasVolta = sys.measureLayouts.some(ml => ml.measure.volta);
+      const voltaTopPad = hasVolta ? 26 : 8;
+
+      const partYOffsets = [0];
+      for (let pIdx = 1; pIdx < parts.length; pIdx++) {
+        let requiredStep = partGap;
+        for (const mLayout of sys.measureLayouts) {
+          const upperEvents = mLayout.measure.partEvents[pIdx - 1] || [];
+          const lowerEvents = mLayout.measure.partEvents[pIdx] || [];
+          let upperLowest = fontSize * 0.18;
+          for (const ev of upperEvents) {
+            if (ev.type === 'dash') continue;
+            let lowReach = 2.5 + ev.beams * 3.1;
+            if (ev.octave <= -1) lowReach = 4.5 + ev.beams * 3.1 + 2.2;
+            if (ev.octave <= -2) lowReach = 4.5 + ev.beams * 3.1 + 3.8 + 2.2;
+            if (lowReach > upperLowest) upperLowest = lowReach;
+          }
+          let lowerHighest = fontSize * 0.85;
+          let inSlur = false;
+          for (const ev of lowerEvents) {
+            if (ev.slurStart) inSlur = true;
+            let highReach = fontSize * 0.85;
+            if (ev.octave >= 1) highReach = Math.max(highReach, fontSize * 0.92 + 3.5);
+            if (ev.octave >= 2) highReach = Math.max(highReach, fontSize * 1.18 + 3.5);
+            if (inSlur || ev.slurStart || ev.slurEnd) {
+              highReach = Math.max(highReach, fontSize * 1.24 + 13.5);
+            }
+            if (ev.tripletStart || ev.inTriplet || ev.tripletEnd) {
+              highReach = Math.max(highReach, fontSize * 1.48 + 4.5);
+            }
+            if (ev.octave8Start || ev.inOctave8 || ev.octave8End) {
+              highReach = Math.max(highReach, fontSize * 1.62 + 4.5);
+            }
+            if (highReach > lowerHighest) lowerHighest = highReach;
+            if (ev.slurEnd) inSlur = false;
+          }
+          requiredStep = Math.max(requiredStep, upperLowest + lowerHighest + 4.5);
+        }
+        partYOffsets.push(partYOffsets[pIdx - 1] + requiredStep);
+      }
+
+      const sysSpanY = partYOffsets[parts.length - 1] || 0;
+      const sysHeight = voltaTopPad + sysSpanY + fontSize * 1.9 + 24;
+
+      if (currentPageSystems.length > 0 && curY + sysHeight > PAGE_H - FOOTER_H) {
+        pages.push(currentPageSystems);
+        currentPageSystems = [];
+        curY = 58;
+      }
+
+      currentPageSystems.push({ ...sys, topY: curY + voltaTopPad, hasVolta, partYOffsets });
+      curY += sysHeight;
+    });
+
+    if (currentPageSystems.length === 0) {
+      pages.push([]);
+    } else {
+      pages.push(currentPageSystems);
+    }
+
+    let pagesHTML = '';
+
+    // Track open slurs, triplets & octave-8 spans across system line breaks per part
+    const openSlursByPart = parts.map(() => new Map());    // Map<id, { octave }>
+    const openTripletsByPart = parts.map(() => new Set()); // Set<id>
+    const openOct8ByPart = parts.map(() => new Set());     // Set<id>
+
+    pages.forEach((pageSystems, pageIdx) => {
+      let svgContent = '';
+
+      if (pageIdx === 0) {
+        svgContent += `<text x="${PAGE_W / 2}" y="54" text-anchor="middle" font-size="22" font-weight="700" fill="#1C1B18" letter-spacing="1.5">${escapeXml(meta.title || '未命名樂譜')}</text>`;
+        if (meta.subtitle && meta.subtitle.trim()) {
+          svgContent += `<text x="${PAGE_W / 2}" y="76" text-anchor="middle" font-size="12.5" font-weight="500" fill="#4A4740" letter-spacing="0.5">${escapeXml(meta.subtitle)}</text>`;
+        }
+        const metaLineY = meta.subtitle && meta.subtitle.trim() ? 102 : 86;
+        const leftMetaParts = [meta.key, meta.time, meta.tempo].filter(v => v && v.trim());
+        svgContent += `<text x="${MARGIN_X}" y="${metaLineY}" text-anchor="start" font-size="12.5" font-weight="600" fill="#1C1B18" class="jianpu-font">${escapeXml(leftMetaParts.join('  |  '))}</text>`;
+        svgContent += `<text x="${PAGE_W - MARGIN_X}" y="${metaLineY}" text-anchor="end" font-size="12.5" font-weight="500" fill="#4A4740" letter-spacing="0.5">${escapeXml(meta.composer || '')}</text>`;
+        const dividerY = metaLineY + 12;
+        svgContent += `<line x1="${MARGIN_X}" y1="${dividerY}" x2="${PAGE_W - MARGIN_X}" y2="${dividerY}" stroke="#D6CEBE" stroke-width="1" />`;
+      }
+
+      pageSystems.forEach(sys => {
+        const sysLeftX = MARGIN_X + sys.leftOffset;
+        const sysRightX = sysLeftX + sys.totalWidth;
+
+        // First-system part labels
+        if (sys.isFirstSystem) {
+          parts.forEach((part, pIdx) => {
+            const baseY = sys.topY + (sys.partYOffsets[pIdx] ?? pIdx * partGap);
+            svgContent += `<text x="${MARGIN_X + labelColW - 10}" y="${baseY}" text-anchor="end" font-size="12" font-weight="700" fill="#1C1B18" class="jianpu-font">${escapeXml(part.name || `Part ${pIdx + 1}`)}</text>`;
+          });
+        }
+
+        // System-wide multi-part barlines & volta brackets
+        const topBarY = sys.topY - fontSize * 0.95;
+        const botBarY = sys.topY + (sys.partYOffsets[parts.length - 1] ?? (parts.length - 1) * partGap) + fontSize * 0.55;
+
+        // Leftmost barline
+        const firstMeasure = sys.measureLayouts[0]?.measure;
+        if (firstMeasure && firstMeasure.leftBar === 'repeat-start') {
+          svgContent += `<line x1="${sysLeftX}" y1="${topBarY}" x2="${sysLeftX}" y2="${botBarY}" stroke="#1C1B18" stroke-width="2.6" />`;
+          svgContent += `<line x1="${sysLeftX + 4.2}" y1="${topBarY}" x2="${sysLeftX + 4.2}" y2="${botBarY}" stroke="#1C1B18" stroke-width="1" />`;
+          parts.forEach((_, pIdx) => {
+            const cy = sys.topY + (sys.partYOffsets[pIdx] ?? pIdx * partGap) - fontSize * 0.28;
+            svgContent += `<circle class="repeat-dot" cx="${sysLeftX + 8.5}" cy="${cy - 3}" r="1.5" fill="#1C1B18" />`;
+            svgContent += `<circle class="repeat-dot" cx="${sysLeftX + 8.5}" cy="${cy + 3}" r="1.5" fill="#1C1B18" />`;
+          });
+        } else {
+          svgContent += `<line x1="${sysLeftX}" y1="${topBarY}" x2="${sysLeftX}" y2="${botBarY}" stroke="#1C1B18" stroke-width="1.2" />`;
+        }
+
+        // Measure barlines & volta brackets
+        sys.measureLayouts.forEach((mLayout, mIdxInSys) => {
+          const mX0 = sysLeftX + mLayout.xStart;
+          const mX1 = sysLeftX + mLayout.xEnd;
+          const prevLayout = mIdxInSys > 0 ? sys.measureLayouts[mIdxInSys - 1] : null;
+          const isBackToBackRepeat = Boolean(
+            prevLayout &&
+            prevLayout.measure.rightBar === 'repeat-end' &&
+            mLayout.measure.leftBar === 'repeat-start'
+          );
+
+          // Render mid-system repeat-start barline (e.g., "1 2 3 4 |: 5 6 7 1'" or ":|:")
+          if (mIdxInSys > 0 && mLayout.measure.leftBar === 'repeat-start') {
+            if (!isBackToBackRepeat) {
+              svgContent += `<line x1="${mX0}" y1="${topBarY}" x2="${mX0}" y2="${botBarY}" stroke="#1C1B18" stroke-width="2.6" />`;
+            }
+            svgContent += `<line x1="${mX0 + 4.2}" y1="${topBarY}" x2="${mX0 + 4.2}" y2="${botBarY}" stroke="#1C1B18" stroke-width="1" />`;
+            parts.forEach((_, pIdx) => {
+              const cy = sys.topY + (sys.partYOffsets[pIdx] ?? pIdx * partGap) - fontSize * 0.28;
+              svgContent += `<circle class="repeat-dot" cx="${mX0 + 8.5}" cy="${cy - 3}" r="1.5" fill="#1C1B18" />`;
+              svgContent += `<circle class="repeat-dot" cx="${mX0 + 8.5}" cy="${cy + 3}" r="1.5" fill="#1C1B18" />`;
+            });
+          }
+
+          if (mLayout.measure.volta) {
+            const vY = topBarY - 25;
+            svgContent += `<polyline points="${mX0},${vY + 11} ${mX0},${vY} ${mX1 - 2},${vY} ${mX1 - 2},${vY + 11}" fill="none" stroke="#1C1B18" stroke-width="1.1" />`;
+            svgContent += `<text x="${mX0 + 5}" y="${vY + 10}" font-size="10.5" font-weight="700" fill="#1C1B18" class="jianpu-font">${escapeXml(mLayout.measure.volta)}</text>`;
+          }
+
+          if (mLayout.measure.rightBar === 'repeat-end') {
+            svgContent += `<line x1="${mX1 - 4.2}" y1="${topBarY}" x2="${mX1 - 4.2}" y2="${botBarY}" stroke="#1C1B18" stroke-width="1" />`;
+            svgContent += `<line x1="${mX1}" y1="${topBarY}" x2="${mX1}" y2="${botBarY}" stroke="#1C1B18" stroke-width="2.6" />`;
+            parts.forEach((_, pIdx) => {
+              const cy = sys.topY + (sys.partYOffsets[pIdx] ?? pIdx * partGap) - fontSize * 0.28;
+              svgContent += `<circle class="repeat-dot" cx="${mX1 - 8.5}" cy="${cy - 3}" r="1.5" fill="#1C1B18" />`;
+              svgContent += `<circle class="repeat-dot" cx="${mX1 - 8.5}" cy="${cy + 3}" r="1.5" fill="#1C1B18" />`;
+            });
+          } else if (mLayout.measure.rightBar === 'double') {
+            svgContent += `<line x1="${mX1 - 4.2}" y1="${topBarY}" x2="${mX1 - 4.2}" y2="${botBarY}" stroke="#1C1B18" stroke-width="1" />`;
+            svgContent += `<line x1="${mX1 - 1.3}" y1="${topBarY}" x2="${mX1 - 1.3}" y2="${botBarY}" stroke="#1C1B18" stroke-width="2.8" />`;
+          } else {
+            svgContent += `<line x1="${mX1}" y1="${topBarY}" x2="${mX1}" y2="${botBarY}" stroke="#1C1B18" stroke-width="1.1" />`;
+          }
+        });
+
+        const partLowestZones = parts.map(() => []);
+
+        // Render notes per part in this system
+        parts.forEach((_, pIdx) => {
+          const baseY = sys.topY + (sys.partYOffsets[pIdx] ?? pIdx * partGap);
+          const slurSegments = [];
+          const activeSlurs = openSlursByPart[pIdx];
+          const firstMLayout = sys.measureLayouts[0];
+          const lastMLayout = sys.measureLayouts[sys.measureLayouts.length - 1];
+          const lineSlurStartX = firstMLayout ? (sysLeftX + firstMLayout.leftPad + 2) : (sysLeftX + 6);
+          const lineSlurEndX = lastMLayout ? (sysRightX - lastMLayout.rightPad - 2) : (sysRightX - 6);
+
+          // Seed slurs that remained open from the previous system line
+          activeSlurs.forEach((info, id) => {
+            slurSegments.push({ id, x0: lineSlurStartX, octave0: info.octave, x1: null, octave1: info.octave, continuedFromPrev: true });
+          });
+
+          const tripletSegments = [];
+          const activeTriplets = openTripletsByPart[pIdx];
+          activeTriplets.forEach(id => {
+            tripletSegments.push({ id, x0: lineSlurStartX, x1: null });
+          });
+
+          const oct8Segments = [];
+          const activeOct8 = openOct8ByPart[pIdx];
+          activeOct8.forEach(id => {
+            oct8Segments.push({ id, x0: lineSlurStartX, x1: null });
+          });
+
+          for (const mLayout of sys.measureLayouts) {
+            const events = mLayout.measure.partEvents[pIdx] || [];
+            const actualBeats = mLayout.measure.partExactBeats ? mLayout.measure.partExactBeats[pIdx] : null;
+            const measureX0 = sysLeftX + mLayout.xStart;
+            const measureX1 = sysLeftX + mLayout.xEnd;
+            const selectedNoteRects = [];
+            const activeSel = state.selectionRange && state.selectionRange.partIndex === pIdx && state.selectionRange.end > state.selectionRange.start
+              ? state.selectionRange
+              : null;
+
+            if (expectedBeatsPerMeasure !== null && actualBeats !== null && actualBeats > 0.015 && Math.abs(actualBeats - expectedBeatsPerMeasure) > 0.015) {
+              const hlTop = baseY - fontSize * 1.15;
+              const hlHeight = fontSize * 1.85;
+              const hlWidth = Math.max(8, measureX1 - measureX0 - 2);
+              const actualFmt = Number((Math.round(actualBeats * 100) / 100).toFixed(2));
+              const expectedFmt = Number((Math.round(expectedBeatsPerMeasure * 100) / 100).toFixed(2));
+              svgContent += `<g class="beat-mismatch-highlight">`;
+              svgContent += `<rect x="${(measureX0 + 1).toFixed(2)}" y="${hlTop.toFixed(2)}" width="${hlWidth.toFixed(2)}" height="${hlHeight.toFixed(2)}" rx="4" fill="rgba(239, 68, 68, 0.14)" stroke="#DC2626" stroke-width="1.15" stroke-dasharray="3,2" />`;
+              svgContent += `<text x="${(measureX1 - 4).toFixed(2)}" y="${(hlTop - 2.5).toFixed(2)}" text-anchor="end" font-size="8.5" font-weight="700" fill="#DC2626" class="jianpu-font">${actualFmt}/${expectedFmt}拍</text>`;
+              svgContent += `</g>`;
+            }
+
+            // Compute beat X boundaries
+            const beatXStarts = [measureX0 + mLayout.leftPad];
+            for (let b = 0; b < mLayout.beatWidths.length; b++) {
+              beatXStarts.push(beatXStarts[b] + mLayout.beatWidths[b]);
+            }
+
+            // Group events by integer beat slot
+            for (let b = 0; b < mLayout.beatWidths.length; b++) {
+              const bX0 = beatXStarts[b];
+              const bW = mLayout.beatWidths[b];
+              const beatCenter = bX0 + bW * 0.5;
+              const inBeat = events.filter(ev => ev.beatStart >= b - 1e-6 && ev.beatStart < b + 1 - 1e-6);
+              if (inBeat.length === 0) continue;
+
+              const noteXs = [];
+              if (inBeat.length === 1) {
+                noteXs.push({ nx: beatCenter, ev: inBeat[0], accOffset: fontSize * 0.48 });
+              } else {
+                const subStep = (bW / inBeat.length) * clusterFactor;
+                const positions = inBeat.map((ev, idxInBeat) => ({
+                  nx: idxInBeat * subStep,
+                  ev,
+                  accOffset: fontSize * 0.46
+                }));
+
+                for (let k = 1; k < positions.length; k++) {
+                  const prev = positions[k - 1];
+                  const curr = positions[k];
+                  const prevRightEdge = prev.nx + (prev.ev.dots > 1 ? fontSize * 0.72 : prev.ev.dots === 1 ? fontSize * 0.52 : fontSize * 0.32);
+                  if (curr.ev.accidental) {
+                    const accHalfW = fontSize * 0.22;
+                    const minSafeGap = 1.8;
+                    const accLeftEdge = curr.nx - curr.accOffset - accHalfW;
+                    if (accLeftEdge < prevRightEdge + minSafeGap) {
+                      const overlap = (prevRightEdge + minSafeGap) - accLeftEdge;
+                      const maxTuck = fontSize * 0.08;
+                      const tuck = Math.min(maxTuck, overlap);
+                      curr.accOffset -= tuck;
+                      const remainingShift = overlap - tuck;
+                      if (remainingShift > 0) {
+                        for (let m = k; m < positions.length; m++) {
+                          positions[m].nx += remainingShift;
+                        }
+                      }
+                    }
+                  }
+                }
+
+                const groupLeft = positions[0].nx - (positions[0].ev.accidental ? positions[0].accOffset + fontSize * 0.2 : fontSize * 0.34);
+                const groupRight = positions[positions.length - 1].nx + (positions[positions.length - 1].ev.dots > 0 ? fontSize * 0.65 : fontSize * 0.34);
+                const groupMid = (groupLeft + groupRight) * 0.5;
+                let shiftToCenter = beatCenter - groupMid;
+                if (groupLeft + shiftToCenter < bX0 + 1) shiftToCenter = (bX0 + 1) - groupLeft;
+                if (groupRight + shiftToCenter > bX0 + bW - 1) shiftToCenter = (bX0 + bW - 1) - groupRight;
+
+                positions.forEach(p => {
+                  noteXs.push({ nx: p.nx + shiftToCenter, ev: p.ev, accOffset: p.accOffset });
+                });
+              }
+
+              noteXs.forEach(({ nx, ev, accOffset }) => {
+                // Track highlighted selection bounds per note
+                if (
+                  activeSel &&
+                  typeof ev.srcStart === 'number' &&
+                  typeof ev.srcEnd === 'number' &&
+                  ev.srcEnd > activeSel.start &&
+                  ev.srcStart < activeSel.end
+                ) {
+                  const leftEdge = nx - (ev.accidental ? (accOffset || fontSize * 0.48) + fontSize * 0.24 : fontSize * 0.42);
+                  const rightEdge = nx + (ev.dots > 1 ? fontSize * 0.78 : ev.dots === 1 ? fontSize * 0.58 : fontSize * 0.42);
+                  selectedNoteRects.push({
+                    x0: leftEdge,
+                    x1: rightEdge,
+                    srcStart: ev.srcStart,
+                    srcEnd: ev.srcEnd
+                  });
+                }
+
+                // Track Slur starts & ends with ID-matched segments across barlines and line breaks
+                if (ev.slurStart && Array.isArray(ev.slurStartIds)) {
+                  ev.slurStartIds.forEach(id => {
+                    activeSlurs.set(id, { octave: ev.octave });
+                    slurSegments.push({ id, x0: nx, octave0: ev.octave, x1: null, octave1: ev.octave, continuedFromPrev: false });
+                  });
+                }
+                if (ev.slurEnd && Array.isArray(ev.slurEndIds)) {
+                  ev.slurEndIds.forEach(id => {
+                    activeSlurs.delete(id);
+                    const seg = [...slurSegments].reverse().find(s => s.id === id && s.x1 === null);
+                    if (seg) {
+                      seg.x1 = nx;
+                      seg.octave1 = ev.octave;
+                    } else {
+                      slurSegments.push({ id, x0: lineSlurStartX, octave0: ev.octave, x1: nx, octave1: ev.octave, continuedFromPrev: true });
+                    }
+                  });
+                }
+
+                // Track Triplet starts & ends with ID-matched segments across line breaks
+                if (ev.tripletStart && Array.isArray(ev.tripletStartIds)) {
+                  ev.tripletStartIds.forEach(id => {
+                    activeTriplets.add(id);
+                    tripletSegments.push({ id, x0: nx, x1: null });
+                  });
+                }
+                if (ev.tripletEnd && Array.isArray(ev.tripletEndIds)) {
+                  ev.tripletEndIds.forEach(id => {
+                    activeTriplets.delete(id);
+                    const seg = [...tripletSegments].reverse().find(s => s.id === id && s.x1 === null);
+                    if (seg) {
+                      seg.x1 = nx;
+                    } else {
+                      tripletSegments.push({ id, x0: lineSlurStartX, x1: nx });
+                    }
+                  });
+                }
+
+                // Track Octave-8 starts & ends with ID-matched segments across line breaks
+                if (ev.octave8Start && Array.isArray(ev.octave8StartIds)) {
+                  ev.octave8StartIds.forEach(id => {
+                    activeOct8.add(id);
+                    oct8Segments.push({ id, x0: nx, x1: null });
+                  });
+                }
+                if (ev.octave8End && Array.isArray(ev.octave8EndIds)) {
+                  ev.octave8EndIds.forEach(id => {
+                    activeOct8.delete(id);
+                    const seg = [...oct8Segments].reverse().find(s => s.id === id && s.x1 === null);
+                    if (seg) {
+                      seg.x1 = nx;
+                    } else {
+                      oct8Segments.push({ id, x0: lineSlurStartX, x1: nx });
+                    }
+                  });
+                }
+
+                if (ev.type === 'dash') {
+                  svgContent += `<line x1="${nx - fontSize * 0.34}" y1="${baseY - fontSize * 0.3}" x2="${nx + fontSize * 0.34}" y2="${baseY - fontSize * 0.3}" stroke="#1C1B18" stroke-width="1.5" stroke-linecap="round" />`;
+                  partLowestZones[pIdx].push({ x0: nx - fontSize * 0.4, x1: nx + fontSize * 0.4, bottomY: baseY + 2 });
+                } else {
+                  if (ev.accidental) {
+                    const accSymbol = ev.accidental === '#' ? '♯' : ev.accidental === 'b' ? '♭' : '♮';
+                    svgContent += `<text x="${nx - (accOffset || fontSize * 0.48)}" y="${baseY - fontSize * 0.38}" text-anchor="middle" font-size="${fontSize * 0.66}" font-weight="600" fill="#1C1B18">${accSymbol}</text>`;
+                  }
+                  svgContent += `<text x="${nx}" y="${baseY}" text-anchor="middle" font-size="${fontSize}" font-weight="600" fill="#1C1B18" class="jianpu-font">${ev.digit}</text>`;
+
+                  if (ev.dots > 0) {
+                    svgContent += `<circle cx="${nx + fontSize * 0.44}" cy="${baseY - fontSize * 0.26}" r="1.45" fill="#1C1B18" />`;
+                    if (ev.dots > 1) {
+                      svgContent += `<circle cx="${nx + fontSize * 0.68}" cy="${baseY - fontSize * 0.26}" r="1.45" fill="#1C1B18" />`;
+                    }
+                  }
+
+                  if (ev.octave >= 1) {
+                    svgContent += `<circle cx="${nx}" cy="${baseY - fontSize * 0.92}" r="1.55" fill="#1C1B18" />`;
+                  }
+                  if (ev.octave >= 2) {
+                    svgContent += `<circle cx="${nx}" cy="${baseY - fontSize * 1.18}" r="1.55" fill="#1C1B18" />`;
+                  }
+
+                  for (let bm = 1; bm <= ev.beams; bm++) {
+                    const uy = baseY + 2.5 + (bm - 1) * 3.1;
+                    svgContent += `<line x1="${nx - fontSize * 0.34}" y1="${uy}" x2="${nx + fontSize * 0.34}" y2="${uy}" stroke="#1C1B18" stroke-width="1.25" />`;
+                  }
+
+                  const lowBaseY = baseY + 4.5 + ev.beams * 3.1;
+                  let lowestY = baseY + 2.5 + ev.beams * 3.1;
+                  if (ev.octave <= -1) {
+                    svgContent += `<circle cx="${nx}" cy="${lowBaseY}" r="1.55" fill="#1C1B18" />`;
+                    lowestY = lowBaseY + 2;
+                  }
+                  if (ev.octave <= -2) {
+                    svgContent += `<circle cx="${nx}" cy="${lowBaseY + 3.8}" r="1.55" fill="#1C1B18" />`;
+                    lowestY = lowBaseY + 5.8;
+                  }
+                  partLowestZones[pIdx].push({ x0: nx - fontSize * 0.45, x1: nx + fontSize * 0.45, bottomY: lowestY });
+                }
+              });
+
+              for (let level = 1; level <= 3; level++) {
+                let runStart = null;
+                for (let k = 0; k < noteXs.length; k++) {
+                  if (noteXs[k].ev.beams >= level) {
+                    if (runStart === null) runStart = noteXs[k].nx;
+                    if (k === noteXs.length - 1 || noteXs[k + 1].ev.beams < level) {
+                      const uy = baseY + 2.5 + (level - 1) * 3.1;
+                      if (noteXs[k].nx > runStart) {
+                        svgContent += `<line x1="${runStart - fontSize * 0.34}" y1="${uy}" x2="${noteXs[k].nx + fontSize * 0.34}" y2="${uy}" stroke="#1C1B18" stroke-width="1.25" />`;
+                      }
+                      runStart = null;
+                    }
+                  }
+                }
+              }
+            }
+
+            // Render merged selection highlight box across selected notes (including gaps between notes)
+            if (activeSel && selectedNoteRects.length > 0) {
+              const firstRect = selectedNoteRects[0];
+              const lastRect = selectedNoteRects[selectedNoteRects.length - 1];
+              const spanX0 = activeSel.start < firstRect.srcStart ? Math.max(measureX0 + 1, firstRect.x0 - 3) : firstRect.x0;
+              const spanX1 = activeSel.end > lastRect.srcEnd ? Math.min(measureX1 - 1, lastRect.x1 + 3) : lastRect.x1;
+              const hlTop = baseY - fontSize * 1.15;
+              const hlHeight = fontSize * 1.85;
+              const hlWidth = Math.max(8, spanX1 - spanX0);
+              svgContent += `<g class="selection-preview-highlight">`;
+              svgContent += `<rect x="${spanX0.toFixed(2)}" y="${hlTop.toFixed(2)}" width="${hlWidth.toFixed(2)}" height="${hlHeight.toFixed(2)}" rx="4" fill="rgba(245, 158, 11, 0.16)" stroke="#D97706" stroke-width="1.2" stroke-dasharray="3,2" />`;
+              svgContent += `</g>`;
+            }
+          }
+
+          // Render Triplet brackets "3" (ID-matched & line-break safe)
+          for (const seg of tripletSegments) {
+            const leftX = seg.x0 - 4;
+            const rightX = (seg.x1 !== null ? seg.x1 : lineSlurEndX) + 4;
+            const yTop = baseY - fontSize * 1.48;
+            const midX = (leftX + rightX) * 0.5;
+            svgContent += `<polyline points="${leftX},${yTop + 4} ${leftX},${yTop} ${Math.max(leftX + 3, midX - 7)},${yTop}" fill="none" stroke="#1C1B18" stroke-width="1" />`;
+            svgContent += `<text x="${midX}" y="${yTop + 3.5}" text-anchor="middle" font-size="10" font-weight="700" fill="#1C1B18" class="jianpu-font">3</text>`;
+            svgContent += `<polyline points="${Math.min(rightX - 3, midX + 7)},${yTop} ${rightX},${yTop} ${rightX},${yTop + 4}" fill="none" stroke="#1C1B18" stroke-width="1" />`;
+          }
+
+          // Render Octave brackets: ┌ - - - oct - - - ┐
+          for (const seg of oct8Segments) {
+            const leftX = seg.x0 - 5;
+            const rightX = (seg.x1 !== null ? seg.x1 : lineSlurEndX) + 5;
+            const yTop = baseY - fontSize * 1.62;
+            const midX = (leftX + rightX) * 0.5;
+            svgContent += `<polyline points="${leftX},${yTop + 5} ${leftX},${yTop} ${Math.max(leftX + 4, midX - 13)},${yTop}" fill="none" stroke="#1C1B18" stroke-width="1.05" stroke-dasharray="3,2.5" />`;
+            svgContent += `<text x="${midX}" y="${yTop + 3}" text-anchor="middle" font-size="10.5" font-style="italic" font-weight="700" fill="#1C1B18" class="jianpu-font">oct</text>`;
+            svgContent += `<polyline points="${Math.min(rightX - 4, midX + 13)},${yTop} ${rightX},${yTop} ${rightX},${yTop + 5}" fill="none" stroke="#1C1B18" stroke-width="1.05" stroke-dasharray="3,2.5" />`;
+          }
+
+          // Render Slurs (with smooth asymmetric continuation curves across line breaks)
+          const upperZones = pIdx > 0 ? partLowestZones[pIdx - 1] : [];
+          for (const seg of slurSegments) {
+            const isOpenAtRight = seg.x1 === null;
+            const isOpenAtLeft = Boolean(seg.continuedFromPrev);
+
+            const rightBreakX = Math.min(lineSlurEndX, seg.x0 + fontSize * 1.45);
+            const leftBreakX = seg.x1 !== null
+              ? Math.max(lineSlurStartX, seg.x1 - fontSize * 1.45)
+              : lineSlurStartX;
+
+            const sA = {
+              x: isOpenAtLeft ? leftBreakX : seg.x0,
+              octave: seg.octave0
+            };
+            const sB = isOpenAtRight
+              ? { x: rightBreakX, octave: seg.octave0 }
+              : { x: seg.x1, octave: seg.octave1 };
+
+            const effectiveOctave = Math.max(sA.octave, sB.octave);
+            const hasTwoHighDots = effectiveOctave >= 2;
+            const hasOneHighDot = effectiveOctave >= 1;
+            const baseClearance = hasTwoHighDots ? fontSize * 1.38 : hasOneHighDot ? fontSize * 1.15 : fontSize * 0.96;
+            let yAnchor = baseY - baseClearance;
+            const span = Math.max(10, sB.x - sA.x);
+            let arch = Math.min(12.5, Math.max(5.5, span * 0.13));
+
+            if (upperZones.length > 0) {
+              let maxUpperBottom = -Infinity;
+              for (const z of upperZones) {
+                if (z.x1 >= sA.x - 6 && z.x0 <= sB.x + 6) {
+                  if (z.bottomY > maxUpperBottom) maxUpperBottom = z.bottomY;
+                }
+              }
+              if (maxUpperBottom > -Infinity) {
+                const safeCeiling = maxUpperBottom + 3.5;
+                if (yAnchor - arch < safeCeiling) {
+                  const maxAllowedArch = Math.max(4.5, yAnchor - safeCeiling);
+                  arch = Math.min(arch, maxAllowedArch);
+                  if (yAnchor - arch < safeCeiling) {
+                    yAnchor = Math.min(baseY - fontSize * 0.85, safeCeiling + arch);
+                  }
+                }
+              }
+            }
+
+            let d = '';
+            if (isOpenAtRight && !isOpenAtLeft) {
+              const endY = yAnchor - arch * 0.72;
+              const c1x = sA.x + span * 0.35;
+              const c2x = sA.x + span * 0.72;
+              d = `M ${sA.x.toFixed(1)} ${yAnchor.toFixed(1)} C ${c1x.toFixed(1)} ${(yAnchor - arch * 0.78).toFixed(1)}, ${c2x.toFixed(1)} ${endY.toFixed(1)}, ${sB.x.toFixed(1)} ${endY.toFixed(1)}`;
+            } else if (isOpenAtLeft && !isOpenAtRight) {
+              const startY = yAnchor - arch * 0.72;
+              const c1x = sA.x + span * 0.28;
+              const c2x = sA.x + span * 0.65;
+              d = `M ${sA.x.toFixed(1)} ${startY.toFixed(1)} C ${c1x.toFixed(1)} ${startY.toFixed(1)}, ${c2x.toFixed(1)} ${(yAnchor - arch * 0.78).toFixed(1)}, ${sB.x.toFixed(1)} ${yAnchor.toFixed(1)}`;
+            } else {
+              const c1x = sA.x + span * 0.25;
+              const c2x = sA.x + span * 0.75;
+              d = `M ${sA.x.toFixed(1)} ${yAnchor.toFixed(1)} C ${c1x.toFixed(1)} ${(yAnchor - arch).toFixed(1)}, ${c2x.toFixed(1)} ${(yAnchor - arch).toFixed(1)}, ${sB.x.toFixed(1)} ${yAnchor.toFixed(1)}`;
+            }
+            svgContent += `<path class="slur-curve" d="${d}" fill="none" stroke="#1C1B18" stroke-width="1.35" stroke-linecap="round" />`;
+          }
+        });
+      });
+
+      svgContent += `<text x="${MARGIN_X}" y="${PAGE_H - 24}" text-anchor="start" font-size="10.5" fill="#4A4740">${escapeXml(meta.footer || '')}</text>`;
+      svgContent += `<text x="${PAGE_W - MARGIN_X}" y="${PAGE_H - 24}" text-anchor="end" font-size="10.5" font-weight="600" fill="#1C1B18" class="jianpu-font">${pageIdx + 1} / ${pages.length}</text>`;
+
+      pagesHTML += `
+        <div class="a4-page">
+          <svg viewBox="0 0 ${PAGE_W} ${PAGE_H}" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+            ${svgContent}
+          </svg>
+        </div>
+      `;
+    });
+
+    container.innerHTML = pagesHTML;
+    applyZoom();
+
+    parts.forEach((_, pIdx) => {
+      const badgeEl = document.getElementById(`part-mismatch-badge-${pIdx}`);
+      if (!badgeEl) return;
+      const issues = mismatchTracker[pIdx] || [];
+      if (issues.length > 0) {
+        const preview = issues.slice(0, 3).map(it => `第${it.measureNum}小節(${it.actual}/${it.expected}拍)`).join('、');
+        const extra = issues.length > 3 ? ` 等${issues.length}處` : '';
+        badgeEl.textContent = `⚠ 拍數不符：${preview}${extra}`;
+        badgeEl.classList.remove('hidden');
+      } else {
+        badgeEl.textContent = '';
+        badgeEl.classList.add('hidden');
+      }
+    });
+
+    const totalMismatches = mismatchTracker.reduce((sum, arr) => sum + arr.length, 0);
+    const statusEl = document.getElementById('status-summary');
+    if (statusEl) {
+      statusEl.textContent = totalMismatches > 0
+        ? `已渲染 ${pages.length} 頁 A4 ・ ⚠ ${totalMismatches} 處小節拍數不符`
+        : `已渲染 ${pages.length} 頁 A4 ・ 共 ${alignedMeasures.length} 小節`;
+    }
+  }
+
+  // --------------------------------------------------------------------------
+  // 7. SUBDIVISION LOCK & AUTO BARLINE HELPERS (快捷鎖定與自動小節線)
+  // --------------------------------------------------------------------------
+  function getTripletSubdivisionByTimeSig(timeSigStr) {
+    const cleaned = String(timeSigStr || '').trim();
+    const match = cleaned.match(/^(\d+)\s*\/\s*(\d+)$/);
+    if (!match) return '_';
+    const denominator = parseInt(match[2], 10);
+    if (denominator === 2) return '';   // e.g. 2/2 -> quarter-note triplet (no underline)
+    if (denominator === 8) return '=';  // e.g. 6/8, 3/8 -> sixteenth-note triplet (=)
+    if (denominator === 16) return '~'; // e.g. 6/16 -> thirty-second-note triplet (~)
+    return '_';                         // default 4/4, 3/4, 2/4 -> eighth-note triplet (_)
+  }
+
+  function countNotesInSlice(sliceText) {
+    const matches = sliceText.match(/[0-7]/g);
+    return matches ? matches.length : 0;
+  }
+
+  function formatTripletGroup(rawSlice, subMark) {
+    const noteRegex = /([#bn]?[0-7](?:['',._=~])*)/g;
+    const rawNotes = [];
+    let m;
+    while ((m = noteRegex.exec(rawSlice)) !== null) {
+      rawNotes.push(m[1]);
+    }
+    if (rawNotes.length !== 3) return null;
+
+    const formattedNotes = rawNotes.map(tok => {
+      if (/[_=~]/.test(tok)) return tok;
+      if (!subMark) return tok;
+      const dotMatch = tok.match(/(\.+)$/);
+      if (dotMatch) {
+        return tok.slice(0, -dotMatch[1].length) + subMark + dotMatch[1];
+      }
+      return tok + subMark;
+    });
+
+    return `3(${formattedNotes.join(' ')}) `;
+  }
+
+  function updateSubdivisionLockUI() {
+    const btn8 = document.getElementById('btn-sym-eighth');
+    const btn16 = document.getElementById('btn-sym-sixteenth');
+    const btnTriplet = document.getElementById('btn-sym-triplet');
+    const pill = document.getElementById('lock-status-pill');
+
+    if (btn8) {
+      const locked8 = state.lockedSubdivision === '_';
+      btn8.classList.toggle('is-locked', locked8);
+      btn8.textContent = locked8 ? '🔒 8分 (_)' : '8分 (_)';
+    }
+    if (btn16) {
+      const locked16 = state.lockedSubdivision === '=';
+      btn16.classList.toggle('is-locked', locked16);
+      btn16.textContent = locked16 ? '🔒 16分 (=)' : '16分 (=)';
+    }
+    if (btnTriplet) {
+      const lockedTriplet = state.lockedSubdivision === 'triplet';
+      btnTriplet.classList.toggle('is-locked', lockedTriplet);
+      btnTriplet.textContent = lockedTriplet ? '🔒 三連音 3(...)' : '三連音 3(...)';
+    }
+    if (pill) {
+      if (state.lockedSubdivision === '_') {
+        pill.textContent = '🔒 8分鎖定中';
+        pill.classList.remove('hidden');
+      } else if (state.lockedSubdivision === '=') {
+        pill.textContent = '🔒 16分鎖定中';
+        pill.classList.remove('hidden');
+      } else if (state.lockedSubdivision === 'triplet') {
+        let pendingCount = 0;
+        const activeTa = document.getElementById(`part-textarea-${state.activePartIndex}`);
+        if (activeTa && state.tripletStartOffset !== null) {
+          const curPos = activeTa.selectionStart ?? activeTa.value.length;
+          if (curPos >= state.tripletStartOffset) {
+            pendingCount = countNotesInSlice(activeTa.value.slice(state.tripletStartOffset, curPos));
+          }
+        }
+        pill.textContent = `🔒 三連音鎖定中 (${Math.min(3, pendingCount)}/3)`;
+        pill.classList.remove('hidden');
+      } else {
+        pill.textContent = '';
+        pill.classList.add('hidden');
+      }
+    }
+  }
+
+  function ensurePartHistoryStacks(idx) {
+    if (!state.undoStacks[idx]) {
+      state.undoStacks[idx] = [{
+        value: state.parts[idx]?.notation || '',
+        selStart: (state.parts[idx]?.notation || '').length,
+        selEnd: (state.parts[idx]?.notation || '').length
+      }];
+    }
+    if (!state.redoStacks[idx]) {
+      state.redoStacks[idx] = [];
+    }
+  }
+
+  function recordPartHistorySnapshot(idx, textarea) {
+    if (!state.parts[idx] || !textarea) return;
+    ensurePartHistoryStacks(idx);
+    const stack = state.undoStacks[idx];
+    const snap = {
+      value: textarea.value,
+      selStart: textarea.selectionStart ?? textarea.value.length,
+      selEnd: textarea.selectionEnd ?? textarea.value.length
+    };
+    const top = stack[stack.length - 1];
+    if (top && top.value === snap.value) {
+      top.selStart = snap.selStart;
+      top.selEnd = snap.selEnd;
+      return;
+    }
+    stack.push(snap);
+    if (stack.length > 200) stack.shift();
+    state.redoStacks[idx] = [];
+  }
+
+  function hasUnclosedSpanInSegment(segmentText) {
+    let depth = 0;
+    for (let i = 0; i < segmentText.length; i++) {
+      const ch = segmentText[i];
+      if (ch === '(') depth++;
+      else if (ch === ')') depth = Math.max(0, depth - 1);
+    }
+    return depth > 0;
+  }
+
+  function tryAutoInsertBarline(textarea, triggerMode = 'immediate') {
+    if (!state.autoBarline || !textarea) return false;
+    const expectedBeats = getExpectedQuarterBeatsPerMeasure(state.meta.time);
+    if (expectedBeats === null || expectedBeats <= 0) return false;
+
+    const pos = textarea.selectionStart ?? textarea.value.length;
+    if (pos !== (textarea.selectionEnd ?? pos)) return false;
+
+    const beforeText = textarea.value.slice(0, pos);
+    const afterText = textarea.value.slice(pos);
+
+    if (/(?:\|\||:\|:|\|:|:\||\|)\s*$/.test(beforeText)) return false;
+    if (/^\s*(?:\|\||:\|:|\|:|:\||\|)/.test(afterText)) return false;
+
+    // Only auto-insert when editing at the end of the current measure
+    const nextBarMatch = afterText.search(/(:\|:|\|:|:\||\|\||\|)/);
+    const restOfCurrentMeasure = nextBarMatch === -1 ? afterText : afterText.slice(0, nextBarMatch);
+    if (restOfCurrentMeasure.trim().length > 0) return false;
+
+    const barRegex = /(:\|:|\|:|:\||\|\||\|)/g;
+    let lastBarEnd = 0;
+    let match;
+    while ((match = barRegex.exec(beforeText)) !== null) {
+      lastBarEnd = match.index + match[0].length;
+    }
+    const currentMeasureSegment = beforeText.slice(lastBarEnd);
+    if (!currentMeasureSegment.trim()) return false;
+
+    // Mode A ('space'): User just typed a space after finishing a note/group
+    if (triggerMode === 'space') {
+      const trimmedBefore = beforeText.replace(/[ ]+$/, '');
+      const segBeforeSpace = trimmedBefore.slice(lastBarEnd);
+      if (!segBeforeSpace.trim()) return false;
+      const parsed = parsePartNotation(segBeforeSpace);
+      if (parsed.length === 0) return false;
+      const measureBeats = parsed[parsed.length - 1].tokens.reduce((sum, t) => sum + t.duration, 0);
+      if (Math.abs(measureBeats - expectedBeats) <= 1e-4) {
+        const barToInsert = '| ';
+        textarea.value = beforeText + barToInsert + afterText;
+        const newPos = pos + barToInsert.length;
+        textarea.setSelectionRange(newPos, newPos);
+        return true;
+      }
+      return false;
+    }
+
+    // Mode B ('before-next-note'): User typed the start of a new note (digit or accidental #/b/n) without pressing space first,
+    // while previous tokens in this measure already sum to expectedBeats -> insert ' | ' right BEFORE the new note/accidental
+    if (triggerMode === 'before-next-note') {
+      const newTokenMatch = currentMeasureSegment.match(/([#bn]?[0-7]|[#bn])$/);
+      if (!newTokenMatch) return false;
+      const prevSegment = currentMeasureSegment.slice(0, currentMeasureSegment.length - newTokenMatch[0].length);
+      if (!prevSegment.trim()) return false;
+      if (hasUnclosedSpanInSegment(prevSegment)) return false;
+      const parsedPrev = parsePartNotation(prevSegment);
+      if (parsedPrev.length === 0) return false;
+      const prevBeats = parsedPrev[parsedPrev.length - 1].tokens.reduce((sum, t) => sum + t.duration, 0);
+      if (Math.abs(prevBeats - expectedBeats) <= 1e-4) {
+        const prefixBeforeNewNote = beforeText.slice(0, beforeText.length - newTokenMatch[0].length);
+        const sep = prefixBeforeNewNote.endsWith(' ') ? '| ' : ' | ';
+        textarea.value = prefixBeforeNewNote + sep + newTokenMatch[0] + afterText;
+        const newPos = prefixBeforeNewNote.length + sep.length + newTokenMatch[0].length;
+        textarea.setSelectionRange(newPos, newPos);
+        return true;
+      }
+      return false;
+    }
+
+    // Mode C ('immediate'): For tokens whose beat count is already finalized (locked 8th/16th, completed triplet, closing ')', or '-')
+    if (hasUnclosedSpanInSegment(currentMeasureSegment)) return false;
+
+    const parsedMeasures = parsePartNotation(currentMeasureSegment);
+    if (parsedMeasures.length === 0) return false;
+    const lastMeasure = parsedMeasures[parsedMeasures.length - 1];
+    const measureBeats = lastMeasure.tokens.reduce((sum, t) => sum + t.duration, 0);
+
+    if (Math.abs(measureBeats - expectedBeats) <= 1e-4) {
+      const insertStr = beforeText.endsWith(' ') ? '| ' : ' | ';
+      textarea.value = beforeText + insertStr + afterText;
+      const newPos = pos + insertStr.length;
+      textarea.setSelectionRange(newPos, newPos);
+      return true;
+    }
+    return false;
+  }
+
+  function applyHistorySnapshot(idx, snap, textarea) {
+    if (!snap || !state.parts[idx]) return;
+    state.parts[idx].notation = snap.value;
+    if (textarea) {
+      textarea.value = snap.value;
+      textarea.focus();
+      const s = Math.min(snap.selStart ?? snap.value.length, snap.value.length);
+      const e = Math.min(snap.selEnd ?? s, snap.value.length);
+      textarea.setSelectionRange(s, e);
+    }
+    if (state.lockedSubdivision === 'triplet') {
+      state.tripletStartOffset = textarea ? (textarea.selectionStart ?? snap.value.length) : null;
+      updateSubdivisionLockUI();
+    }
+    renderScore();
+  }
+
+  function undoPartNotation(idx, textarea) {
+    ensurePartHistoryStacks(idx);
+    const undoStack = state.undoStacks[idx];
+    if (undoStack.length <= 1) {
+      showToast('已無更早的輸入步驟可復原');
+      return false;
+    }
+    const currentSnap = undoStack.pop();
+    state.redoStacks[idx].push(currentSnap);
+    const prevSnap = undoStack[undoStack.length - 1];
+    applyHistorySnapshot(idx, prevSnap, textarea);
+    return true;
+  }
+
+  function redoPartNotation(idx, textarea) {
+    ensurePartHistoryStacks(idx);
+    const redoStack = state.redoStacks[idx];
+    if (redoStack.length === 0) {
+      showToast('已無可重做的步驟');
+      return false;
+    }
+    const nextSnap = redoStack.pop();
+    state.undoStacks[idx].push(nextSnap);
+    applyHistorySnapshot(idx, nextSnap, textarea);
+    return true;
+  }
+
+  // --------------------------------------------------------------------------
+  // 8. LEFT EDITOR PANEL SYNC & DYNAMIC PART CARDS
+  // --------------------------------------------------------------------------
+  function syncMetadataInputs() {
+    const map = {
+      'meta-title': state.meta.title,
+      'meta-subtitle': state.meta.subtitle,
+      'meta-composer': state.meta.composer,
+      'meta-key': state.meta.key,
+      'meta-time': state.meta.time,
+      'meta-tempo': state.meta.tempo,
+      'meta-footer': state.meta.footer
+    };
+    Object.entries(map).forEach(([id, val]) => {
+      const el = document.getElementById(id);
+      if (el) el.value = val || '';
+    });
+  }
+
+  function renderPartsEditorList() {
+    const listEl = document.getElementById('parts-editor-list');
+    if (!listEl) return;
+
+    listEl.innerHTML = state.parts.map((part, idx) => {
+      const isActive = idx === state.activePartIndex;
+      return `
+        <div data-part-idx="${idx}" class="part-card bg-zinc-950/80 border ${isActive ? 'border-amber-500/70 ring-1 ring-amber-500/30' : 'border-zinc-800'} rounded-xl p-3 transition">
+          <div class="flex items-center justify-between gap-2 mb-2">
+            <div class="flex items-center gap-2 flex-1">
+              <span class="part-index-badge text-[11px] font-mono font-semibold px-1.5 py-0.5 rounded bg-zinc-800 text-amber-400">#${idx + 1}</span>
+              <input
+                type="text"
+                data-idx="${idx}"
+                data-field="name"
+                value="${escapeHtmlAttr(part.name)}"
+                placeholder="聲部名稱（如 Harmonica1）"
+                class="part-meta-input w-full bg-zinc-900 border border-zinc-800 rounded px-2 py-1 text-xs font-semibold text-zinc-100 focus:border-amber-500 focus:outline-none jianpu-font"
+              />
+            </div>
+            ${state.parts.length > 1 ? `
+              <button type="button" data-remove-idx="${idx}" class="btn-remove-part text-zinc-500 hover:text-rose-400 p-1 rounded transition text-xs" title="刪除此聲部">✕</button>
+            ` : ''}
+          </div>
+          <div id="part-mismatch-badge-${idx}" class="hidden mb-2 px-2 py-1 rounded-md bg-rose-500/15 border border-rose-500/40 text-[11px] font-medium text-rose-500 leading-snug"></div>
+          <textarea
+            id="part-textarea-${idx}"
+            data-idx="${idx}"
+            rows="3"
+            spellcheck="false"
+            placeholder="輸入簡譜，例如：(3_ 5_ 1' 7_) | #1= #2= 3= #4= | 1 - - -"
+            class="part-notation-input w-full bg-zinc-900/90 border border-zinc-800 rounded-lg p-2.5 text-xs text-zinc-100 jianpu-font leading-relaxed focus:border-amber-500 focus:outline-none resize-y"
+          >${escapeXml(part.notation)}</textarea>
+        </div>
+      `;
+    }).join('');
+
+    updateActivePartBadge();
+  }
+
+  function escapeHtmlAttr(str) {
+    return String(str || '').replace(/"/g, '&quot;');
+  }
+
+  function updateActivePartBadge() {
+    const badge = document.getElementById('active-part-badge');
+    const p = state.parts[state.activePartIndex];
+    if (badge && p) {
+      badge.textContent = `目前：${p.name || p.subName || `Part ${state.activePartIndex + 1}`}`;
+    }
+  }
+
+  function applyZoom() {
+    const container = document.getElementById('pages-container');
+    const label = document.getElementById('zoom-label');
+    if (container) {
+      container.style.transform = `scale(${state.zoom})`;
+    }
+    if (label) {
+      label.textContent = `${Math.round(state.zoom * 100)}%`;
+    }
+  }
+
+  function fitZoomToViewport() {
+    const viewport = document.getElementById('preview-viewport');
+    if (!viewport) return;
+    const availW = viewport.clientWidth - 48;
+    const a4PxW = 794;
+    const computed = Math.min(1.15, Math.max(0.45, availW / a4PxW));
+    state.zoom = Math.round(computed * 20) / 20;
+    applyZoom();
+  }
+
+  function showToast(msg) {
+    const box = document.getElementById('toast-box');
+    const msgEl = document.getElementById('toast-msg');
+    if (!box || !msgEl) return;
+    msgEl.textContent = msg;
+    box.classList.remove('opacity-0');
+    clearTimeout(window.__toastTimer);
+    window.__toastTimer = setTimeout(() => {
+      box.classList.add('opacity-0');
+    }, 2400);
+  }
+
+  // --------------------------------------------------------------------------
+  // 9. EVENT LISTENERS INITIALIZATION
+  // --------------------------------------------------------------------------
+  function applyStudioTheme(theme) {
+    const isLight = theme === 'light';
+    document.body.classList.toggle('studio-light', isLight);
+    const iconEl = document.getElementById('theme-toggle-icon');
+    const labelEl = document.getElementById('theme-toggle-label');
+    if (iconEl) iconEl.textContent = isLight ? '🌙' : '☀️';
+    if (labelEl) labelEl.textContent = isLight ? '深色' : '淡色';
+    try {
+      localStorage.setItem('jianpu_studio_theme', theme);
+    } catch (e) {}
+  }
+
+  function applySidebarCollapsed(collapsed, silent = false) {
+    state.sidebarCollapsed = Boolean(collapsed);
+    const sidebarEl = document.getElementById('studio-sidebar');
+    const expandBtn = document.getElementById('btn-expand-sidebar');
+    if (sidebarEl) {
+      sidebarEl.classList.toggle('sidebar-collapsed', state.sidebarCollapsed);
+    }
+    if (expandBtn) {
+      expandBtn.classList.toggle('hidden', !state.sidebarCollapsed);
+    }
+    if (!silent) {
+      showToast(state.sidebarCollapsed ? '已收合側邊編輯欄（點擊左上角「展開編輯欄」還原）' : '已展開側邊編輯欄');
+    }
+  }
+
+  function syncConfigInputs() {
+    const beatsEl = document.getElementById('cfg-beats-per-line');
+    const beatsVal = document.getElementById('val-beats-per-line');
+    if (beatsEl) beatsEl.value = state.config.beatsPerLine;
+    if (beatsVal) beatsVal.textContent = `${state.config.beatsPerLine} 拍`;
+
+    const fontEl = document.getElementById('cfg-font-size');
+    const fontVal = document.getElementById('val-font-size');
+    if (fontEl) fontEl.value = state.config.fontSize;
+    if (fontVal) fontVal.textContent = `${state.config.fontSize} px`;
+
+    const clusterEl = document.getElementById('cfg-cluster');
+    const clusterVal = document.getElementById('val-cluster');
+    if (clusterEl) clusterEl.value = state.config.clusterFactor;
+    if (clusterVal) {
+      const v = state.config.clusterFactor;
+      clusterVal.textContent = v <= 0.88 ? '極緊密' : v <= 0.98 ? '標準緊密' : '寬鬆';
+    }
+
+    const gapEl = document.getElementById('cfg-part-gap');
+    const gapVal = document.getElementById('val-part-gap');
+    if (gapEl) gapEl.value = state.config.partGap;
+    if (gapVal) gapVal.textContent = `${state.config.partGap} px`;
+
+    const spacingEl = document.getElementById('cfg-beat-spacing');
+    const spacingVal = document.getElementById('val-beat-spacing');
+    if (spacingEl) spacingEl.value = state.config.beatSpacing;
+    if (spacingVal) spacingVal.textContent = `${Number(state.config.beatSpacing).toFixed(2)}x`;
+  }
+
+  function applyOctaveToSelection(textarea, octaveSymbol) {
+    const start = textarea.selectionStart ?? 0;
+    const end = textarea.selectionEnd ?? 0;
+    if (end <= start) return false;
+
+    const val = textarea.value;
+    const selectedText = val.slice(start, end);
+
+    const transformed = selectedText.replace(
+      /(\[[1-4](?:[.,-][1-4])*\.?)|([38]\()|([#bn]?[1-7])([',]*)/g,
+      (match, voltaGrp, tupletOctGrp, notePart) => {
+        if (voltaGrp || tupletOctGrp) return match;
+        return `${notePart}${octaveSymbol}`;
+      }
+    );
+
+    textarea.value = val.slice(0, start) + transformed + val.slice(end);
+    textarea.focus();
+    textarea.setSelectionRange(start, start + transformed.length);
+    return true;
+  }
+
+  function applyOctaveAtCursor(textarea, octaveSymbol) {
+    const pos = textarea.selectionStart ?? textarea.value.length;
+    const val = textarea.value;
+    const before = val.slice(0, pos);
+    const after = val.slice(pos);
+
+    const m = before.match(/([#bn]?[1-7])([',]*)$/);
+    if (m) {
+      const prefix = before.slice(0, before.length - m[0].length);
+      const updated = `${prefix}${m[1]}${octaveSymbol}`;
+      textarea.value = updated + after;
+      textarea.focus();
+      textarea.setSelectionRange(updated.length, updated.length);
+      return true;
+    }
+    return false;
+  }
+
+  function initEvents() {
+    const savedTheme = (() => {
+      try { return localStorage.getItem('jianpu_studio_theme') || 'light'; } catch (e) { return 'light'; }
+    })();
+    applyStudioTheme(savedTheme);
+
+    const collapseSidebarBtn = document.getElementById('btn-collapse-sidebar');
+    if (collapseSidebarBtn) {
+      collapseSidebarBtn.addEventListener('click', () => applySidebarCollapsed(true));
+    }
+    const expandSidebarBtn = document.getElementById('btn-expand-sidebar');
+    if (expandSidebarBtn) {
+      expandSidebarBtn.addEventListener('click', () => applySidebarCollapsed(false));
+    }
+
+    const themeBtn = document.getElementById('btn-theme-toggle');
+    if (themeBtn) {
+      themeBtn.addEventListener('click', () => {
+        const nextTheme = document.body.classList.contains('studio-light') ? 'dark' : 'light';
+        applyStudioTheme(nextTheme);
+        showToast(nextTheme === 'light' ? '已切換至淡色編輯主題' : '已切換至深色編輯主題');
+      });
+    }
+
+    const autoBarlineChk = document.getElementById('chk-auto-barline');
+    if (autoBarlineChk) {
+      autoBarlineChk.checked = state.autoBarline;
+      autoBarlineChk.addEventListener('change', e => {
+        state.autoBarline = Boolean(e.target.checked);
+        showToast(state.autoBarline ? '已開啟自動增加小節線（拍數吻合拍號時自動補上 |）' : '已關閉自動增加小節線');
+      });
+    }
+
+    const metaBindings = [
+      ['meta-title', 'title'],
+      ['meta-subtitle', 'subtitle'],
+      ['meta-composer', 'composer'],
+      ['meta-key', 'key'],
+      ['meta-time', 'time'],
+      ['meta-tempo', 'tempo'],
+      ['meta-footer', 'footer']
+    ];
+    metaBindings.forEach(([elId, field]) => {
+      const el = document.getElementById(elId);
+      if (el) {
+        el.addEventListener('input', e => {
+          state.meta[field] = e.target.value;
+          renderScore();
+        });
+      }
+    });
+
+    document.getElementById('cfg-beats-per-line').addEventListener('input', e => {
+      state.config.beatsPerLine = Number(e.target.value);
+      document.getElementById('val-beats-per-line').textContent = `${state.config.beatsPerLine} 拍`;
+      renderScore();
+    });
+
+    document.getElementById('cfg-font-size').addEventListener('input', e => {
+      state.config.fontSize = Number(e.target.value);
+      document.getElementById('val-font-size').textContent = `${state.config.fontSize} px`;
+      renderScore();
+    });
+
+    document.getElementById('cfg-cluster').addEventListener('input', e => {
+      state.config.clusterFactor = Number(e.target.value);
+      const v = state.config.clusterFactor;
+      const label = v <= 0.88 ? '極緊密' : v <= 0.98 ? '標準緊密' : '寬鬆';
+      document.getElementById('val-cluster').textContent = label;
+      renderScore();
+    });
+
+    document.getElementById('cfg-part-gap').addEventListener('input', e => {
+      state.config.partGap = Number(e.target.value);
+      document.getElementById('val-part-gap').textContent = `${state.config.partGap} px`;
+      renderScore();
+    });
+
+    document.getElementById('cfg-beat-spacing').addEventListener('input', e => {
+      state.config.beatSpacing = Number(e.target.value);
+      document.getElementById('val-beat-spacing').textContent = `${state.config.beatSpacing.toFixed(2)}x`;
+      renderScore();
+    });
+
+    document.getElementById('preset-select').addEventListener('change', e => {
+      const preset = PRESETS[e.target.value];
+      if (!preset) return;
+      state.meta = JSON.parse(JSON.stringify(preset.meta));
+      state.parts = JSON.parse(JSON.stringify(preset.parts));
+      state.activePartIndex = 0;
+      state.selectionRange = null;
+      state.lockedSubdivision = null;
+      state.tripletStartOffset = null;
+      state.undoStacks = [];
+      state.redoStacks = [];
+      state.parts.forEach((_, i) => ensurePartHistoryStacks(i));
+      syncMetadataInputs();
+      renderPartsEditorList();
+      updateSubdivisionLockUI();
+      renderScore();
+      showToast('已載入範例樂譜');
+    });
+
+    const listEl = document.getElementById('parts-editor-list');
+
+    const syncSelectionHighlight = target => {
+      if (!target || !target.classList || !target.classList.contains('part-notation-input')) return;
+      const idx = Number(target.dataset.idx);
+      const s = target.selectionStart ?? 0;
+      const e = target.selectionEnd ?? 0;
+      const nextSel = e > s ? { partIndex: idx, start: s, end: e } : null;
+      const prevSel = state.selectionRange;
+      const changed =
+        (Boolean(nextSel) !== Boolean(prevSel)) ||
+        (nextSel && prevSel && (nextSel.partIndex !== prevSel.partIndex || nextSel.start !== prevSel.start || nextSel.end !== prevSel.end));
+      if (changed) {
+        state.selectionRange = nextSel;
+        renderScore();
+      }
+    };
+
+    listEl.addEventListener('select', e => syncSelectionHighlight(e.target), true);
+    listEl.addEventListener('mouseup', e => syncSelectionHighlight(e.target));
+    listEl.addEventListener('keyup', e => syncSelectionHighlight(e.target));
+
+    listEl.addEventListener('focusin', e => {
+      const card = e.target.closest('.part-card');
+      if (card) {
+        const idx = Number(card.dataset.partIdx);
+        if (!Number.isNaN(idx) && idx !== state.activePartIndex) {
+          state.activePartIndex = idx;
+          state.tripletStartOffset = null;
+          document.querySelectorAll('.part-card').forEach((c, i) => {
+            if (i === idx) {
+              c.classList.add('border-amber-500/70', 'ring-1', 'ring-amber-500/30');
+              c.classList.remove('border-zinc-800');
+            } else {
+              c.classList.remove('border-amber-500/70', 'ring-1', 'ring-amber-500/30');
+              c.classList.add('border-zinc-800');
+            }
+          });
+          updateActivePartBadge();
+          updateSubdivisionLockUI();
+        }
+      }
+    });
+
+    listEl.addEventListener('keydown', e => {
+      if (!e.target.classList || !e.target.classList.contains('part-notation-input')) return;
+      const idx = Number(e.target.dataset.idx);
+      if (Number.isNaN(idx)) return;
+
+      // Escape key clears any active lock mode
+      if (e.key === 'Escape' && state.lockedSubdivision !== null) {
+        e.preventDefault();
+        state.lockedSubdivision = null;
+        state.tripletStartOffset = null;
+        updateSubdivisionLockUI();
+        showToast('已解除快捷鎖定狀態');
+        return;
+      }
+
+      // Toggle 8th-note ('_') lock mode when pressing digit '8'
+      if (e.key === '8' && !e.ctrlKey && !e.metaKey && !e.altKey && !e.isComposing) {
+        e.preventDefault();
+        if (state.lockedSubdivision === '_') {
+          state.lockedSubdivision = null;
+          state.tripletStartOffset = null;
+          updateSubdivisionLockUI();
+          showToast('已取消 8 分音符鎖定狀態');
+        } else {
+          state.lockedSubdivision = '_';
+          state.tripletStartOffset = null;
+          updateSubdivisionLockUI();
+          showToast('已進入 8 分音符鎖定狀態（快捷鍵 8）：輸入數字自動加上 _（再按一次 8 或 Esc 取消）');
+        }
+        return;
+      }
+
+      // Toggle 16th-note ('=') lock mode when pressing digit '9'
+      if (e.key === '9' && !e.ctrlKey && !e.metaKey && !e.altKey && !e.isComposing) {
+        e.preventDefault();
+        if (state.lockedSubdivision === '=') {
+          state.lockedSubdivision = null;
+          state.tripletStartOffset = null;
+          updateSubdivisionLockUI();
+          showToast('已取消 16 分音符鎖定狀態');
+        } else {
+          state.lockedSubdivision = '=';
+          state.tripletStartOffset = null;
+          updateSubdivisionLockUI();
+          showToast('已進入 16 分音符鎖定狀態（快捷鍵 9）：輸入數字自動加上 =（再按一次 9 或 Esc 取消）');
+        }
+        return;
+      }
+
+      const isMod = e.ctrlKey || e.metaKey;
+      if (isMod && !e.altKey) {
+        const keyLower = e.key.toLowerCase();
+        if (keyLower === 'z' && !e.shiftKey) {
+          e.preventDefault();
+          undoPartNotation(idx, e.target);
+          return;
+        }
+        if (keyLower === 'y' || (keyLower === 'z' && e.shiftKey)) {
+          e.preventDefault();
+          redoPartNotation(idx, e.target);
+          return;
+        }
+      }
+    });
+
+    listEl.addEventListener('input', e => {
+      const idx = Number(e.target.dataset.idx);
+      if (Number.isNaN(idx) || !state.parts[idx]) return;
+
+      if (e.target.classList.contains('part-meta-input')) {
+        const field = e.target.dataset.field;
+        state.parts[idx][field] = e.target.value;
+        updateActivePartBadge();
+        renderScore();
+      } else if (e.target.classList.contains('part-notation-input')) {
+        const ta = e.target;
+        const isInsertEvent = !e.inputType || e.inputType.startsWith('insert');
+        const insertedData = e.data || '';
+        let tripletStillPending = false;
+        let autoBarTriggered = false;
+
+        // 1) Locked 8th ('_') or 16th ('=') subdivision mode
+        if (
+          (state.lockedSubdivision === '_' || state.lockedSubdivision === '=') &&
+          isInsertEvent &&
+          insertedData.length === 1 &&
+          /[0-7]/.test(insertedData) &&
+          !e.isComposing
+        ) {
+          const curPos = ta.selectionStart ?? ta.value.length;
+          const before = ta.value.slice(0, curPos);
+          const after = ta.value.slice(curPos);
+          if (!after.startsWith(state.lockedSubdivision) && !after.startsWith('(')) {
+            ta.value = before + state.lockedSubdivision + after;
+            const nextPos = curPos + state.lockedSubdivision.length;
+            ta.setSelectionRange(nextPos, nextPos);
+            if (state.autoBarline) {
+              tryAutoInsertBarline(ta, 'before-next-note');
+              tryAutoInsertBarline(ta, 'immediate');
+              autoBarTriggered = true;
+            }
+          }
+        } else if (
+          (state.lockedSubdivision === '_' || state.lockedSubdivision === '=') &&
+          isInsertEvent &&
+          insertedData.length === 1 &&
+          (insertedData === "'" || insertedData === ',') &&
+          !e.isComposing
+        ) {
+          const curPos = ta.selectionStart ?? ta.value.length;
+          const before = ta.value.slice(0, curPos);
+          const swapRe = new RegExp(`([0-7][',]*)(${state.lockedSubdivision === '_' ? '_' : '='})([',])$`);
+          const m = before.match(swapRe);
+          if (m) {
+            const fixedBefore = before.slice(0, before.length - m[0].length) + m[1] + m[3] + m[2];
+            ta.value = fixedBefore + ta.value.slice(curPos);
+            ta.setSelectionRange(fixedBefore.length, fixedBefore.length);
+          }
+        }
+
+        // 2) Locked Triplet ('triplet') mode
+        if (state.lockedSubdivision === 'triplet' && isInsertEvent && !e.isComposing) {
+          const curPos = ta.selectionStart ?? ta.value.length;
+          if (state.tripletStartOffset === null || curPos < state.tripletStartOffset) {
+            state.tripletStartOffset = Math.max(0, curPos - insertedData.length);
+          }
+          const slice = ta.value.slice(state.tripletStartOffset, curPos);
+          const noteCount = countNotesInSlice(slice);
+          if (noteCount > 0 && noteCount < 3) {
+            tripletStillPending = true;
+          } else if (noteCount >= 3) {
+            const subMark = getTripletSubdivisionByTimeSig(state.meta.time);
+            const formatted = formatTripletGroup(slice, subMark);
+            if (formatted) {
+              const beforeTrip = ta.value.slice(0, state.tripletStartOffset);
+              const afterTrip = ta.value.slice(curPos);
+              ta.value = beforeTrip + formatted + afterTrip;
+              const nextPos = beforeTrip.length + formatted.length;
+              ta.setSelectionRange(nextPos, nextPos);
+              state.tripletStartOffset = nextPos;
+              if (state.autoBarline) {
+                tryAutoInsertBarline(ta, 'immediate');
+                state.tripletStartOffset = ta.selectionStart ?? nextPos;
+                autoBarTriggered = true;
+              }
+            }
+          }
+          updateSubdivisionLockUI();
+        }
+
+        // 3) Auto-Barline check (priority strictly below active lock modes)
+        if (!autoBarTriggered && !tripletStillPending && state.autoBarline && isInsertEvent && !e.isComposing && insertedData !== '|') {
+          if (insertedData === ' ') {
+            tryAutoInsertBarline(ta, 'space');
+          } else if (insertedData.length === 1 && /[0-7#bn]/.test(insertedData)) {
+            tryAutoInsertBarline(ta, 'before-next-note');
+          } else if (insertedData.length === 1 && (insertedData === '-' || insertedData === ')')) {
+            tryAutoInsertBarline(ta, 'immediate');
+          }
+          if (state.lockedSubdivision === 'triplet') {
+            state.tripletStartOffset = ta.selectionStart ?? ta.value.length;
+          }
+        }
+
+        state.selectionRange = null;
+        state.parts[idx].notation = ta.value;
+        recordPartHistorySnapshot(idx, ta);
+        renderScore();
+      }
+    });
+
+    listEl.addEventListener('click', e => {
+      const btn = e.target.closest('.btn-remove-part');
+      if (btn) {
+        const idx = Number(btn.dataset.removeIdx);
+        if (state.parts.length > 1 && !Number.isNaN(idx)) {
+          state.parts.splice(idx, 1);
+          state.undoStacks.splice(idx, 1);
+          state.redoStacks.splice(idx, 1);
+          state.activePartIndex = Math.max(0, Math.min(state.activePartIndex, state.parts.length - 1));
+          state.selectionRange = null;
+          renderPartsEditorList();
+          renderScore();
+          showToast('已移除聲部');
+        }
+      }
+    });
+
+    document.getElementById('btn-add-part').addEventListener('click', () => {
+      const nextNum = state.parts.length + 1;
+      state.parts.push({
+        id: 'p' + Date.now(),
+        name: `Harmonica ${nextNum}`,
+        notation: '1 2 3 4 | 5 6 7 1\' | 1 - - -'
+      });
+      state.activePartIndex = state.parts.length - 1;
+      ensurePartHistoryStacks(state.activePartIndex);
+      renderPartsEditorList();
+      renderScore();
+      showToast(`已新增 Harmonica ${nextNum}`);
+    });
+
+    // Quick symbol toolbar buttons
+    const lastClickTimeBySymbol = {};
+    const DOUBLE_CLICK_MS = 380;
+
+    function insertSymbolIntoActiveTextarea(sym) {
+      const idx = state.activePartIndex;
+      const textarea = document.getElementById(`part-textarea-${idx}`);
+      if (!textarea) return;
+
+      const start = textarea.selectionStart ?? textarea.value.length;
+      const end = textarea.selectionEnd ?? textarea.value.length;
+
+      // 1) Octave buttons
+      if (sym === "'" || sym === "''" || sym === ',' || sym === ',,') {
+        if (end > start) {
+          applyOctaveToSelection(textarea, sym);
+        } else if (!applyOctaveAtCursor(textarea, sym)) {
+          const before = textarea.value.slice(0, start);
+          const after = textarea.value.slice(end);
+          textarea.value = before + sym + after;
+          textarea.focus();
+          textarea.setSelectionRange(start + sym.length, start + sym.length);
+        }
+        state.selectionRange = null;
+        state.parts[idx].notation = textarea.value;
+        recordPartHistorySnapshot(idx, textarea);
+        renderScore();
+        return;
+      }
+
+      // 2) Octave 8(...) button
+      if (sym === '8(1 2 3 4)' && end > start) {
+        const before = textarea.value.slice(0, start);
+        const selected = textarea.value.slice(start, end);
+        const after = textarea.value.slice(end);
+        const wrapped = `8( ${selected} )`;
+        textarea.value = before + wrapped + after;
+        textarea.focus();
+        const newPos = start + wrapped.length;
+        textarea.setSelectionRange(newPos, newPos);
+        state.selectionRange = null;
+        if (state.autoBarline) {
+          tryAutoInsertBarline(textarea, 'immediate');
+        }
+        state.parts[idx].notation = textarea.value;
+        recordPartHistorySnapshot(idx, textarea);
+        renderScore();
+        return;
+      }
+
+      // 3) Slur (...) button
+      if (sym === '( )') {
+        const before = textarea.value.slice(0, start);
+        const selected = textarea.value.slice(start, end);
+        const after = textarea.value.slice(end);
+        if (end > start) {
+          const wrapped = `( ${selected} )`;
+          textarea.value = before + wrapped + after;
+          textarea.focus();
+          const newPos = start + wrapped.length;
+          textarea.setSelectionRange(newPos, newPos);
+        } else {
+          const emptySlur = '(  )';
+          textarea.value = before + emptySlur + after;
+          textarea.focus();
+          textarea.setSelectionRange(start + 2, start + 2);
+        }
+        state.selectionRange = null;
+        if (state.autoBarline && end > start) {
+          tryAutoInsertBarline(textarea, 'immediate');
+        }
+        state.parts[idx].notation = textarea.value;
+        recordPartHistorySnapshot(idx, textarea);
+        renderScore();
+        return;
+      }
+
+      // 4) Standard symbol insertion
+      const before = textarea.value.slice(0, start);
+      const after = textarea.value.slice(end);
+      textarea.value = before + sym + after;
+      textarea.focus();
+      const newPos = start + sym.length;
+      textarea.setSelectionRange(newPos, newPos);
+      state.selectionRange = null;
+      if (state.autoBarline) {
+        tryAutoInsertBarline(textarea, 'immediate');
+      }
+      state.parts[idx].notation = textarea.value;
+      recordPartHistorySnapshot(idx, textarea);
+      renderScore();
+    }
+
+    document.querySelectorAll('.sym-btn').forEach(btn => {
+      const lockMode = btn.dataset.lockSymbol;
+      if (lockMode) {
+        btn.addEventListener('click', () => {
+          const now = Date.now();
+          const prev = lastClickTimeBySymbol[lockMode] || 0;
+          lastClickTimeBySymbol[lockMode] = now;
+
+          if (state.lockedSubdivision === lockMode) {
+            state.lockedSubdivision = null;
+            state.tripletStartOffset = null;
+            updateSubdivisionLockUI();
+            showToast('已解除鎖定模式');
+            return;
+          }
+
+          if (now - prev <= DOUBLE_CLICK_MS) {
+            state.lockedSubdivision = lockMode;
+            const activeTa = document.getElementById(`part-textarea-${state.activePartIndex}`);
+            state.tripletStartOffset = lockMode === 'triplet' && activeTa
+              ? (activeTa.selectionStart ?? activeTa.value.length)
+              : null;
+            updateSubdivisionLockUI();
+            const modeLabel = lockMode === '_' ? '8 分音符 (_)' : lockMode === '=' ? '16 分音符 (=)' : '三連音 3(...)';
+            showToast(`已進入 ${modeLabel} 鎖定狀態（再點一下取消）`);
+          }
+        });
+      } else {
+        const sym = btn.dataset.insert || '';
+        btn.addEventListener('click', () => insertSymbolIntoActiveTextarea(sym));
+      }
+    });
+
+    document.getElementById('zoom-in').addEventListener('click', () => {
+      state.zoom = Math.min(1.4, Math.round((state.zoom + 0.1) * 10) / 10);
+      applyZoom();
+    });
+    document.getElementById('zoom-out').addEventListener('click', () => {
+      state.zoom = Math.max(0.45, Math.round((state.zoom - 0.1) * 10) / 10);
+      applyZoom();
+    });
+    document.getElementById('zoom-fit').addEventListener('click', fitZoomToViewport);
+
+    document.getElementById('btn-print').addEventListener('click', () => {
+      window.print();
+    });
+
+    const modal = document.getElementById('help-modal');
+    document.getElementById('btn-help').addEventListener('click', () => {
+      modal.classList.remove('hidden');
+      modal.classList.add('flex');
+    });
+    const closeHelp = () => {
+      modal.classList.add('hidden');
+      modal.classList.remove('flex');
+    };
+    document.getElementById('btn-close-help').addEventListener('click', closeHelp);
+    document.getElementById('btn-close-help-2').addEventListener('click', closeHelp);
+    modal.addEventListener('click', e => {
+      if (e.target === modal) closeHelp();
+    });
+
+    document.getElementById('btn-export-json').addEventListener('click', () => {
+      const payload = JSON.stringify({
+        meta: state.meta,
+        parts: state.parts,
+        config: {
+          beatsPerLine: state.config.beatsPerLine,
+          fontSize: state.config.fontSize,
+          clusterFactor: state.config.clusterFactor,
+          partGap: state.config.partGap,
+          beatSpacing: state.config.beatSpacing
+        }
+      }, null, 2);
+      const blob = new Blob([payload], { type: 'application/json' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `${(state.meta.title || 'harmonica_score').replace(/\s+/g, '_')}.json`;
+      a.click();
+      URL.revokeObjectURL(url);
+      showToast('已匯出樂譜與排版參數 (.json)');
+    });
+
+    const fileInput = document.getElementById('file-import-input');
+    document.getElementById('btn-import-json').addEventListener('click', () => fileInput.click());
+    fileInput.addEventListener('change', e => {
+      const file = e.target.files && e.target.files[0];
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = ev => {
+        try {
+          const parsed = JSON.parse(ev.target.result);
+          if (parsed.meta && Array.isArray(parsed.parts)) {
+            state.meta = parsed.meta;
+            state.parts = parsed.parts;
+            if (parsed.config) {
+              state.config = {
+                beatsPerLine: parsed.config.beatsPerLine ?? state.config.beatsPerLine,
+                fontSize: parsed.config.fontSize ?? state.config.fontSize,
+                clusterFactor: parsed.config.clusterFactor ?? state.config.clusterFactor,
+                partGap: parsed.config.partGap ?? state.config.partGap,
+                beatSpacing: parsed.config.beatSpacing ?? state.config.beatSpacing
+              };
+              syncConfigInputs();
+            }
+            state.activePartIndex = 0;
+            state.selectionRange = null;
+            state.lockedSubdivision = null;
+            state.tripletStartOffset = null;
+            state.undoStacks = [];
+            state.redoStacks = [];
+            state.parts.forEach((_, i) => ensurePartHistoryStacks(i));
+            syncMetadataInputs();
+            renderPartsEditorList();
+            updateSubdivisionLockUI();
+            renderScore();
+            showToast('成功匯入樂譜與排版參數設定');
+          }
+        } catch (err) {
+          showToast('匯入失敗：檔案格式錯誤');
+        }
+      };
+      reader.readAsText(file);
+      fileInput.value = '';
+    });
+  }
+
+  // --------------------------------------------------------------------------
+  // 10. BUILT-IN UNIT TEST RUNNER (核心功能自動化單元測試套件)
+  // --------------------------------------------------------------------------
+  function runAllUnitTests() {
+    const results = [];
+    const assert = (cond, msg) => {
+      if (!cond) throw new Error(msg || 'Assertion failed');
+    };
+    const assertNear = (actual, expected, msg, eps = 1e-3) => {
+      if (Math.abs(actual - expected) > eps) {
+        throw new Error(`${msg || 'Value mismatch'}: 預期 ${expected}，實際 ${actual}`);
+      }
+    };
+
+    const runCase = (name, fn) => {
+      const savedMeta = JSON.parse(JSON.stringify(state.meta));
+      const savedParts = JSON.parse(JSON.stringify(state.parts));
+      const savedConfig = JSON.parse(JSON.stringify(state.config));
+      const savedActiveIdx = state.activePartIndex;
+      const savedLock = state.lockedSubdivision;
+      const savedTripletOffset = state.tripletStartOffset;
+      const savedAutoBar = state.autoBarline;
+      const savedSel = state.selectionRange ? { ...state.selectionRange } : null;
+      const savedUndo = JSON.parse(JSON.stringify(state.undoStacks));
+      const savedRedo = JSON.parse(JSON.stringify(state.redoStacks));
+
+      try {
+        fn();
+        results.push({ name, passed: true, detail: 'PASS' });
+      } catch (err) {
+        results.push({ name, passed: false, detail: err && err.message ? err.message : String(err) });
+      } finally {
+        state.meta = savedMeta;
+        state.parts = savedParts;
+        state.config = savedConfig;
+        state.activePartIndex = savedActiveIdx;
+        state.lockedSubdivision = savedLock;
+        state.tripletStartOffset = savedTripletOffset;
+        state.autoBarline = savedAutoBar;
+        state.selectionRange = savedSel;
+        state.undoStacks = savedUndo;
+        state.redoStacks = savedRedo;
+        syncMetadataInputs();
+        renderPartsEditorList();
+        updateSubdivisionLockUI();
+        const chk = document.getElementById('chk-auto-barline');
+        if (chk) chk.checked = state.autoBarline;
+      }
+    };
+
+    // Test 1
+    runCase('T01 簡譜詞法解析與音符時值計算（四分/八分/十六分/附點/增時線）', () => {
+      const parsed = parsePartNotation("1 2_ 3_ 4= 5= 6= 7= | 1. 2_ - |");
+      assert(parsed.length === 2, '應解析出 2 個小節');
+      const m1Beats = parsed[0].tokens.reduce((s, t) => s + t.duration, 0);
+      const m2Beats = parsed[1].tokens.reduce((s, t) => s + t.duration, 0);
+      assertNear(m1Beats, 3.0, '第 1 小節拍數錯誤');
+      assertNear(m2Beats, 3.0, '第 2 小節拍數錯誤');
+    });
+
+    // Test 2
+    runCase('T02 三連音 3(...) 與含空白八度奏法 8( ... ) 解析', () => {
+      const parsed = parsePartNotation("3(1_ 2_ 3_) 8( 4 5 | 6 )");
+      assert(parsed.length === 2, '跨小節八度應解析出 2 個小節');
+      const tripBeats = parsed[0].tokens.slice(0, 3).reduce((s, t) => s + t.duration, 0);
+      assertNear(tripBeats, 1.0, '三連音三音總拍數應為 1.0 拍');
+      assert(parsed[0].tokens[3].octave8Start === true, '8( 後帶空白時第 4 音仍應標記 octave8Start');
+      assert(parsed[1].tokens[0].octave8End === true, '第 2 小節結尾應標記 octave8End');
+    });
+
+    // Test 3
+    runCase('T03 多聲部每拍等寬對齊與小節拍數檢查', () => {
+      const p1 = parsePartNotation("1= 2= 3= 4= 5 6 7");
+      const p2 = parsePartNotation("1 - 5 -");
+      const aligned = buildAlignedMeasures([p1, p2], 17, 0.85, 1.0);
+      assert(aligned.length === 1, '應對齊為 1 個小節');
+      assert(aligned[0].measureBeats === 4, '小節總拍數應取最大聲部 4 拍');
+      assert(aligned[0].beatWidths[0] > aligned[0].beatWidths[1], '含 4 個 16 分音符的第 1 拍寬度應自動撐開大於單音拍');
+    });
+
+    // Test 4
+    runCase('T04 8分(_)/16分(=) 取消單擊插入、雙擊進入鎖定、單擊解除鎖定', () => {
+      state.parts = [{ id: 't', name: 'P1', notation: '1 ' }];
+      state.activePartIndex = 0;
+      state.lockedSubdivision = null;
+      renderPartsEditorList();
+
+      const btn8 = document.getElementById('btn-sym-eighth');
+      const ta = document.getElementById('part-textarea-0');
+      ta.focus();
+      ta.setSelectionRange(2, 2);
+
+      btn8.click();
+      assert(ta.value === '1 ', '單擊 8分(_) 不應插入底線');
+      assert(state.lockedSubdivision === null, '單擊不應進入鎖定狀態');
+
+      btn8.click();
+      assert(state.lockedSubdivision === '_', '連按兩下應進入 8分(_) 鎖定狀態');
+      assert(ta.value === '1 ', '進入鎖定時不應多插入多餘符號');
+
+      ta.value = '1 2';
+      ta.setSelectionRange(3, 3);
+      ta.dispatchEvent(new InputEvent('input', { bubbles: true, data: '2', inputType: 'insertText' }));
+      assert(ta.value === '1 2_', `鎖定狀態輸入 2 應自動變成 '1 2_'，實際為 '${ta.value}'`);
+
+      btn8.click();
+      assert(state.lockedSubdivision === null, '鎖定中單擊應解除鎖定');
+    });
+
+    // Test 5
+    runCase('T05 三連音雙擊鎖定與依拍號自動加減時線（4/4加_、2/2不加、6/8加=）', () => {
+      state.meta.time = '4/4';
+      state.parts = [{ id: 't', name: 'P1', notation: '' }];
+      state.activePartIndex = 0;
+      state.lockedSubdivision = null;
+      renderPartsEditorList();
+
+      const btnTrip = document.getElementById('btn-sym-triplet');
+      const ta = document.getElementById('part-textarea-0');
+      ta.focus();
+
+      btnTrip.click();
+      btnTrip.click();
+      assert(state.lockedSubdivision === 'triplet', '連按兩下應進入三連音鎖定');
+
+      ta.value = '1';
+      ta.setSelectionRange(1, 1);
+      ta.dispatchEvent(new InputEvent('input', { bubbles: true, data: '1', inputType: 'insertText' }));
+      assert(ta.value === '1', '輸入第 1 個音尚未湊滿 3 音不應提前包裝');
+
+      ta.value = '1 2';
+      ta.setSelectionRange(3, 3);
+      ta.dispatchEvent(new InputEvent('input', { bubbles: true, data: '2', inputType: 'insertText' }));
+      assert(ta.value === '1 2', '輸入第 2 個音尚未湊滿 3 音不應提前包裝');
+
+      ta.value = '1 2 3';
+      ta.setSelectionRange(5, 5);
+      ta.dispatchEvent(new InputEvent('input', { bubbles: true, data: '3', inputType: 'insertText' }));
+      assert(ta.value === '3(1_ 2_ 3_) ', `4/4 拍輸入第 3 個音應自動組成 '3(1_ 2_ 3_) '，實際為 '${ta.value}'`);
+
+      const sub22 = getTripletSubdivisionByTimeSig('2/2');
+      const sub68 = getTripletSubdivisionByTimeSig('6/8');
+      assert(sub22 === '', '2/2 拍三連音不應加減時線');
+      assert(sub68 === '=', '6/8 拍三連音應加 16 分減時線 (=)');
+    });
+
+    // Test 6
+    runCase('T06 按鍵鎖定優先於自動新增小節線（三連音湊滿第4拍後才斷小節）', () => {
+      state.meta.time = '4/4';
+      state.autoBarline = true;
+      state.parts = [{ id: 't', name: 'P1', notation: '1 2 3 ' }];
+      state.activePartIndex = 0;
+      state.lockedSubdivision = 'triplet';
+      state.tripletStartOffset = 6;
+      renderPartsEditorList();
+
+      const ta = document.getElementById('part-textarea-0');
+      ta.focus();
+      ta.setSelectionRange(6, 6);
+
+      ta.value = '1 2 3 4';
+      ta.setSelectionRange(7, 7);
+      ta.dispatchEvent(new InputEvent('input', { bubbles: true, data: '4', inputType: 'insertText' }));
+      assert(!ta.value.includes('|'), '三連音第 1 音輸入時絕不可提前插入小節線');
+
+      ta.value = '1 2 3 4 5';
+      ta.setSelectionRange(9, 9);
+      ta.dispatchEvent(new InputEvent('input', { bubbles: true, data: '5', inputType: 'insertText' }));
+      assert(!ta.value.includes('|'), '三連音第 2 音輸入時絕不可提前插入小節線');
+
+      ta.value = '1 2 3 4 5 6';
+      ta.setSelectionRange(11, 11);
+      ta.dispatchEvent(new InputEvent('input', { bubbles: true, data: '6', inputType: 'insertText' }));
+      assert(ta.value === '1 2 3 3(4_ 5_ 6_) | ', `三連音完成後滿 4 拍應自動補上小節線，實際為 '${ta.value}'`);
+    });
+
+    // Test 7
+    runCase('T07 自動小節線不搶拍（第4拍可繼續加 _ / . / \'，空白或下一音才補 |）', () => {
+      state.meta.time = '4/4';
+      state.autoBarline = true;
+      state.lockedSubdivision = null;
+      state.parts = [{ id: 't', name: 'P1', notation: '1 2 3 ' }];
+      state.activePartIndex = 0;
+      renderPartsEditorList();
+
+      const ta = document.getElementById('part-textarea-0');
+      ta.focus();
+
+      ta.value = '1 2 3 4';
+      ta.setSelectionRange(7, 7);
+      ta.dispatchEvent(new InputEvent('input', { bubbles: true, data: '4', inputType: 'insertText' }));
+      assert(ta.value === '1 2 3 4', '剛打完第 4 拍數字時不應立刻插入 |，須允許繼續打修飾符');
+
+      ta.value = '1 2 3 4 ';
+      ta.setSelectionRange(8, 8);
+      ta.dispatchEvent(new InputEvent('input', { bubbles: true, data: ' ', inputType: 'insertText' }));
+      assert(ta.value === '1 2 3 4 | ', `按下空白鍵確認第 4 拍後應自動補上 '| '，實際為 '${ta.value}'`);
+    });
+
+    // Test 8
+    runCase('T08 反白選段批次設定高/倍高/低/倍低八度（忽略 0、3(、8(、[1.）', () => {
+      state.parts = [{ id: 't', name: 'P1', notation: "[1. 3(1_ 2''_ 0_) 8(4, 5)" }];
+      state.activePartIndex = 0;
+      renderPartsEditorList();
+
+      const ta = document.getElementById('part-textarea-0');
+      ta.focus();
+      ta.setSelectionRange(0, ta.value.length);
+
+      const btnHigh = document.querySelector('.sym-btn[data-insert="\'"]');
+      btnHigh.click();
+      assert(ta.value === "[1. 3(1'_ 2'_ 0_) 8(4' 5')", `高八度轉換結果不符：${ta.value}`);
+
+      ta.setSelectionRange(0, ta.value.length);
+      const btnDoubleLow = document.querySelector('.sym-btn[data-insert=",,"]');
+      btnDoubleLow.click();
+      assert(ta.value === "[1. 3(1,,_ 2,,_ 0_) 8(4,, 5,,)", `倍低八度轉換結果不符：${ta.value}`);
+    });
+
+    // Test 9
+    runCase('T09 反白一段簡譜按八度音快捷鈕自動頭尾包覆 8( ... )', () => {
+      state.parts = [{ id: 't', name: 'P1', notation: '1 2 3 | 4' }];
+      state.activePartIndex = 0;
+      renderPartsEditorList();
+
+      const ta = document.getElementById('part-textarea-0');
+      ta.focus();
+      ta.setSelectionRange(0, ta.value.length);
+
+      const btnOct8 = document.querySelector('.sym-btn[data-insert="8(1 2 3 4)"]');
+      btnOct8.click();
+      assert(ta.value === '8( 1 2 3 | 4 )', `反白包覆八度記號結果不符：${ta.value}`);
+    });
+
+    // Test 10
+    runCase('T10 反白一段簡譜按圓滑線快捷鈕自動頭尾包覆 ( ... )', () => {
+      state.parts = [{ id: 't', name: 'P1', notation: '1 2 3 | 4' }];
+      state.activePartIndex = 0;
+      renderPartsEditorList();
+
+      const ta = document.getElementById('part-textarea-0');
+      ta.focus();
+      ta.setSelectionRange(0, ta.value.length);
+
+      const btnSlur = document.getElementById('btn-sym-slur');
+      btnSlur.click();
+      assert(ta.value === '( 1 2 3 | 4 )', `反白包覆圓滑線結果不符：${ta.value}`);
+    });
+
+    // Test 11
+    runCase('T11 輸入與快捷操作支援 Ctrl+Z 復原與 Ctrl+Y 重做', () => {
+      state.parts = [{ id: 't', name: 'P1', notation: '1 2' }];
+      state.activePartIndex = 0;
+      state.undoStacks = [];
+      state.redoStacks = [];
+      ensurePartHistoryStacks(0);
+      renderPartsEditorList();
+
+      const ta = document.getElementById('part-textarea-0');
+      ta.focus();
+      ta.value = '1 2 3';
+      ta.setSelectionRange(5, 5);
+      ta.dispatchEvent(new InputEvent('input', { bubbles: true, data: '3', inputType: 'insertText' }));
+      assert(state.parts[0].notation === '1 2 3', '步驟 1 應為 1 2 3');
+
+      ta.dispatchEvent(new KeyboardEvent('keydown', { key: 'z', ctrlKey: true, bubbles: true }));
+      assert(state.parts[0].notation === '1 2', `按 Ctrl+Z 應還原為 '1 2'，實際為 '${state.parts[0].notation}'`);
+
+      ta.dispatchEvent(new KeyboardEvent('keydown', { key: 'y', ctrlKey: true, bubbles: true }));
+      assert(state.parts[0].notation === '1 2 3', `按 Ctrl+Y 應重做為 '1 2 3'，實際為 '${state.parts[0].notation}'`);
+    });
+
+    // Test 12
+    runCase('T12 樂譜中間插入反覆起 (|:) 與雙向反覆 (:|:) 正確解析並繪製粗細線與圓點', () => {
+      const parsed = parsePartNotation("1 2 3 4 |: 5 6 7 1' :|: 2' 3' 4' 5' :|");
+      assert(parsed.length === 3, '應解析出 3 個小節');
+      assert(parsed[1].leftBar === 'repeat-start', '第 2 小節左側應為 repeat-start');
+      assert(parsed[1].rightBar === 'repeat-end', '第 2 小節右側應為 repeat-end');
+      assert(parsed[2].leftBar === 'repeat-start', '第 3 小節左側應為 repeat-start');
+
+      state.parts = [{ id: 't', name: 'P1', notation: "1 2 3 4 |: 5 6 7 1' :|: 2' 3' 4' 5' :|" }];
+      renderScore();
+      const repeatDots = document.querySelectorAll('#pages-container svg circle.repeat-dot');
+      assert(repeatDots.length === 8, `單聲部中間 |: 與 :|: 應繪製 8 顆反覆圓點，實際為 ${repeatDots.length}`);
+    });
+
+    // Test 13
+    runCase('T13 按下鍵盤數字 8 進入 8分(_) 鎖定模式，再按一次 8 或 Esc 取消鎖定', () => {
+      state.parts = [{ id: 't', name: 'P1', notation: '1 ' }];
+      state.activePartIndex = 0;
+      state.lockedSubdivision = null;
+      renderPartsEditorList();
+
+      const ta = document.getElementById('part-textarea-0');
+      ta.focus();
+      ta.setSelectionRange(2, 2);
+
+      ta.dispatchEvent(new KeyboardEvent('keydown', { key: '8', bubbles: true, cancelable: true }));
+      assert(state.lockedSubdivision === '_', '按下數字 8 應進入 8分(_) 鎖定模式');
+      assert(ta.value === '1 ', '按下數字 8 切換鎖定時不應在編輯區插入字元 8');
+
+      ta.value = '1 3';
+      ta.setSelectionRange(3, 3);
+      ta.dispatchEvent(new InputEvent('input', { bubbles: true, data: '3', inputType: 'insertText' }));
+      assert(ta.value === '1 3_', `鎖定狀態輸入 3 應自動變成 '1 3_'，實際為 '${ta.value}'`);
+
+      ta.dispatchEvent(new KeyboardEvent('keydown', { key: 'Escape', bubbles: true, cancelable: true }));
+      assert(state.lockedSubdivision === null, '按下 Esc 鍵應取消鎖定模式');
+    });
+
+    // Test 14
+    runCase('T14 按下鍵盤數字 9 進入 16分(=) 鎖定模式，再按一次 9 取消鎖定', () => {
+      state.parts = [{ id: 't', name: 'P1', notation: '1 ' }];
+      state.activePartIndex = 0;
+      state.lockedSubdivision = null;
+      renderPartsEditorList();
+
+      const ta = document.getElementById('part-textarea-0');
+      ta.focus();
+      ta.setSelectionRange(2, 2);
+
+      ta.dispatchEvent(new KeyboardEvent('keydown', { key: '9', bubbles: true, cancelable: true }));
+      assert(state.lockedSubdivision === '=', '按下數字 9 應進入 16分(=) 鎖定模式');
+      assert(ta.value === '1 ', '按下數字 9 切換鎖定時不應在編輯區插入字元 9');
+
+      ta.value = '1 4';
+      ta.setSelectionRange(3, 3);
+      ta.dispatchEvent(new InputEvent('input', { bubbles: true, data: '4', inputType: 'insertText' }));
+      assert(ta.value === '1 4=', `鎖定狀態輸入 4 應自動變成 '1 4='，實際為 '${ta.value}'`);
+
+      ta.dispatchEvent(new KeyboardEvent('keydown', { key: '9', bubbles: true, cancelable: true }));
+      assert(state.lockedSubdivision === null, '再次按下數字 9 應取消 16分(=) 鎖定模式');
+    });
+
+    // Test 15
+    runCase('T15 未閉合圓滑線跨小節不誤插 | ，且 8分(_) 鎖定滿拍後連打新音自動補小節線', () => {
+      state.meta.time = '4/4';
+      state.autoBarline = true;
+      state.lockedSubdivision = '_';
+      state.parts = [{ id: 't', name: 'P1', notation: '1_ 2_ 3_ 4_ 5_ 6_ 7_ ' }];
+      state.activePartIndex = 0;
+      renderPartsEditorList();
+
+      const ta = document.getElementById('part-textarea-0');
+      ta.focus();
+
+      ta.value = '1_ 2_ 3_ 4_ 5_ 6_ 7_ 1';
+      ta.setSelectionRange(ta.value.length, ta.value.length);
+      ta.dispatchEvent(new InputEvent('input', { bubbles: true, data: '1', inputType: 'insertText' }));
+      assert(ta.value === '1_ 2_ 3_ 4_ 5_ 6_ 7_ 1_ | ', `8分鎖定滿8音應自動補小節線，實際為 '${ta.value}'`);
+
+      ta.value = ta.value + '2';
+      ta.setSelectionRange(ta.value.length, ta.value.length);
+      ta.dispatchEvent(new InputEvent('input', { bubbles: true, data: '2', inputType: 'insertText' }));
+      assert(ta.value === '1_ 2_ 3_ 4_ 5_ 6_ 7_ 1_ | 2_', `第2小節首音應為 '2_'，實際為 '${ta.value}'`);
+
+      state.lockedSubdivision = null;
+      ta.value = '(1 2 3 4 5';
+      ta.setSelectionRange(ta.value.length, ta.value.length);
+      ta.dispatchEvent(new InputEvent('input', { bubbles: true, data: '5', inputType: 'insertText' }));
+      assert(!ta.value.includes('|'), `未閉合圓滑線 '(' 內即使滿4拍也不應在音符中間強行插入 |，實際為 '${ta.value}'`);
+    });
+
+    // Test 16
+    runCase('T16 跨小節與跨行換行圓滑線 ( ... | ... ) 兩行皆正確接續且不穿過小節線', () => {
+      state.config.beatsPerLine = 8;
+      state.parts = [{ id: 't', name: 'P1', notation: "(1 2 3 4 | 5 6 7 1')" }];
+      renderScore();
+      const slurs = document.querySelectorAll('#pages-container svg path.slur-curve');
+      assert(slurs.length === 2, `跨小節且跨行時，上下兩行應各繪製 1 段圓滑線（共 2 段），實際為 ${slurs.length}`);
+      const d1 = slurs[0].getAttribute('d') || '';
+      const d2 = slurs[1].getAttribute('d') || '';
+      const m1Coords = d1.match(/M\s+([\d.]+)\s+([\d.]+).*?([\d.]+)\s+([\d.]+)$/);
+      const m2Coords = d2.match(/M\s+([\d.]+)\s+([\d.]+).*?([\d.]+)\s+([\d.]+)$/);
+      assert(m1Coords && m2Coords, '跨行圓滑線 SVG path 座標格式應完整');
+      assert(parseFloat(m1Coords[3]) < 740, `第一行圓滑線終點 (${m1Coords[3]}) 不應超出右側小節線`);
+      assert(parseFloat(m2Coords[1]) > 54, `第二行圓滑線起點 (${m2Coords[1]}) 不應壓在左側小節線上`);
+    });
+
+    // Test 17
+    runCase('T17 8分音符跨行圓滑線對稱平滑延伸 & 切換範本自動重置鎖定狀態', () => {
+      state.config.beatsPerLine = 8;
+      state.parts = [{ id: 't', name: 'P1', notation: "(7_ 1'_ 2'_ 3'_ 4'_ 5'_ 6'_ 7'_ | 1'_ 2'_ 3'_ 4'_ 5'_ 6'_ 7'_ 1'_)" }];
+      renderScore();
+      const slurs = document.querySelectorAll('#pages-container svg path.slur-curve');
+      assert(slurs.length === 2, `8分音符跨行圓滑線應分為前後兩段平滑弧線，實際為 ${slurs.length}`);
+      const d1 = slurs[0].getAttribute('d') || '';
+      const d2 = slurs[1].getAttribute('d') || '';
+      assert(d1.includes('C ') && d2.includes('C '), '前後兩段應使用平滑三次貝茲曲線繪製');
+
+      state.lockedSubdivision = '_';
+      state.tripletStartOffset = 5;
+      const sel = document.getElementById('preset-select');
+      if (sel) {
+        sel.value = 'blank_trio';
+        sel.dispatchEvent(new Event('change', { bubbles: true }));
+        assert(state.lockedSubdivision === null && state.tripletStartOffset === null, '切換範例範本後應自動解除鎖定狀態');
+      }
+    });
+
+    // Test 18
+    runCase('T18 側邊編輯欄收合與展開切換功能正常', () => {
+      const prevCollapsed = state.sidebarCollapsed;
+      const collapseBtn = document.getElementById('btn-collapse-sidebar');
+      const expandBtn = document.getElementById('btn-expand-sidebar');
+      const sidebarEl = document.getElementById('studio-sidebar');
+      assert(collapseBtn && expandBtn && sidebarEl, '側邊欄與收合/展開按鈕元素應存在');
+
+      collapseBtn.click();
+      assert(state.sidebarCollapsed === true && sidebarEl.classList.contains('sidebar-collapsed'), '點擊收合按鈕後應隱藏側邊欄');
+      assert(!expandBtn.classList.contains('hidden'), '收合後應顯示左上角展開按鈕');
+
+      expandBtn.click();
+      assert(state.sidebarCollapsed === false && !sidebarEl.classList.contains('sidebar-collapsed'), '點擊展開按鈕後應恢復顯示側邊欄');
+      assert(expandBtn.classList.contains('hidden'), '展開後應隱藏左上角展開按鈕');
+
+      applySidebarCollapsed(prevCollapsed, true);
+    });
+
+    // Test 19: Full-width spaces, full-width dashes & multi-ending volta [1.2.
+    runCase('T19 全形空白、全形增時線與複合跳房子括弧 [1.2. 解析相容性', () => {
+      const parsed = parsePartNotation("[1.2. 1　—　3　4 |");
+      assert(parsed.length === 1, '應解析出 1 個小節');
+      assert(parsed[0].volta === '1.2.', `複合跳房子括弧應解析為 '1.2.'，實際為 '${parsed[0].volta}'`);
+      const beats = parsed[0].tokens.reduce((s, t) => s + t.duration, 0);
+      assertNear(beats, 4.0, '全形空白與全形破折號應正確計算為 4 拍');
+    });
+
+    // Test 20: Auto-barline before accidental (#/b/n) when previous measure is full
+    runCase('T20 滿拍後直接輸入升降記號 (#4) 時，自動小節線正確插在 # 之前', () => {
+      state.meta.time = '4/4';
+      state.autoBarline = true;
+      state.lockedSubdivision = null;
+      state.parts = [{ id: 't', name: 'P1', notation: '1 2 3 4' }];
+      state.activePartIndex = 0;
+      renderPartsEditorList();
+
+      const ta = document.getElementById('part-textarea-0');
+      ta.focus();
+      ta.value = '1 2 3 4#';
+      ta.setSelectionRange(8, 8);
+      ta.dispatchEvent(new InputEvent('input', { bubbles: true, data: '#', inputType: 'insertText' }));
+      assert(ta.value === '1 2 3 4 | #', `滿4拍後打 # 應自動變成 '1 2 3 4 | #'，實際為 '${ta.value}'`);
+    });
+
+    // Render Test Report in Left Panel & Re-render Active Score
+    renderScore();
+    const badgeEl = document.getElementById('unit-test-badge');
+    const dotEl = document.getElementById('unit-test-dot');
+    const listContainer = document.getElementById('unit-test-results');
+    const passedCount = results.filter(r => r.passed).length;
+    const allPassed = passedCount === results.length;
+
+    if (badgeEl) {
+      badgeEl.textContent = `${passedCount}/${results.length} 通過`;
+      badgeEl.className = allPassed
+        ? 'text-[10px] px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-500 border border-emerald-500/40 font-mono'
+        : 'text-[10px] px-2 py-0.5 rounded bg-rose-500/20 text-rose-500 border border-rose-500/40 font-mono';
+    }
+    if (dotEl) {
+      dotEl.className = allPassed
+        ? 'w-2 h-2 rounded-full bg-emerald-400'
+        : 'w-2 h-2 rounded-full bg-rose-500 animate-ping';
+    }
+    if (listContainer) {
+      listContainer.innerHTML = results.map(r => `
+        <div class="px-2.5 py-1.5 rounded-lg border ${r.passed ? 'test-item-pass' : 'test-item-fail'}">
+          <div class="flex items-start justify-between gap-2">
+            <span class="font-semibold">${r.passed ? '✔' : '✘'} ${escapeXml(r.name)}</span>
+            <span class="shrink-0 font-bold">${r.passed ? 'PASS' : 'FAIL'}</span>
+          </div>
+          ${r.passed ? '' : `<div class="mt-1 text-[10px] opacity-90">${escapeXml(r.detail)}</div>`}
+        </div>
+      `).join('');
+    }
+    return results;
+  }
+
+  // Boot application
+  window.addEventListener('DOMContentLoaded', () => {
+    state.parts.forEach((_, i) => ensurePartHistoryStacks(i));
+    syncMetadataInputs();
+    syncConfigInputs();
+    renderPartsEditorList();
+    updateSubdivisionLockUI();
+    initEvents();
+    renderScore();
+    runAllUnitTests();
+
+    const rerunBtn = document.getElementById('btn-rerun-tests');
+    if (rerunBtn) {
+      rerunBtn.addEventListener('click', e => {
+        e.preventDefault();
+        e.stopPropagation();
+        const latest = runAllUnitTests();
+        const passed = latest.filter(r => r.passed).length;
+        showToast(`已完成 ${latest.length} 項核心功能單元測試（${passed}/${latest.length} 通過）`);
+      });
+    }
+
+    if (window.innerWidth < 1024) {
+      fitZoomToViewport();
+    }
+  });
+})();
+</script>
+</body>
+</html>
